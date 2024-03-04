@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/04 10:52:13 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/04 11:13:51 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	all_quotes_are_closed(char *str);
 
 /// QUOTES SPLIT
 int	count_words_quotes(char *s, char c);
+int	len_word_quotes(char *s, char c);
 
 #endif
