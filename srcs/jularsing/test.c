@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:41:19 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/04 10:52:44 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/04 11:14:24 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	main(void)
 {
 	char *str = readline("");
-	printf("NUMBER WORDS=%d\n", count_words_quotes(str, ' '));
+	printf("LEN WORD=%d\n", len_word_quotes(str, ' '));
 	return (0);
 }
