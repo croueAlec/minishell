@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 11:10:35 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:28:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ void	execute_cmd(t_cmd *cmd, char **env)
 	printf("Je suis une commande\n");
 	pid = fork();
 	if (pid == 0)
-		execve(cmd->cmd_path, cmd->args, env);
+	{
+		if (execve(cmd->cmd_path, cmd->args, env) == -1)
+		{
+			perror("Command failed, why ??");
+		}
+	}
 	free_tab((void **)cmd->args);
 	free(cmd->tree);
 	free(cmd);
@@ -60,6 +65,10 @@ void	execute_tree(t_cmd *cmd, char **env)
 	int	infile;
 	int	outfile;
 
+	if (access(cmd->cmd_path, X_OK))
+		cmd->cmd_path = NULL;
+	if (!cmd->cmd_path)
+		return ((void)ft_dprintf(2, "%s : command not found\n", cmd->args[0]));
 	infile = open_infiles(cmd->tree);
 	if (infile == E_FD)
 		return ;
