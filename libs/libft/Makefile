@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
+#    By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/02/12 18:40:23 by acroue           ###   ########.fr        #
+#    Updated: 2024/03/05 11:11:19 by julieblaye       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS =	DPrintf/ft_dprintf_basic_functions.c \
 		Printf/ft_printf_hex.c \
 		Printf/ft_printf_numbers.c \
 		Printf/ft_printf.c \
+		Printf/ft_printtab.c \
 \
 		Strings/ft_sep_join.c \
 		Strings/ft_split.c \
