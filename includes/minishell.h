@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/05 10:53:26 by julieblaye       ###   ########.fr       */
+/*   Created: 2024/03/05 18:58:54 by acroue            #+#    #+#             */
+/*   Updated: 2024/03/05 18:59:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H

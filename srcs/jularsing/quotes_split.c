@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:28:48 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/05 17:58:02 by julieblaye       ###   ########.fr       */
+/*   Updated: 2024/03/05 18:56:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_words_quotes(char *s, char c)
 	int		i;
 	int		count;
 	char	quote;
-	
+
 	i = 0;
 	count = 0;
 	while (s[i] != 0)
@@ -45,17 +45,17 @@ int	len_word_quotes(char *s, char c)
 {
 	int		i;
 	char	quote;
-	
+
 	i = 0;
 	while (s[i] != 0 && s[i] != c)
 	{
 		if (s[i] == '\"' || s[i] == '\'')
-			{
-				quote = s[i];
+		{
+			quote = s[i];
+			i++;
+			while (s[i] != quote && s[i] != 0)
 				i++;
-				while (s[i] != quote && s[i] != 0)
-					i++;
-			}
+		}
 		i++;
 	}
 	return (i);
