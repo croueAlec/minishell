@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/05 10:53:26 by julieblaye       ###   ########.fr       */
+/*   Created: 2024/03/04 10:41:19 by jblaye            #+#    #+#             */
+/*   Updated: 2024/03/04 11:14:24 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include <stdio.h>
-# include "parsing.h"
-# include "../libs/libft/libft.h"
-
-void	print_parsing(void);
-void	print_exec(void);
-
-#endif
+int	main(void)
+{
+	char *str = readline("");
+	printf("LEN WORD=%d\n", len_word_quotes(str, ' '));
+	return (0);
+}

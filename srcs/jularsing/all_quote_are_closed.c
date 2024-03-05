@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_split.c                                      :+:      :+:    :+:   */
+/*   all_quote_are_closed.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/03/01 11:00:33 by julieblaye       ###   ########.fr       */
+/*   Updated: 2024/03/04 10:28:38 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,3 @@ int	all_quotes_are_closed(char *str)
 	}
 	return (0);
 }
-
-// char	**quote_split(char *str)
-// {
-	
-// }

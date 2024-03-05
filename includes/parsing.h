@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/05 10:53:26 by julieblaye       ###   ########.fr       */
+/*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
+/*   Updated: 2024/03/05 10:31:47 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PARSING_H
+# define PARSING_H
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
-# include <stdio.h>
-# include "parsing.h"
-# include "../libs/libft/libft.h"
+/// QUOTES CHECK
+int		all_quotes_are_closed(char *str);
 
-void	print_parsing(void);
-void	print_exec(void);
+/// QUOTES SPLIT
+int		count_words_quotes(char *s, char c);
+int		len_word_quotes(char *s, char c);
+void	ft_fsplit(char **tab);
 
 #endif
