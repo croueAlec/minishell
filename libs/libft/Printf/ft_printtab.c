@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_printtab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 15:11:21 by julieblaye       ###   ########.fr       */
+/*   Created: 2024/01/12 10:09:56 by jblaye            #+#    #+#             */
+/*   Updated: 2024/03/05 11:14:31 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../libft.h"
 
-void	print_parsing(void)
+void	ft_printinttab(int *tab, int len)
 {
-	printf("this is the parsing\n");
+	if (!tab)
+		return ;
+	while (len > 0)
+	{
+		ft_printf("%d\n", *tab);
+		len--;
+		tab++;
+	}
+}
+
+void	ft_printstrtab(char **tab)
+{
+	if (!tab)
+		return ;
+	while (*tab != 0)
+	{
+		ft_printf("%s\n", *tab);
+		tab++;
+	}
 }

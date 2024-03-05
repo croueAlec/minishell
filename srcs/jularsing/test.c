@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 15:11:21 by julieblaye       ###   ########.fr       */
+/*   Created: 2024/03/04 10:41:19 by jblaye            #+#    #+#             */
+/*   Updated: 2024/03/05 18:58:10 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	print_parsing(void)
+int	main(void)
 {
-	printf("this is the parsing\n");
+	char	*str;
+	char	**test;
+
+	str = readline("");
+	test = quotes_split(str, ' ');
+	ft_printstrtab(test);
+	return (0);
 }
