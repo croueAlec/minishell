@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printtab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:09:56 by jblaye            #+#    #+#             */
-/*   Updated: 2024/01/15 10:35:08 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:14:31 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_printinttab(int *tab, int len)
 {
