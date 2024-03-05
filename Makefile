@@ -5,13 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/03/05 15:35:14 by julieblaye       ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2024/03/05 18:12:52 by julieblaye       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
+
 #	Program name
 NAME = minishell
+TEST_PARSING = test_parsing
 TEST_PARSING = test_parsing
 
 #	Colors
@@ -45,8 +48,10 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 LIB :=	$(LIBFT) \
+LIB :=	$(LIBFT) \
 	-lreadline
 
+INCLUDES := $(INCS_DIR) \
 INCLUDES := $(INCS_DIR) \
 	$(LIBFT_DIR)
 
@@ -55,7 +60,12 @@ INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 SRC :=	$(addprefix $(PARSING_DIR)/, \
 	parsing.c \
 	) \
+SRC :=	$(addprefix $(PARSING_DIR)/, \
+	parsing.c \
+	) \
 	$(addprefix $(EXEC_DIR)/, \
+	exec.c \
+	) \
 	exec.c \
 	) \
 	main.c
@@ -87,6 +97,8 @@ fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(RED)! Removing$(DEFAULT) $(TEST_PARSING)"
 	@$(RM) $(TEST_PARSING)
+	@echo "$(RED)! Removing$(DEFAULT) $(TEST_PARSING)"
+	@$(RM) $(TEST_PARSING)
 
 re: fclean all
 
@@ -111,6 +123,10 @@ cre:
 norm:
 	@norminette $(SRCS_DIR) $(INCS_DIR) $(BONUS_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'
 	@norminette $(LIBFT_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(YELLOW)Norm libft O.K.$(DEFAULT)"}'
+
+testparsing: $(LIBFT)
+	@echo "$(YELLOW)* Assembling $(BWHITE)$(TEST_PARSING)$(DEFAULT)"
+	@$(CC) $(CFLAGS) $(LIB) $(INCLUDES_FLAGS) $(SRCS_DIR)/$(PARSING_DIR)/*.c -o $(TEST_PARSING)
 
 testparsing: $(LIBFT)
 	@echo "$(YELLOW)* Assembling $(BWHITE)$(TEST_PARSING)$(DEFAULT)"

@@ -6,7 +6,7 @@
 /*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:28:48 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/05 10:38:40 by julieblaye       ###   ########.fr       */
+/*   Updated: 2024/03/05 17:58:02 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ char	**quotes_split(char *s, char c)
 			result[i] = ft_strndup(s, word_len);
 			if (!result[i])
 				return (ft_fsplit(result), NULL);
+			i++;
 		}
 		s = s + word_len;
 	}
+	result[i] = NULL;
+	return (result);
 }

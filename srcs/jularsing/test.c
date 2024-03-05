@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:41:19 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/04 11:14:24 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/05 15:11:49 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(void)
 {
 	char *str = readline("");
-	printf("LEN WORD=%d\n", len_word_quotes(str, ' '));
+	char **test = quotes_split(str, ' ');
+	ft_printstrtab(test);
 	return (0);
 }

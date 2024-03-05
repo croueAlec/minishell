@@ -6,7 +6,7 @@
 /*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/05 10:31:47 by julieblaye       ###   ########.fr       */
+/*   Updated: 2024/03/05 11:05:05 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int		all_quotes_are_closed(char *str);
 int		count_words_quotes(char *s, char c);
 int		len_word_quotes(char *s, char c);
 void	ft_fsplit(char **tab);
+char	**quotes_split(char *s, char c);
 
 #endif
