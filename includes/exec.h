@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 17:14:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 10:14:12 by acroue           ###   ########.fr       */
+/*   Created: 2024/03/05 10:12:39 by acroue            #+#    #+#             */
+/*   Updated: 2024/03/05 10:14:47 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXEC_H
+# define EXEC_H
 
-# include <stdio.h>
-# include "struct.h"
-# include "../libs/libft/libft.h"
-# include "redirections.h"
-# include "exec.h"
+# include "minishell.h"
 
-void	print_parsing(void);
-void	print_exec(void);
+void	execute_tree(t_cmd *cmd, char **env);
 
 #endif
