@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/05 18:52:02 by acroue           ###   ########.fr        #
+#    Updated: 2024/03/05 19:32:25 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,12 @@ INCLUDES := $(INCS_DIR) \
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC :=	$(addprefix $(PARSING_DIR)/, \
-	parsing.c \
-	) \
+	parsing.c ) \
 	$(addprefix $(EXEC_DIR)/, \
 	exec.c \
-	) \
+	open_infiles.c \
+	open_outfiles.c \
+	display_tree.c ) \
 	main.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))

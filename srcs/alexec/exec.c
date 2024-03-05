@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 18:28:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 19:30:00 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	execute_tree(t_cmd *cmd, char **env)
 	int	infile;
 	int	outfile;
 
+	if (!cmd)
+		return ;
 	if (access(cmd->cmd_path, X_OK))
 		cmd->cmd_path = NULL;
 	if (!cmd->cmd_path)
