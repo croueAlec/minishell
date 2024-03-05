@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/04 17:16:39 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 09:53:05 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	redirect_outfile(int fd, t_outfile *outfile)
 		if (fd < 0)
 			return (perror(outfile->path), free_outfile_leaves(outfile), E_FD);
 	}
-	return (fd);
+	return (free_outfile_leaves(outfile), fd);
 }
 
 int	open_outfiles(t_branch **tree)

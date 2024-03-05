@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/04 17:24:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 09:53:25 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	redirect_infile(int fd, t_infile *infile)
 		if (fd < 0)
 			return (perror(infile->path), free_infile_leaves(infile), E_FD);
 	}
-	return (fd);
+	return (free_infile_leaves(infile), fd);
 }
 
 int	open_infiles(t_branch **tree)

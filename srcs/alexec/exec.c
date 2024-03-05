@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/04 17:33:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 10:00:37 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ void	print_exec(void)
 	printf("this is the exec\n");
 }
 
+void	free_tab(void **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab && tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 void	execute_cmd(t_cmd *cmd, char **env)
 {
 	pid_t	pid;
@@ -24,9 +37,11 @@ void	execute_cmd(t_cmd *cmd, char **env)
 	pid = fork();
 	if (pid == 0)
 		execve(cmd->cmd_path, cmd->args, env);
-	free(cmd->args[0]);
-	free(cmd->args[1]);
-	free(cmd->args);
+	// free(cmd->args[0]);
+	// free(cmd->args[1]);
+	// free(cmd->args);
+	free_tab((void **)cmd->args);
+	free(cmd->tree);
 	free(cmd);
 }
 
