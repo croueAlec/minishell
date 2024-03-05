@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 18:28:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 20:08:21 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,8 @@ void	execute_tree(t_cmd *cmd, char **env)
 	if (!cmd->cmd_path)
 		return ((void)ft_dprintf(2, "%s : command not found\n", cmd->args[0]));
 	infile = open_infiles(cmd->tree);
-	if (infile == E_FD)
-		return ;
 	outfile = open_outfiles(cmd->tree);
-	if (outfile == E_FD)
+	if (outfile == E_FD || infile == E_FD)
 		return ;
 	printf("infile : %d\noutfile : %d\n", infile, outfile);
 	dup2(infile, STDIN_FILENO);
