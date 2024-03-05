@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+         #
+#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/05 18:12:52 by julieblaye       ###   ########.fr        #
+#    Updated: 2024/03/05 18:52:02 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@
 
 #	Program name
 NAME = minishell
-TEST_PARSING = test_parsing
 TEST_PARSING = test_parsing
 
 #	Colors
@@ -48,10 +47,8 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 LIB :=	$(LIBFT) \
-LIB :=	$(LIBFT) \
 	-lreadline
 
-INCLUDES := $(INCS_DIR) \
 INCLUDES := $(INCS_DIR) \
 	$(LIBFT_DIR)
 
@@ -60,12 +57,7 @@ INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 SRC :=	$(addprefix $(PARSING_DIR)/, \
 	parsing.c \
 	) \
-SRC :=	$(addprefix $(PARSING_DIR)/, \
-	parsing.c \
-	) \
 	$(addprefix $(EXEC_DIR)/, \
-	exec.c \
-	) \
 	exec.c \
 	) \
 	main.c
@@ -126,8 +118,4 @@ norm:
 
 testparsing: $(LIBFT)
 	@echo "$(YELLOW)* Assembling $(BWHITE)$(TEST_PARSING)$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(LIB) $(INCLUDES_FLAGS) $(SRCS_DIR)/$(PARSING_DIR)/*.c -o $(TEST_PARSING)
-
-testparsing: $(LIBFT)
-	@echo "$(YELLOW)* Assembling $(BWHITE)$(TEST_PARSING)$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(LIB) $(INCLUDES_FLAGS) $(SRCS_DIR)/$(PARSING_DIR)/*.c -o $(TEST_PARSING)
+	@$(CC) $(CFLAGS) $(LIB) $(INCLUDES_FLAGS) $(SRCS_DIR)/$(PARSING_DIR)/*.c libs/libft/libft.a -o $(TEST_PARSING)
