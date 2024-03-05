@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:28:48 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/04 13:11:43 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/05 10:38:40 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,60 @@ int	len_word_quotes(char *s, char c)
 	return (i);
 }
 
+static char	*ft_strndup(char *src, size_t n)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = ft_calloc((n + 1), sizeof(char));
+	if (!str)
+		return (NULL);
+	while (i < n)
+	{
+		str[i] = src[i];
+		i++;
+	}
+	return (str);
+}
+
+void	ft_fsplit(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i] != 0)
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
+	}
+}
+
 char	**quotes_split(char *s, char c)
 {
 	char	**result;
-	int		nb;
 	int		i;
+	int		word_len;
 
 	if (all_quotes_are_closed(s) == 0)
 		return (NULL);
-	nb = count_words_quotes(s, ' ');
-	result = ft_calloc(nb + 1, sizeof(char *));
+	result = ft_calloc(count_words_quotes(s, c) + 1, sizeof(char *));
 	i = 0;
-	nb = 0;
 	while (*s != 0)
 	{
 		while (*s == c)
 			s++;
 		if (*s != 0)
-			nb = len_word_quotes(s, c);
-		
+		{
+			word_len = len_word_quotes(s, c);
+			result[i] = ft_strndup(s, word_len);
+			if (!result[i])
+				return (ft_fsplit(result), NULL);
+		}
+		s = s + word_len;
 	}
 }

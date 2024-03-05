@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/04 11:13:51 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/05 10:31:47 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 #include <readline/history.h>
 
 /// QUOTES CHECK
-int	all_quotes_are_closed(char *str);
+int		all_quotes_are_closed(char *str);
 
 /// QUOTES SPLIT
-int	count_words_quotes(char *s, char c);
-int	len_word_quotes(char *s, char c);
+int		count_words_quotes(char *s, char c);
+int		len_word_quotes(char *s, char c);
+void	ft_fsplit(char **tab);
 
 #endif
