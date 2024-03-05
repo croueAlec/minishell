@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:43:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/04 16:56:56 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 19:14:05 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_outfile
 	t_out_type	type;
 	char		*path;
 }				t_outfile;
-
 
 typedef struct s_branch
 {

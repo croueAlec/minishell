@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:51:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 16:35:47 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 19:13:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ void	print_cmd(char *s)
 	printf("\n||%s||\n", s);
 	write(1, "=========================================================", len);
 	write(1, "\n", 1);
+}
+
+void	print_infile_or_outfile(t_type type)
+{
+	if (type == T_INFILE)
+		printf("\n\t  %s", "infile");
+	else
+		printf("\n\t  %s", "outfilefile");
 }
 
 void	print_branches(t_branch *branch)
@@ -43,7 +51,7 @@ void	print_branches(t_branch *branch)
 	}
 	len = ft_strlen(name) + 6;
 	write(1, "|\t======================================================", len);
-	printf("\n\t  %s", (branch->type == T_INFILE) ? "infile" : "outfile");
+	print_infile_or_outfile(branch->type);
 	printf("\n----->\t||%s||\n", name);
 	write(1, "|\t======================================================", len);
 	write(1, "\n|\n", 3);
@@ -71,7 +79,6 @@ void	differentiate_branches(t_branch *branch)
 	}
 	while (cmd && cmd->tree[i])
 	{
-		
 		print_branches(cmd->tree[i]);
 		i++;
 	}
