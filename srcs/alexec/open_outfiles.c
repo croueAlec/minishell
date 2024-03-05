@@ -6,20 +6,36 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 09:53:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:06:30 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_outfile_leaves(t_outfile *outfile)
+/**
+ * @brief Frees the contents of the Outfile Struct. The branches themselves get 
+ * freed in open_outfiles();
+ * 
+ * @param outfile The Outfile Struct
+ */
+static void	free_outfile_leaves(t_outfile *outfile)
 {
 	free(outfile->path);
 	outfile->path = NULL;
 	free(outfile);
 }
 
-int	redirect_outfile(int fd, t_outfile *outfile)
+/**
+ * @brief Opens the outfile in Append or Truncate mode.
+ * Prints an error message in case of error
+ * 
+ * @param fd The file descriptor of the previously opened outfile, or 
+ * UNDEFINED_FD if this is the first file
+ * @param outfile The Outfile Struct indicating what to open and how
+ * @return int The file descriptor of the opened outfile or E_FD in case of 
+ * error
+ */
+static int	redirect_outfile(int fd, t_outfile *outfile)
 {
 	int	open_flags;
 
@@ -38,6 +54,15 @@ int	redirect_outfile(int fd, t_outfile *outfile)
 	return (free_outfile_leaves(outfile), fd);
 }
 
+/**
+ * @brief Opens outfiles and makes sur they have the right permissions if they
+ * exist or creates them if they don't. Frees all the branches after their 
+ * contents have been freed in free_*_leaves();
+ * 
+ * @param tree An array of branches from the AST, parameters of the CMD Struct
+ * @return int The last opened outfile in case of success or E_FD (-1) in case 
+ * of error
+ */
 int	open_outfiles(t_branch **tree)
 {
 	size_t	i;

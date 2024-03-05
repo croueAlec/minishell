@@ -6,13 +6,19 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 09:53:25 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:05:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_infile_leaves(t_infile *infile)
+/**
+ * @brief Frees the contents of the Infile Struct. The branches themselves get 
+ * freed in open_outfiles();
+ * 
+ * @param infile The Infile Struct
+ */
+static void	free_infile_leaves(t_infile *infile)
 {
 	free(infile->path);
 	infile->path = NULL;
@@ -27,7 +33,17 @@ int	open_here_doc(int fd)
 	return (fd);
 }
 
-int	redirect_infile(int fd, t_infile *infile)
+/**
+ * @brief Opens either the here_doc or infile depending on infile type.
+ * Prints an error message in case of error
+ * 
+ * @param fd The file descriptor of the previously opened infile, or 
+ * UNDEFINED_FD if this is the first file
+ * @param infile The Infile Struct indicating what to open and how
+ * @return int The file descriptor of the opened infile or E_FD in case of
+ *  error
+ */
+static int	redirect_infile(int fd, t_infile *infile)
 {
 	if (infile->type == IT_HERE_DOC)
 		return (open_here_doc(fd));
@@ -43,6 +59,13 @@ int	redirect_infile(int fd, t_infile *infile)
 	return (free_infile_leaves(infile), fd);
 }
 
+/**
+ * @brief Opens infiles (or here_docs) and makes sure they all exist and have 
+ * the right permissions
+ * @param tree An array of branches from the AST, parameters of the CMD Struct
+ * @return int The last opened infile in case of success or E_FD (-1) in case of
+ * error
+ */
 int	open_infiles(t_branch **tree)
 {
 	size_t	i;
