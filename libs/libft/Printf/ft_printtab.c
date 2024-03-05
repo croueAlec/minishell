@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_printtab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/03/05 10:53:26 by julieblaye       ###   ########.fr       */
+/*   Created: 2024/01/12 10:09:56 by jblaye            #+#    #+#             */
+/*   Updated: 2024/03/05 11:14:31 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft.h"
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+void	ft_printinttab(int *tab, int len)
+{
+	if (!tab)
+		return ;
+	while (len > 0)
+	{
+		ft_printf("%d\n", *tab);
+		len--;
+		tab++;
+	}
+}
 
-# include <stdio.h>
-# include "parsing.h"
-# include "../libs/libft/libft.h"
-
-void	print_parsing(void);
-void	print_exec(void);
-
-#endif
+void	ft_printstrtab(char **tab)
+{
+	if (!tab)
+		return ;
+	while (*tab != 0)
+	{
+		ft_printf("%s\n", *tab);
+		tab++;
+	}
+}
