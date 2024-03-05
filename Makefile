@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
+#    By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/03/05 15:02:50 by acroue           ###   ########.fr        #
+#    Updated: 2024/03/05 15:24:37 by julieblaye       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,30 +44,21 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 #	Files
 LIBFT = $(LIBFT_DIR)/libft.a
 
-define LIB :=
-	$(LIBFT)
+LIB :=	$(LIBFT) \
 	-lreadline
-endef
-LIB := $(strip $(LIB))
 
-define INCLUDES :=
-	$(INCS_DIR)
+INCLUDES := $(INCS_DIR) \
 	$(LIBFT_DIR)
-endef
-INCLUDES := $(strip $(INCLUDES))
 
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
-define SRC :=
-	$(addprefix $(PARSING_DIR)/, \
-	parsing.c
-	)
+SRC :=	$(addprefix $(PARSING_DIR)/, \
+	parsing.c \
+	) \
 	$(addprefix $(EXEC_DIR)/, \
-	exec.c
-	)
+	exec.c \
+	) \
 	main.c
-endef
-SRC := $(strip $(SRC))
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
 DEPS := $(patsubst %.c,$(OBJS_DIR)/%.d,$(SRC))
@@ -121,6 +112,6 @@ norm:
 	@norminette $(SRCS_DIR) $(INCS_DIR) $(BONUS_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'
 	@norminette $(LIBFT_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(YELLOW)Norm libft O.K.$(DEFAULT)"}'
 
-testparsing: $(LIB)
+testparsing: $(LIBFT)
 	@echo "$(YELLOW)* Assembling $(BWHITE)$(TEST_PARSING)$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(LIB) $(INCLUDES_FLAGS) $(SRCS_DIR)/$(PARSING_DIR)/*.c -o $(TEST_PARSING)
