@@ -6,12 +6,13 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/02/23 17:20:18 by acroue           ###   ########.fr        #
+#    Updated: 2024/03/05 15:02:50 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #	Program name
 NAME = minishell
+TEST_PARSING = test_parsing
 
 #	Colors
 DEFAULT    = \033[0m
@@ -93,6 +94,8 @@ clean:
 fclean: clean
 	@echo "$(RED)! Removing$(DEFAULT) $(NAME)"
 	@$(RM) $(NAME)
+	@echo "$(RED)! Removing$(DEFAULT) $(TEST_PARSING)"
+	@$(RM) $(TEST_PARSING)
 
 re: fclean all
 
@@ -117,3 +120,7 @@ cre:
 norm:
 	@norminette $(SRCS_DIR) $(INCS_DIR) $(BONUS_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'
 	@norminette $(LIBFT_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(YELLOW)Norm libft O.K.$(DEFAULT)"}'
+
+testparsing: $(LIB)
+	@echo "$(YELLOW)* Assembling $(BWHITE)$(TEST_PARSING)$(DEFAULT)"
+	@$(CC) $(CFLAGS) $(LIB) $(INCLUDES_FLAGS) $(SRCS_DIR)/$(PARSING_DIR)/*.c -o $(TEST_PARSING)
