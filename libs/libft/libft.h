@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:21:36 by acroue            #+#    #+#             */
-/*   Updated: 2024/02/12 18:38:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/05 10:47:58 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int		ft_put_hex(char *str, int len, int is_address);
 int		ft_putnbr_base(unsigned long long n, char *base, int is_address);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
+void	ft_printinttab(int *tab, int len);
+void	ft_printstrtab(char **tab);
+
 /* Strings */
 char	*ft_sep_join(char *s1, char *s2, char *sep);
 int		ft_count_words(char const *s, char c);
