@@ -57,10 +57,7 @@ INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 SRC :=	$(addprefix $(PARSING_DIR)/, \
 	parsing.c ) \
 	$(addprefix $(EXEC_DIR)/, \
-	exec.c \
-	open_infiles.c \
-	open_outfiles.c \
-	display_tree.c ) \
+	exec.c ) \
 	main.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
