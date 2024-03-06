@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/05 19:32:25 by acroue           ###   ########.fr        #
+#    Updated: 2024/03/06 15:26:09 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,7 @@ INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 SRC :=	$(addprefix $(PARSING_DIR)/, \
 	parsing.c ) \
 	$(addprefix $(EXEC_DIR)/, \
-	exec.c \
-	open_infiles.c \
-	open_outfiles.c \
-	display_tree.c ) \
+	exec.c ) \
 	main.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
@@ -88,8 +85,6 @@ clean:
 fclean: clean
 	@echo "$(RED)! Removing$(DEFAULT) $(NAME)"
 	@$(RM) $(NAME)
-	@echo "$(RED)! Removing$(DEFAULT) $(TEST_PARSING)"
-	@$(RM) $(TEST_PARSING)
 	@echo "$(RED)! Removing$(DEFAULT) $(TEST_PARSING)"
 	@$(RM) $(TEST_PARSING)
 

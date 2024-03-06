@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:10:23 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 19:14:35 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/06 13:22:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_branch	*define_test_cmd(t_branch *branch, char **args)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(sizeof(t_cmd), 1);
-	cmd->cmd_path = args[0];
+	cmd->cmd_path = ft_strdup(args[0]);
 	cmd->args = ft_calloc(sizeof(char *), 3);
 	cmd->args[0] = ft_strdup(args[1]);
 	cmd->args[1] = ft_strdup(args[2]);
@@ -85,9 +85,8 @@ int	main(int argc, char *argv[], char **env)
 	branch = ft_calloc(sizeof(t_branch), 1);
 	branch = define_test_cmd(branch, &argv[1]);
 	differentiate_branches(branch);
-	execute_tree(branch->elmnt, env);
+	execute_tree(branch, env);
 	wait_children(1);
-	free(branch);
 	(void)argc;
 	(void)argv;
 	return (0);
