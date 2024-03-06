@@ -1,5 +1,5 @@
 #include "minishell.h"
-
+/*
 void	set_branch(t_type type, t_branch *branch)
 {
 	void	*elmnt;
@@ -25,4 +25,4 @@ t_branch	input_tree(char **input)
 	first = (t_branch *) ft_calloc (1, sizeof(t_branch));
 	set_branch(T_CMD, first);
 	first->elmnt->cmd_path = fetch_cmd_path(input[0]);
-}
+}*/

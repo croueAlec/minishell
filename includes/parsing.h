@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/05 18:58:38 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:39:44 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ int		count_words_quotes(char *s, char c);
 int		len_word_quotes(char *s, char c);
 void	ft_fsplit(char **tab);
 char	**quotes_split(char *s, char c);
+
+/// INFILE MANAGEMENT
+int		in_outfile_len(char *str);
 
 #endif
