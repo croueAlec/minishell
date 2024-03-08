@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:16:50 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/06 10:24:58 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/08 17:16:33 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "minishell.h"
 
-int		open_infiles(t_branch **branch);
-void	free_infile_leaves(t_infile *infile);
-int		open_outfiles(t_branch **tree);
-void	free_outfile_leaves(t_outfile *outfile);
+int		open_infile(t_branch *branch, int infile);
+void	free_infile_branch(t_infile *infile);
+int		open_outfile(t_branch *branch, int outfile);
+void	free_outfile_branch(t_branch *branch);
 
 #endif

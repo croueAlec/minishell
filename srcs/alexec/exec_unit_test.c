@@ -6,15 +6,14 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:10:23 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/06 13:22:46 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/07 14:44:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec_unit_test.h"
 
-#define TEST_ERR "./a.out /usr/bin/cat cat -n <in1> <in2> <out1> <out2>\n"
-
-static t_branch	*define_test_infile(char *path)
+t_branch	*define_test_infile(char *path)
 {
 	t_branch	*branch;
 	t_infile	*infile;
@@ -28,7 +27,7 @@ static t_branch	*define_test_infile(char *path)
 	return (branch);
 }
 
-static t_branch	*define_test_outifle(char *path, t_out_type type)
+t_branch	*define_test_outifle(char *path, t_out_type type)
 {
 	t_branch	*branch;
 	t_outfile	*outfile;
@@ -42,7 +41,7 @@ static t_branch	*define_test_outifle(char *path, t_out_type type)
 	return (branch);
 }
 
-static t_branch	*define_test_cmd(t_branch *branch, char **args)
+t_branch	*define_test_cmd(t_branch *branch, char **args)
 {
 	t_cmd	*cmd;
 
@@ -60,10 +59,12 @@ static t_branch	*define_test_cmd(t_branch *branch, char **args)
 	cmd->tree[2] = define_test_outifle(args[5], OT_APPEND);
 	cmd->tree[3] = define_test_outifle(args[6], OT_TRUNC);
 	cmd->tree[4] = NULL;
+	if (args[7])
+		define_test_pipe(cmd, &args[7]);
 	return (branch);
 }
 
-static int	wait_children(int pid)
+int	wait_children(int pid)
 {
 	int	wait_status;
 	int	error_status;
@@ -81,7 +82,7 @@ int	main(int argc, char *argv[], char **env)
 	t_branch	*branch;
 
 	if (argc < 8)
-		return (ft_dprintf(2, TEST_ERR));
+		return ((void)ft_dprintf(2, TEST_ERR), ft_dprintf(2, TEST_ERR_2));
 	branch = ft_calloc(sizeof(t_branch), 1);
 	branch = define_test_cmd(branch, &argv[1]);
 	differentiate_branches(branch);

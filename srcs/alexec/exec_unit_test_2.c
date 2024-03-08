@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   exec_unit_test_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 10:12:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/08 18:17:42 by acroue           ###   ########.fr       */
+/*   Created: 2024/03/07 10:08:29 by acroue            #+#    #+#             */
+/*   Updated: 2024/03/07 14:17:19 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "minishell.h"
+#include "exec_unit_test.h"
 
-# include "minishell.h"
+void	define_test_pipe(t_cmd *cmd, char **args)
+{
+	t_branch	*next_cmd;
 
-void	cmd_error(t_branch *branch, char *err_msg);
-void	redirection_error(t_branch *branch, size_t tree_index,char *err_msg);
-void	free_tab(void **tab);
-void	free_cmd(t_cmd *cmd);
-void	free_tree(t_branch *branch);
-void	execute_tree(t_branch *branch, char **env);
-void	differentiate_branches(t_branch *branch);
-
-#endif
+	next_cmd = ft_calloc(sizeof(t_branch), 1);
+	cmd->next_cmd = define_test_cmd(next_cmd, args);
+}

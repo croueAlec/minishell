@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:43:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 19:14:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/07 14:12:16 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 typedef enum e_type
 {
 	T_CMD = 1,
-	T_PIPE,
 	T_INFILE,
 	T_OUTFILE
 }			t_type;
@@ -62,6 +61,7 @@ typedef struct s_cmd
 {
 	char		*cmd_path;
 	char		**args;
+	t_branch	*next_cmd;
 	t_branch	**tree;
 }			t_cmd;
 

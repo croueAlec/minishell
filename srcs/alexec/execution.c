@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/06 15:24:17 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:41:45 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,35 @@ void	execute_cmd(t_cmd *cmd, char **env)
 	free(cmd);
 }
 
+void	open_redirections(int *infile, int *outfile, t_branch *branch)
+{
+	t_cmd	*cmd;
+	size_t	i;
+
+	i = 0;
+	cmd = branch->elmnt;
+	if (access(cmd->cmd_path, X_OK))
+		(free(cmd->cmd_path), cmd->cmd_path = NULL);
+	if (!cmd->cmd_path)
+		return (cmd_error(branch, "Cmd error thus free\n"));
+	while (cmd->tree && cmd->tree[i] != NULL)
+	{
+		if (cmd->tree[i]->type == T_INFILE)
+			*infile = open_infile(branch, *infile);
+		else if (cmd->tree[i]->type == T_OUTFILE)
+			*outfile = open_outfile(branch, *outfile);
+		else
+			printf("hmm what kind of branch is %d ?\n", cmd->tree[i]->type);
+		if (*outfile == E_FD || *infile == E_FD)
+			return (redirection_error(branch, i,"Redirection error free\n"));
+		i++;
+	}
+}
+
 /**
  * @brief Handles pipes and redirections before calling execute_cmd();
  * 
- * @param cmd A pointer to the command structure
+ * @param branch A pointer to the Branch Command Structure
  * @param env The Minishell's local environment
  */
 void	execute_tree(t_branch *branch, char **env)
@@ -50,14 +75,16 @@ void	execute_tree(t_branch *branch, char **env)
 	t_cmd	*cmd;
 
 	cmd = branch->elmnt;
-	if (access(cmd->cmd_path, X_OK))
-		(free(cmd->cmd_path), cmd->cmd_path = NULL);
-	if (!cmd->cmd_path)
-		return (cmd_error(branch, "Cmd error thus free\n"));
-	infile = open_infiles(cmd->tree);
-	outfile = open_outfiles(cmd->tree);
-	if (outfile == E_FD || infile == E_FD)
-		return (redirection_error(branch, "Redirection error thus free\n"));
+	infile == UNDEFINED_FD;
+	outfile == UNDEFINED_FD;
+	while (cmd->next_cmd)
+	{
+		open_redirections(infile, outfile, branch);
+		if (infile == E_FD || outfile == E_FD)
+			continue ;
+		branch = cmd->next_cmd;
+		cmd = branch->elmnt;
+	}
 	printf("infile : %d\noutfile : %d\n", infile, outfile);
 	dup2(infile, STDIN_FILENO);
 	close(infile);
