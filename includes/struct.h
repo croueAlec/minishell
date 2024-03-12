@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:43:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 19:14:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:56:14 by julieblaye       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_cmd
 {
 	char		*cmd_path;
 	char		**args;
+	t_branch	*next_cmd;
 	t_branch	**tree;
 }			t_cmd;
 

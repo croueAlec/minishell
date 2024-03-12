@@ -18,10 +18,10 @@ int	in_outfile_len(char *str)
 		{
 			if (str[len + i] == '\"' || str[len + i] == '\'')
 			{
-			quote = str[len + i];
-			len++;
-			while (str[len + i] != quote && str[len + i] != 0)
+				quote = str[len + i];
 				len++;
+				while (str[len + i] != quote && str[len + i] != 0)
+					len++;
 			}
 			len++;
 		}

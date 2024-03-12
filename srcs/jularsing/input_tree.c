@@ -1,28 +1,40 @@
 #include "minishell.h"
-/*
-void	set_branch(t_type type, t_branch *branch)
+
+void	generate_cmd_branches(t_branch *first, int len)
 {
-	void	*elmnt;
-	
-	branch->type = type
-	if (branch->type == T_CMD)
+	t_branch	*tmp;
+	t_cmd		*cmd;
+	int			i;
+
+	i = 0;
+	tmp = first;
+	while (i < len)
 	{
-		elmnt = (t_cmd *) ft_calloc(1, sizeof(t_cmd));
-		branch->elmnt = elmnt;
-	}	
+		tmp = new_cmd_branch();
+		cmd = tmp->elmnt;
+		tmp = cmd->next_cmd;
+		i++;
+	}
 }
-
-char	*fetch_cmd_path(char *cmd_str)
-{
-
-}
-
-t_branch	input_tree(char **input)
+/*
+t_branch	*input_tree(char **input, char **env)
 {
 	t_branch	*first;
-	void		*ptr;
+	t_branch	*tmp;
+	t_cmd		*cmd;
+	int			len;
+	int			i;
 
-	first = (t_branch *) ft_calloc (1, sizeof(t_branch));
-	set_branch(T_CMD, first);
-	first->elmnt->cmd_path = fetch_cmd_path(input[0]);
+	i = 0;
+	len = str_tab_len(input);
+	generate_cmd_branches(first, len);
+	tmp = first;
+	while (i < len)
+	{
+		fill_cmd_token(input[i], tmp, env);
+		cmd = tmp->elmnt;
+		tmp = cmd->next_cmd;
+		i++;
+	}
+	return (first);
 }*/
