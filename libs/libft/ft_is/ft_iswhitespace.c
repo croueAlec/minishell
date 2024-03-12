@@ -6,11 +6,11 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:14:22 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/12 12:15:51 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/12 12:20:32 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 int	ft_iswhitespace(char c)
 {
