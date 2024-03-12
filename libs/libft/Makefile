@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+         #
+#    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/03/05 11:25:40 by julieblaye       ###   ########.fr        #
+#    Updated: 2024/03/12 12:16:27 by jblaye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS =	DPrintf/ft_dprintf_basic_functions.c \
 		ft_is/ft_isascii.c \
 		ft_is/ft_isdigit.c \
 		ft_is/ft_isprint.c \
+		ft_is/ft_iswhitespace.c \
 \
 		ft_put/ft_putchar_fd.c \
 		ft_put/ft_putendl_fd.c \

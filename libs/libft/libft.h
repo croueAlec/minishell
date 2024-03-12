@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:21:36 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 10:47:58 by julieblaye       ###   ########.fr       */
+/*   Updated: 2024/03/12 12:16:04 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_iswhitespace(char c);
 /* ft_put */
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
