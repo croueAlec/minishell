@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 11:05:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:11:18 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 
  * @param infile The Infile Struct
  */
-static void	free_infile_leaves(t_infile *infile)
+void	free_infile_leaves(t_infile *infile)
 {
 	free(infile->path);
 	infile->path = NULL;
@@ -75,6 +75,7 @@ int	open_infiles(t_branch **tree)
 	fd = UNDEFINED_FD;
 	while (tree[i] != NULL)
 	{
+		printf("%d\n", tree[i]->type);
 		if (tree[i]->type == T_INFILE)
 			fd = redirect_infile(fd, tree[i]->elmnt);
 		if (fd == E_FD)

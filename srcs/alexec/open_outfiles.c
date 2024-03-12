@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 11:06:30 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:24:35 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 
  * @param outfile The Outfile Struct
  */
-static void	free_outfile_leaves(t_outfile *outfile)
+void	free_outfile_leaves(t_outfile *outfile)
 {
 	free(outfile->path);
 	outfile->path = NULL;

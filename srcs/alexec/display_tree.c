@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:51:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/05 19:13:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/06 12:31:25 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_infile_or_outfile(t_type type)
 	if (type == T_INFILE)
 		printf("\n\t  %s", "infile");
 	else
-		printf("\n\t  %s", "outfilefile");
+		printf("\n\t  %s", "outfile");
 }
 
 void	print_branches(t_branch *branch)
