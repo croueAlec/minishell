@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/12 11:57:49 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:04:58 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,16 @@ void		expanded_len_variable(char *str, size_t *len, size_t *exp_len, char **env)
 void		expanded_len_double_quote(char *str, size_t *len, size_t *exp_len, char **env);
 size_t		expanded_len(size_t i, char *str, char **env);
 void		dup_exp_var(char *result, char *str, size_t *index, char **env);
-void		dup_exp_single_quote(char **result, char *str, size_t *index);
-void		dup_exp_doubl_quote(char *gresult, char *str, size_t *index, char **env);
+void		dup_exp_single_quote(char *result, char *str, size_t *index);
+void		dup_exp_doubl_quote(char *result, char *str, size_t *index, char **env);
 char		*dup_expanded_char(size_t i, char *str, char **env);
 
+/// CMD FETCHING
+ssize_t		fetch_cmd_index(char *cmd_str);
+char		**pathstab(char **ev);
+char		*cmdpath(char *cmd, char **ev);
+int			isbuiltin(char *cmd_name);
+char		*fetch_cmd_path(char *cmd_str, char **env);
 
 /// INPUT TREE GENERATION
 /// Utils

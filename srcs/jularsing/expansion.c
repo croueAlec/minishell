@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 11:35:02 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/03/12 11:47:19 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/13 11:07:12 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,25 @@ void	dup_exp_var(char *result, char *str, size_t *index, char **env)
 	}
 	while (ft_isalnum(str[index[0]]) == 1 || str[index[0]] == '_')
 		index[0] += 1;
+	index[1] -= 1;
 }
 
 /// @brief copies the quoted caracters from str to result without the quotes
 /// @param result str with all expansions performed up to index[1]
 /// @param str str with no expansions performed
 /// @param index [0] is the cursor in str, [1] is the cursor in result
-void	dup_exp_single_quote(char **result, char *str, size_t *index)
+void	dup_exp_single_quote(char *result, char *str, size_t *index)
 {
+	result[index[1]] = str[index[0] - 1];
+	index[1] += 1;
 	while (str[index[0]] != '\'')
 			{
-				*result[index[1]] = str[index[0]];
+				result[index[1]] = str[index[0]];
 				index[1] += 1;
 				index[0] += 1;
 			}
-			index[0] += 1;
+	result[index[1]] = str[index[0]];
+	index[0] += 1;
 }
 
 /// @brief copies the quoted caracters from str to result while performming var expansions
@@ -56,6 +60,8 @@ void	dup_exp_single_quote(char **result, char *str, size_t *index)
 /// @param env env parameters in a mallocked array
 void	dup_exp_doubl_quote(char *result, char *str, size_t *index, char **env)
 {
+	result[index[1]] = str[index[0] - 1];
+	index[1] += 1;
 	while (str[index[0]] != '\"' && str[index[0]] != 0)
 	{
 		index[0] += 1;
@@ -67,6 +73,7 @@ void	dup_exp_doubl_quote(char *result, char *str, size_t *index, char **env)
 			index[1] += 1;
 		}
 	}
+	result[index[1]] = str[index[0]];
 	index[0] += 1;
 }
 
@@ -86,7 +93,8 @@ char	*dup_expanded_char(size_t i, char *str, char **env)
 	index = (size_t [2]) {i, 0};
 	if (!result)
 		return (NULL);
-	while (str[index[0]] != ' ' && str[index[0]] != 0)
+	while (str[index[0]] != ' ' && str[index[0]] != 0
+			&& str[index[0]] != '>' && str[index[0]] != '<')
 	{
 		index[0] += 1;
 		if (str[index[0] - 1] == '\'')
@@ -96,10 +104,8 @@ char	*dup_expanded_char(size_t i, char *str, char **env)
 		else if (str[index[0] - 1] == '\"')
 			dup_exp_doubl_quote(result, str, index, env);
 		else
-		{
 			result[index[1]] = str[index[0] - 1];
-			index[1] += 1;
-		}
+		index[1] += 1;
 	}
 	return (result);
 }

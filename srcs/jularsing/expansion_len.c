@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/03/12 11:47:27 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/13 11:05:18 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	expanded_len_variable(char *str, size_t *len, size_t *exp_len, char **env)
 /// @param env char array containing the environment variables
 void	expanded_len_double_quote(char *str, size_t *len, size_t *exp_len, char **env)
 {
+	*exp_len += 1;
 	while (str[*len] != '\"' && str[*len] != 0)
 	{
 		*len+= 1;
@@ -85,6 +86,7 @@ void	expanded_len_double_quote(char *str, size_t *len, size_t *exp_len, char **e
 			*exp_len += 1;
 	}
 	*len += 1;
+	*exp_len += 1;
 }
 
 /// @brief calculates the len of str when quotes have been deleted and var expanded, up until the next ' ' or \0
@@ -97,11 +99,13 @@ size_t	expanded_len(size_t i, char *str, char **env)
 	size_t	*len;
 
 	len = (size_t [2]){i, 0};
-	while (str[len[LEN]] != 0 && str[len[LEN]] != ' ')
+	while (str[len[LEN]] != 0 && str[len[LEN]] != ' '
+			&& str[len[LEN]] != '>' && str[len[LEN]] != '<')
 	{
 		len[LEN]++;
 		if (str[len[LEN] - 1] == '\'')
 		{
+			len[EXP_LEN] += 2;
 			while (str[len[LEN]] != '\'')
 			{
 				len[LEN]++;
