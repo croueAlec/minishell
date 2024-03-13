@@ -6,13 +6,13 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:09:12 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/12 17:24:31 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/13 12:57:32 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	copy_str(char *s, char *result, char quote, int *index)
+static void	copy_str(char *s, char *result, char quote, size_t *index)
 {
 	while (s[index[0]] != quote)
 	{
@@ -26,7 +26,6 @@ char	*expanded_quotes_dup(char *s, int len)
 {
 	char	*result;
 	size_t	*index;
-	int		quote;
 
 	index = (size_t [2]) {0, 0};
 	result = ft_calloc(len + 1, sizeof(char));

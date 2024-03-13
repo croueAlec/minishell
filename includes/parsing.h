@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/12 17:04:58 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:50:56 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,26 @@ char		**quotes_split(char *s, char c);
 int			in_outfile_len(char *str);
 
 /// VAR EXPAND MANAGEMENT
-int			variable_len(char *variable, char **env);
+/// Utils
+void		move_forward_single_quotes(size_t *len, char *str);
+void		move_forward_double_quotes(size_t *len, char *str, char **env);
+void		copy_single_quote(char *result, char *str, size_t *index);
+void		copy_double_quote_expand(char *result, char *str, size_t *index, char **env);
+void		single_var_expansion(size_t *index, char *str, char *result, char **env);
+/// Expand variables
+size_t		*variable_len(char *variable, char **env);
 char		*variable_value(char *variable, char **env);
-void		expanded_len_variable(char *str, size_t *len, size_t *exp_len, char **env);
-void		expanded_len_double_quote(char *str, size_t *len, size_t *exp_len, char **env);
-size_t		expanded_len(size_t i, char *str, char **env);
-void		dup_exp_var(char *result, char *str, size_t *index, char **env);
-void		dup_exp_single_quote(char *result, char *str, size_t *index);
-void		dup_exp_doubl_quote(char *result, char *str, size_t *index, char **env);
-char		*dup_expanded_char(size_t i, char *str, char **env);
+size_t		var_expanded_len(char *str, char **env);
+char		*str_expand_var(char *str, char **env);
+/// Expand quotes
+char		**quote_expansion_split(char *s, char c);
 
 /// CMD FETCHING
-ssize_t		fetch_cmd_index(char *cmd_str);
+ssize_t		fetch_cmd_index(char **args);
 char		**pathstab(char **ev);
 char		*cmdpath(char *cmd, char **ev);
 int			isbuiltin(char *cmd_name);
-char		*fetch_cmd_path(char *cmd_str, char **env);
+char		*fetch_cmd_path(char *cmd_name, char **env);
 
 /// INPUT TREE GENERATION
 /// Utils
