@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:16:50 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/08 17:16:33 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:21:02 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 
 # include "minishell.h"
 
-int		open_infile(t_branch *branch, int infile);
-void	free_infile_branch(t_infile *infile);
-int		open_outfile(t_branch *branch, int outfile);
-void	free_outfile_branch(t_branch *branch);
+# define ERR_REDIR "Redirection error free\n"
+
+t_branch	*open_close_redir(t_branch *branch);
+void		open_redirections(int *infile, int *outfile, t_branch *branch);
+int			open_infile(t_branch *branch, int infile);
+void		free_infile_branch(t_infile *infile);
+int			open_outfile(t_branch *branch, int outfile);
+void		free_outfile_branch(t_branch *branch);
 
 #endif

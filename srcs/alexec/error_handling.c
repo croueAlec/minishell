@@ -6,16 +6,28 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:18:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/08 18:28:06 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:21:09 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_branch	*free_curr_branch(t_branch *branch)
+{
+	t_branch	*next_branch;
+	t_cmd		*cmd;
+
+	cmd = branch->elmnt;
+	next_branch = cmd->next_cmd;
+	cmd->next_cmd = NULL;
+	free_tree(branch);
+	return (next_branch);
+}
+
 void	cmd_error(t_branch *branch, char *err_msg)
 {
 	ft_dprintf(2, "%s", err_msg);
-	free_tree(branch);
+	free_curr_branch(branch);
 }
 
 /**
@@ -26,11 +38,11 @@ void	cmd_error(t_branch *branch, char *err_msg)
  * @param tree_index The index of the failing infile from whence to free
  * @param err_msg The error message to display when the function is called
  */
-void	redirection_error(t_branch *branch, size_t tree_index, char *err_msg)
+void	redirection_error(t_branch *branch, size_t tree_index)
 {
 	t_cmd	*cmd;
 
-	ft_dprintf(2, "%s", err_msg);
+	ft_dprintf(2, "%s", ERR_REDIR);
 	cmd = branch->elmnt;
 	free_tab(&cmd->tree[tree_index]);
 	free(cmd->tree);
