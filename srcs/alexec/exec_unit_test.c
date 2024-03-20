@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:10:23 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/07 14:44:01 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:31:54 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,22 @@ t_branch	*define_test_cmd(t_branch *branch, char **args)
 	cmd->tree = ft_calloc(sizeof(t_branch *), 6);
 	cmd->tree[0] = define_test_infile(args[3]);
 	cmd->tree[1] = define_test_infile(args[4]);
-	cmd->tree[2] = define_test_outifle(args[5], OT_APPEND);
-	cmd->tree[3] = define_test_outifle(args[6], OT_TRUNC);
-	cmd->tree[4] = NULL;
+	cmd->tree[2] = NULL;
 	if (args[7])
 		define_test_pipe(cmd, &args[7]);
+	else
+	{
+		free_infile_branch(cmd->tree[0]->elmnt);
+		free(cmd->tree[0]);
+		free_infile_branch(cmd->tree[1]->elmnt);
+		(free(cmd->tree[1]), free(cmd->tree));
+		cmd->tree = NULL;
+	}
 	return (branch);
 }
+	/* cmd->tree[2] = define_test_outifle(args[5], OT_APPEND);
+	cmd->tree[3] = define_test_outifle(args[6], OT_TRUNC);
+	cmd->tree[4] = NULL; a la place de cmd->tree[2] = NULL*/
 
 int	wait_children(int pid)
 {

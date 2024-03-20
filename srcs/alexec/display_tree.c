@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:51:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/07 14:20:07 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/20 15:25:47 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	differentiate_branches(t_branch *branch)
 		cmd = branch->elmnt;
 		print_cmd(cmd->cmd_path);
 	}
-	while (cmd && cmd->tree[i])
+	while (cmd && cmd->tree && cmd->tree[i])
 	{
 		print_branches(cmd->tree[i]);
 		i++;

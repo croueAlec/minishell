@@ -64,6 +64,8 @@ void	printing_bltin(t_branch *branch, t_bltin type, int fd_out, int *cmd_nbr)
 		ft_dprintf(fd_out, "je suis un env, PATH='PATH'\n");
 	else
 		ft_dprintf(fd_out, "Not supposed to happen in call print builtin\n");
+	(void)branch;
+	(void)cmd_nbr;
 }
 
 /**
@@ -84,6 +86,8 @@ void	other_builtin(t_branch *branch, t_bltin type, int *cmd_number)
 		ft_printf("Je suis un exit et j'exit (je crois)\n");
 	else
 		printf("Not supposed to happen in call non print builtin\n");
+	(void)branch;
+	(void)cmd_number;
 }
 
 /**
@@ -118,4 +122,6 @@ int	handle_builtins(t_branch *branch, int *cmd_number)
 	close(outfile);
 	if (type > B_ENV)
 		other_builtin(branch, type, cmd_number);
+	(void)cmd_number;
+	return (1);
 }

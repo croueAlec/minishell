@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/13 16:20:25 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/20 13:52:03 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  * command. It will open infiles and outfiles in order then close them.
  * 
  * @param branch The current CMD Branch which has cmd_path and args to NULL.
- * @return *t_branch A pointer to the next branch or NULL if there is none.
+ * @return *t_cmd A pointer to the next cmd or NULL if there is none.
  */
-t_branch	*open_close_redir(t_branch *branch)
+t_cmd	*open_close_redir(t_branch *branch)
 {
 	t_branch	*next_branch;
 	t_cmd		*cmd;
@@ -35,7 +35,7 @@ t_branch	*open_close_redir(t_branch *branch)
 		close(infile);
 	if (outfile >= 0)
 		close(outfile);
-	return (next_branch);
+	return (next_branch->elmnt); // soucis ici
 }
 
 void	open_redirections(int *infile, int *outfile, t_branch *branch)
@@ -52,9 +52,9 @@ void	open_redirections(int *infile, int *outfile, t_branch *branch)
 	while (cmd->tree && cmd->tree[i] != NULL)
 	{
 		if (cmd->tree[i]->type == T_INFILE)
-			*infile = open_infile(branch, *infile);
+			*infile = open_infile(cmd->tree[i], *infile);
 		else if (cmd->tree[i]->type == T_OUTFILE)
-			*outfile = open_outfile(branch, *outfile);
+			*outfile = open_outfile(cmd->tree[i], *outfile);
 		else
 			printf("hmm what kind of branch is %d ?\n", cmd->tree[i]->type);
 		if (*outfile == E_FD || *infile == E_FD)
@@ -62,3 +62,4 @@ void	open_redirections(int *infile, int *outfile, t_branch *branch)
 		i++;
 	}
 }
+/* this function should free everything when it encounters an error */
