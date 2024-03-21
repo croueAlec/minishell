@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/08 18:10:51 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:48:39 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	free_infile_branch(t_branch *branch)
 	t_infile	*infile;
 
 	infile = branch->elmnt;
-	free(infile->path);
-	infile->path = NULL;
+	if (infile->path)
+		(free(infile->path), infile->path = NULL);
 	free(infile);
 	free(branch);
 }

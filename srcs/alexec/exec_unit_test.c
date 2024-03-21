@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:10:23 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/20 19:31:54 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:52:51 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_branch	*define_test_infile(char *path)
 	branch->type = T_INFILE;
 	branch->elmnt = infile;
 	infile->path = ft_strdup(path);
+	// printf("\t\t\t%s\n", infile->path); //regarder au premier appel de freetruc
 	infile->type = IT_RDONLY;
 	return (branch);
 }
@@ -61,10 +62,9 @@ t_branch	*define_test_cmd(t_branch *branch, char **args)
 		define_test_pipe(cmd, &args[7]);
 	else
 	{
-		free_infile_branch(cmd->tree[0]->elmnt);
-		free(cmd->tree[0]);
-		free_infile_branch(cmd->tree[1]->elmnt);
-		(free(cmd->tree[1]), free(cmd->tree));
+		free_infile_branch(cmd->tree[0]);
+		free_infile_branch(cmd->tree[1]);
+		free(cmd->tree);
 		cmd->tree = NULL;
 	}
 	return (branch);
