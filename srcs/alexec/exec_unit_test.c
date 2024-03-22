@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:10:23 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/21 12:52:51 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:17:20 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ t_branch	*define_test_cmd(t_branch *branch, char **args)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(sizeof(t_cmd), 1);
-	cmd->cmd_path = ft_strdup(args[0]);
+	if (ft_strlen(args[0]) > 6)
+		cmd->cmd_path = ft_strdup(args[0]);
+	else
+		cmd->cmd_path = NULL;
 	cmd->args = ft_calloc(sizeof(char *), 3);
 	cmd->args[0] = ft_strdup(args[1]);
 	cmd->args[1] = ft_strdup(args[2]);
@@ -62,10 +65,8 @@ t_branch	*define_test_cmd(t_branch *branch, char **args)
 		define_test_pipe(cmd, &args[7]);
 	else
 	{
-		free_infile_branch(cmd->tree[0]);
-		free_infile_branch(cmd->tree[1]);
-		free(cmd->tree);
-		cmd->tree = NULL;
+		(free_infile_branch(cmd->tree[0]), free_infile_branch(cmd->tree[1]));
+		(free(cmd->tree), cmd->tree = NULL);
 	}
 	return (branch);
 }

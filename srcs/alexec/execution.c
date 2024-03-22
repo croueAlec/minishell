@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/20 18:51:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/22 11:29:25 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,11 @@ void	execute_cmd(t_branch *branch, char **env, int infile, int outfile)
 	if (outfile == UNDEFINED_FD)
 		outfile = STDOUT_FILENO;
 	dup2(infile, STDIN_FILENO);
+	if (!isatty(infile))
+		close(infile);
 	dup2(outfile, STDOUT_FILENO);
+	if (!isatty(outfile))
+		close(outfile);
 	execve(cmd->cmd_path, cmd->args, env);
 	perror(cmd->args[0]);
 	if (infile >= 0)
@@ -120,6 +124,8 @@ void	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (tmp_in != pipefd[0])
+			close(pipefd[0]);
 		infile = tmp_in;
 		outfile = pipefd[1];
 		open_redirections(&infile, &outfile, branch);
