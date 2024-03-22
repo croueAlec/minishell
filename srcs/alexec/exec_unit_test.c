@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:10:23 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/21 13:17:20 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/22 14:27:40 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_branch	*define_test_infile(char *path)
 	branch->type = T_INFILE;
 	branch->elmnt = infile;
 	infile->path = ft_strdup(path);
-	// printf("\t\t\t%s\n", infile->path); //regarder au premier appel de freetruc
 	infile->type = IT_RDONLY;
 	return (branch);
 }
@@ -42,7 +41,7 @@ t_branch	*define_test_outifle(char *path, t_out_type type)
 	return (branch);
 }
 
-t_branch	*define_test_cmd(t_branch *branch, char **args)
+t_branch	*define_test_cmd(t_branch *branch, char **args, int is_second)
 {
 	t_cmd	*cmd;
 
@@ -63,14 +62,15 @@ t_branch	*define_test_cmd(t_branch *branch, char **args)
 	cmd->tree[2] = NULL;
 	if (args[7])
 		define_test_pipe(cmd, &args[7]);
-	else
+	else if (is_second)
 	{
 		(free_infile_branch(cmd->tree[0]), free_infile_branch(cmd->tree[1]));
 		(free(cmd->tree), cmd->tree = NULL);
 	}
 	return (branch);
 }
-	/* cmd->tree[2] = define_test_outifle(args[5], OT_APPEND);
+	/* 
+	cmd->tree[2] = define_test_outifle(args[5], OT_APPEND);
 	cmd->tree[3] = define_test_outifle(args[6], OT_TRUNC);
 	cmd->tree[4] = NULL; a la place de cmd->tree[2] = NULL*/
 
@@ -94,7 +94,7 @@ int	main(int argc, char *argv[], char **env)
 	if (argc < 8)
 		return ((void)ft_dprintf(2, TEST_ERR), ft_dprintf(2, TEST_ERR_2));
 	branch = ft_calloc(sizeof(t_branch), 1);
-	branch = define_test_cmd(branch, &argv[1]);
+	branch = define_test_cmd(branch, &argv[1], 0);
 	differentiate_branches(branch);
 	execute_tree(branch, env);
 	wait_children(1);

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/20 13:52:03 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/22 14:31:14 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ t_cmd	*open_close_redir(t_branch *branch)
 		close(infile);
 	if (outfile >= 0)
 		close(outfile);
-	return (next_branch->elmnt); // soucis ici
+	return (next_branch->elmnt);
 }
+/* soucis dans le return apparemment */
 
 void	open_redirections(int *infile, int *outfile, t_branch *branch)
 {
@@ -45,10 +46,6 @@ void	open_redirections(int *infile, int *outfile, t_branch *branch)
 
 	i = 0;
 	cmd = branch->elmnt;
-	// if (access(cmd->cmd_path, X_OK))
-	// 	(free(cmd->cmd_path), cmd->cmd_path = NULL);
-	// if (!cmd->cmd_path)
-	// 	return (cmd_error(branch, "Cmd error thus free\n"));
 	while (cmd->tree && cmd->tree[i] != NULL)
 	{
 		if (cmd->tree[i]->type == T_INFILE)

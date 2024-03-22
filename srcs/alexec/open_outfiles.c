@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/22 14:30:17 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_outfile_branch(t_branch *branch)
 int	open_outfile(t_branch *branch, int outfile_fd)
 {
 	t_outfile	*outfile;
-	int	open_flags;
+	int			open_flags;
 
 	outfile = branch->elmnt;
 	if (outfile_fd != UNDEFINED_FD)

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/22 11:29:25 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/22 14:30:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,30 @@ int	open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile)
 t_cmd	*basic_check(t_branch *branch, size_t *cmd_number)
 {
 	t_cmd	*cmd;
-	// int		is_directory;
-	// int		builtin_type;
 
 	(void)cmd_number;
 	cmd = branch->elmnt;
 	if (!cmd->cmd_path && !cmd->args)
 		return (open_close_redir(branch));
-	// if (!cmd->cmd_path && !handle_builtins(branch, cmd_number))
-		// return_next_cmd();
-	// is_directory = (ft_strncmp(ft_strchr(cmd->cmd_path, '/'), "/", 1) == 0);
-	// if (env[find_env_index("PATH")] == NULL || is_directory)
-	// {
-	// 	errno = 127;
-	// 	perror(cmd->args[0]);
-	// 	return_next_cmd();
-	// }
-	// else if (!is_directory)
-	// {
-	// 	errno = 2;
-	// 	perror(cmd->args[0]);
-	// 	return_next_cmd();
-	// }
 	return (cmd);
 }
+	/* int		is_directory;
+	int		builtin_type;
+	if (!cmd->cmd_path && !handle_builtins(branch, cmd_number))
+		return_next_cmd();
+	is_directory = (ft_strncmp(ft_strchr(cmd->cmd_path, '/'), "/", 1) == 0);
+	if (env[find_env_index("PATH")] == NULL || is_directory)
+	{
+		errno = 127;
+		perror(cmd->args[0]);
+		return_next_cmd();
+	}
+	else if (!is_directory)
+	{
+		errno = 2;
+		perror(cmd->args[0]);
+		return_next_cmd();
+	} */
 
 void	execute_cmd(t_branch *branch, char **env, int infile, int outfile)
 {
@@ -139,8 +139,6 @@ void	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 	if (tmp_in > 0)
 		close(tmp_in);
 	free_curr_branch(branch);
-	(void)env;
-	(void)pipefd; //gerer le pipefd
 }
 
 /**
@@ -154,16 +152,18 @@ void	execute_tree(t_branch *branch, char **env)
 	t_branch	*next_branch;
 	size_t		cmd_number;
 	int			tmp_outfile;
-	int			pipefd[2] = {UNDEFINED_FD, UNDEFINED_FD};
+	int			pipefd[2];
 	t_cmd		*cmd;
 
+	pipefd[0] = UNDEFINED_FD;
+	pipefd[1] = UNDEFINED_FD;
 	cmd_number = 0;
 	tmp_outfile = UNDEFINED_FD;
 	while (branch)
 	{
 		cmd = basic_check(branch, &cmd_number);
 		if (cmd->next_cmd && (open_pipe(branch, pipefd, tmp_outfile)))
-			break ; // exit en cas de fail pipe
+			break ;
 		next_branch = cmd->next_cmd;
 		fork_cmd(branch, env, pipefd, tmp_outfile);
 		tmp_outfile = pipefd[0];
