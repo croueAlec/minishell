@@ -6,81 +6,60 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/06 14:11:18 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:48:39 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /**
- * @brief Frees the contents of the Infile Struct. The branches themselves get 
- * freed in open_outfiles();
+ * @brief Frees a branch containing an Infile Struct
  * 
- * @param infile The Infile Struct
+ * @param branch The branch pointer
  */
-void	free_infile_leaves(t_infile *infile)
+void	free_infile_branch(t_branch *branch)
 {
-	free(infile->path);
-	infile->path = NULL;
+	t_infile	*infile;
+
+	infile = branch->elmnt;
+	if (infile->path)
+		(free(infile->path), infile->path = NULL);
 	free(infile);
+	free(branch);
 }
 
 int	open_here_doc(int fd)
 {
-	if (fd >= 0)
-		close(fd);
 	fd = open(HEREDOC_TEST_PATH, O_RDONLY);
+	printf("Je suis un redirect de here_doc,");
+	printf(" alec ne doit pas oublier de free ma struct !\n");
 	return (fd);
 }
 
 /**
- * @brief Opens either the here_doc or infile depending on infile type.
- * Prints an error message in case of error
- * 
- * @param fd The file descriptor of the previously opened infile, or 
- * UNDEFINED_FD if this is the first file
- * @param infile The Infile Struct indicating what to open and how
- * @return int The file descriptor of the opened infile or E_FD in case of
- *  error
+ * @brief Opens infile (or here_doc) and makes sure it exists. In case of 
+ * insufficient permissions an error message is printed. 
+ * Closes previous infiles.
+ * @param branch a branch containing an Infile Struct
+ * @param infile_fd a previously opened infile to be closed or UNDEFINED_FD (-2)
+ * @return int The opened infile_fd in case of success or E_FD (-1) in case of
+ * error
  */
-static int	redirect_infile(int fd, t_infile *infile)
+int	open_infile(t_branch *branch, int infile_fd)
 {
+	t_infile	*infile;
+
+	infile = branch->elmnt;
+	if (infile_fd != UNDEFINED_FD)
+		close(infile_fd);
 	if (infile->type == IT_HERE_DOC)
-		return (open_here_doc(fd));
-	if (fd >= 0)
-		close(fd);
+		return (open_here_doc(infile_fd));
 	printf("Je suis un redirect de infile\n");
 	if (infile->type == IT_RDONLY)
 	{
-		fd = open(infile->path, O_RDONLY);
-		if (fd < 0)
-			return (perror(infile->path), free_infile_leaves(infile), E_FD);
+		infile_fd = open(infile->path, O_RDONLY);
+		if (infile_fd < 0)
+			return (perror(infile->path), free_infile_branch(branch), E_FD);
 	}
-	return (free_infile_leaves(infile), fd);
-}
-
-/**
- * @brief Opens infiles (or here_docs) and makes sure they all exist and have 
- * the right permissions
- * @param tree An array of branches from the AST, parameters of the CMD Struct
- * @return int The last opened infile in case of success or E_FD (-1) in case of
- * error
- */
-int	open_infiles(t_branch **tree)
-{
-	size_t	i;
-	int		fd;
-
-	i = 0;
-	fd = UNDEFINED_FD;
-	while (tree[i] != NULL)
-	{
-		printf("%d\n", tree[i]->type);
-		if (tree[i]->type == T_INFILE)
-			fd = redirect_infile(fd, tree[i]->elmnt);
-		if (fd == E_FD)
-			return (fd);
-		i++;
-	}
-	return (fd);
+	return (free_infile_branch(branch), infile_fd);
 }

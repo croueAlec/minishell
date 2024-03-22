@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exec_unit_test_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 17:14:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/13 16:09:16 by acroue           ###   ########.fr       */
+/*   Created: 2024/03/07 10:08:29 by acroue            #+#    #+#             */
+/*   Updated: 2024/03/22 14:08:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
+#include "exec_unit_test.h"
 
-# include <stdio.h>
-# include "struct.h"
-# include "../libs/libft/libft.h"
-# include "redirections.h"
-# include "exec.h"
-# include <errno.h>
-# include <sys/wait.h>
-# include "parsing.h"
-# include "builtins.h"
+void	define_test_pipe(t_cmd *cmd, char **args)
+{
+	t_branch	*next_cmd;
 
-void	print_parsing(void);
-void	print_exec(void);
-
-#endif
+	next_cmd = ft_calloc(sizeof(t_branch), 1);
+	cmd->next_cmd = define_test_cmd(next_cmd, args, 1);
+}
