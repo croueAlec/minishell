@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/22 18:08:07 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/23 13:48:33 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,41 @@
 
 void	fill_here_doc(char *lim, int *here_doc_fd)
 {
-	printf("{%s}\n", lim);
+	printf("\n{%s}\n", lim);
 	(free(lim), lim = NULL);
 	(void)here_doc_fd;
+}
+
+void	fill_complex_lim(char *str, char **lim, size_t len, size_t i)
+{
+	size_t	j;
+	int		is_quote;
+	char	curr_quote;
+	char	*tmp;
+
+	curr_quote = str[0];
+	is_quote = 1;
+	j = 1;
+	tmp = ft_calloc((len + 1), sizeof(char));
+	if(!tmp)
+		return ;
+	while (str[j])
+	{
+		if (is_quote < 0 && (str[j] == '\'' || str[j] == '\"'))
+		{
+			curr_quote = str[j];
+			is_quote *= -1;
+		}
+		else if (str[j] == curr_quote)
+			is_quote *= -1;
+		else if (is_quote < 0 && (str[j] == ' ' || !str[j]))
+			break ;
+		else
+			tmp[i++] = str[j];
+		j++;
+	}
+	*lim = tmp;
+	printf("%s\n", tmp);
 }
 
 int	find_complex_lim(char *str, char **lim, size_t *i)
@@ -30,19 +62,29 @@ int	find_complex_lim(char *str, char **lim, size_t *i)
 	is_quote = 1;
 	j = 1;
 	len = 0;
+	printf("%c[", curr_quote);
 	while (str[j])
 	{
-		if (str[j] == curr_quote)
+		if (is_quote < 0 && (str[j] == '\'' || str[j] == '\"'))
+		{
+			curr_quote = str[j];
 			is_quote *= -1;
-		if (is_quote < 0 && str[j] == ' ')
+			printf("%c[", curr_quote);
+		}
+		else if (str[j] == curr_quote && printf("]"))
+			is_quote *= -1;
+		else if (is_quote < 0 && (str[j] == ' ' || !str[j]))
 			break ;
+		else
+		{
+			printf("%c", str[j]);
+			len++;
+		}
 		j++;
-		len++;
 	}
-	printf("%zu", len);
-	(void)lim;
-	(void)i;
-	return (1);
+	printf("]\t%zu", len);
+	*i += j;
+	return (fill_complex_lim(str, lim, len, 0), 1);
 }
 
 int	find_lim(char *str, size_t *i, char **lim)
@@ -55,12 +97,14 @@ int	find_lim(char *str, size_t *i, char **lim)
 	*i += 2;
 	while (str[spaces] && str[spaces] == ' ')
 		spaces++;
-	if (str[j + spaces] != '\'' || str[j + spaces] != '\"')
+	if (!str[spaces] || str[spaces] == '|')
+		return (0);
+	if (str[spaces] == '<' || str[spaces] == '>')
+		return (0);
+	if (str[j + spaces] != '\'' && str[j + spaces] != '\"')
 	{
 		while (str[j + spaces] && str[j + spaces] != ' ')
 			j++;
-		if (str[j + spaces] == '\0')
-			return (0);
 		*lim = ft_substr(str, spaces, j);
 		*i += j + spaces;
 	}
@@ -108,5 +152,6 @@ int	main(int argc, char *argv[])
 			i++;
 		}
 	}
+	(void)argv;
 	return (0);
 }
