@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/23 16:37:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/23 16:44:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "minishell.h"
 
+# ifndef HERE_DOC_PROMPT
+#  define HERE_DOC_PROMPT "hd> "
+# endif
 # ifndef DEFAULT_HERE_DOC_NAME
 #  define DEFAULT_HERE_DOC_NAME ".here_doc"
 # endif

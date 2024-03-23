@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/23 16:42:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/23 16:44:35 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	fill_here_doc(int write_here_doc_fd, char *lim, int expand_var)
 	while (!line || ft_strncmp(line, lim, lim_len) != 0)
 	{
 		free(line);
-		line = readline("hd> ");
+		line = readline(HERE_DOC_PROMPT);
 		if (!line)
 			break ;
 		if (expand_var)
