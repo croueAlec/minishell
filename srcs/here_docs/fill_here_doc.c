@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 13:32:24 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:16:22 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	fill_here_doc(int write_here_doc_fd, char *lim, int expand_var)
 
 	line = NULL;
 	lim_len = (size_t)ft_safe_strlen(lim);
-	while (!line || ft_strncmp(line, lim, lim_len) != 0)
+	while (!line || ft_strncmp(line, lim, lim_len + 1) != 0)
 	{
 		free(line);
 		line = readline(HERE_DOC_PROMPT);
-		if (!line)
+		if (!line || ft_strncmp(line, lim, lim_len + 1) == 0)
 			break ;
 		if (expand_var)
 			printf("expand_var\n");
@@ -79,7 +79,7 @@ void	fill_here_doc(int write_here_doc_fd, char *lim, int expand_var)
  * @param read_here_doc_fd The here_doc's file descriptor, used in the exec for
  *  reading.
  */
-void	create_here_doc(char *lim, int *read_here_doc_fd)
+void	create_here_doc(char *lim, int *read_here_doc_fd, int is_expand)
 {
 	int		write_here_doc_fd;
 	char	*name;
@@ -105,5 +105,5 @@ void	create_here_doc(char *lim, int *read_here_doc_fd)
 		return (perror(name), free(name), free(lim));
 	(free(name), name = NULL);
 	printf("\n{%s}\n", lim);
-	fill_here_doc(write_here_doc_fd, lim, 0);
+	fill_here_doc(write_here_doc_fd, lim, is_expand);
 }

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 15:30:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/23 15:53:38 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:10:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	find_complex_lim(char *cmd, char **lim, size_t *i, size_t len)
  * @param lim A pointer to the Limiter String.
  * @return int 0 if an error occured, 1 otherwise.
  */
-int	find_lim(char *cmd, size_t *i, char **lim)
+int	find_lim(char *cmd, size_t *i, char **lim, int *is_expand)
 {
 	size_t	spaces;
 	size_t	j;
@@ -123,6 +123,7 @@ int	find_lim(char *cmd, size_t *i, char **lim)
 			j++;
 		*lim = ft_substr(cmd, spaces, j);
 		*i += j + spaces;
+		(*is_expand)++;
 	}
 	else
 		return (find_complex_lim(&cmd[j + spaces], lim, i, 0));

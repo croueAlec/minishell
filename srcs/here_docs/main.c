@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/23 15:31:53 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:03:55 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	main(int argc, char *argv[])
 	char	*str;
 	char	*lim;
 	int		here_doc_fd;
+	int		is_expand;
 
+	is_expand = 0;
 	here_doc_fd = UNDEFINED_FD;
 	i = 0;
 	str = argv[1];
@@ -39,9 +41,9 @@ int	main(int argc, char *argv[])
 		return ((void)ft_dprintf(2, "bad arg nbr, use ./a.out 'string'\n"), -1);
 	while (str[i])
 	{
-		if (is_here_doc(&str[i]) && find_lim(&str[i + 2], &i, &lim))
+		if (is_here_doc(&str[i]) && find_lim(&str[i + 2], &i, &lim, &is_expand))
 		{
-			create_here_doc(lim, &here_doc_fd);
+			create_here_doc(lim, &here_doc_fd, is_expand);
 			if (!lim)
 				return ((void)ft_dprintf(2, "malloc fail\n"), -1);
 		}
