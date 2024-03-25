@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/23 16:44:35 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 13:32:24 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,28 @@
 char	*here_doc_name(void)
 {
 	char	*name;
-	char	letter;
+	char	letter[2];
+	size_t	i;
 
-	letter = 'A';
-	name = ft_strdup(DEFAULT_HERE_DOC_NAME);
+	i = 0;
+	letter[0] = 'A';
+	letter[1] = '\0';
+	name = ft_strdup(HERE_DOC_NAME);
 	if (!name)
 		return (NULL);
 	while (access(name, F_OK) == 0)
 	{
 		if (ft_safe_strlen(name) >= FILE_NAME_MAX_LEN)
 		{
-			if (letter == 'Z')
-				letter = 'a';
-			else if (letter == 'z')
+			if (letter[1] == 'Z')
+				letter[0] = 'a';
+			else if (letter[1] == 'z')
 				return (free(name), (void)ft_dprintf(2, E_HERE_DOC_NAME), NULL);
 			(free(name), name = NULL);
-			name = ft_sep_join(ft_strdup(DEFAULT_HERE_DOC_NAME), &letter, "");
+			name = ft_sep_join(ft_strdup(HERE_DOC_NAME), letter, NULL);
+			letter[0]++;
 		}
-		name = ft_sep_join(name, &letter, "");
-		letter++;
+		name = ft_sep_join(name, letter, "");
 	}
 	return (name);
 }
