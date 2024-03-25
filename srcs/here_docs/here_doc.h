@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:05:17 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:58:22 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@
 # define E_HERE_DOC_NAME "No suitable here_doc name found"
 
 int		find_lim(char *cmd, size_t *i, char **lim, int *is_expand);
-void	create_here_doc(char *lim, int *read_here_doc_fd, int is_expand);
+void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, char **env);
 
 #endif
