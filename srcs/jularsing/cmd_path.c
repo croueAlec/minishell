@@ -1,34 +1,29 @@
 #include "minishell.h"
 
-/// @brief Fetches the index of the start of the cmd in the cmd string
-/// @param cmd_str string containing the cmd  if there is one as well as redirections and arguments
-/// @return the index where the commands starts. IF there are in/outfiles but no cmd, returns -1. IF there aren't outfiles nor commands, returns -2.
-ssize_t	fetch_cmd_index(char *cmd_str)
-{	
-	ssize_t	i;
-	int		valid;
+// ssize_t	fetch_cmd_index(char **args)
+// {	
+// 	ssize_t	i;
+// 	size_t	index;
 
-	i = 0;
-	valid = 0;
-	while (cmd_str && cmd_str[i] != 0)
-	{
-		while (cmd_str[i] == ' ')
-			i++;
-		if (cmd_str[i] == '<' || cmd_str[i] == '>')
-		{
-			if (cmd_str[i + 1] == cmd_str[i])
-				i++;
-			i = i + 1 + in_outfile_len(&cmd_str[i]);
-			valid = 1;
-		}
-		if (cmd_str[i] != '>' && cmd_str[i] != '<'
-			&& cmd_str[i] != ' ' && cmd_str[i] != 0)
-			return (i);
-	}
-	if (cmd_str && cmd_str[i] == 0 && valid == 1)
-		return (-1);
-	return (-2);
-}
+// 	i = 0;
+// 	if (args && args[i] != 0)
+// 	{
+// 		while (args[i][0] == '<' || args[i][0] == '>' || ft_isdigit(args[i][0]) == 1)
+// 		{
+// 			if (i > 0)
+// 			{
+// 				index = ft_strlen(args[i - 1]) - 1;
+// 				if (args[i - 1][index] == '<' || args[i - 1][index] == '>')
+// 					i++;
+				
+// 			}
+// 			i++;
+// 		}
+// 		if (args[i] == 0)
+// 			return (-1);
+// 	}
+// 	return (i);
+// }
 
 /// @brief fetches in the env parameters the one starting with path then split it into a str array with : separator
 /// @param ev array with mallocked env variables
@@ -102,17 +97,11 @@ int	isbuiltin(char *cmd_name)
 	return (0);
 }
 
-char	*fetch_cmd_path(char *cmd_str, char **env)
+char	*fetch_cmd_path(char *cmd_name, char **env)
 {
-	ssize_t	i;
 	char	*path;
-	char	*cmd_name;
 
 	path = NULL;
-	cmd_name = NULL;
-	i = fetch_cmd_index(cmd_str);
-	if (i >= 0)
-		cmd_name = dup_expanded_char(i, cmd_str, env);
 	if (cmd_name && isbuiltin(cmd_name) == 1)
 		return (free(cmd_name), NULL);
 	if (cmd_name && ft_strchr(cmd_name, '/') != 0)

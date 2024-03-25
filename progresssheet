@@ -1,13 +1,35 @@
-gestion des expansions:
-expansion len ne gere plus que la len quand les vars a etendre sont etendues
-expansion.c n expand que les var et celle qui sont entre double quotes
-expansion split permet de split selon les espaces en prenant en compte les quotes
-TEST expansion split
+A GERER
+bash-3.2$ "" | echo truc
+bash: : command not found
+truc
 
-comment ca s'agence ?
-= split selon les |
+bash-3.2$ cat a
+bash-3.2$ echo truc >a | echo truc >""
+bash: : No such file or directory
+bash-3.2$ cat a
+truc
+bash-3.2$ 
+
+comment ca s agence ?
+= split selon les | ==> a  modifier car si on a "" cela compte comme une commande nulle et bash la cherche
 = expand les variables
 = split expand selon les ' '
-= fonction qui recup les redirection en fonction de si c'est dans deux str ou une seule (<, name OU <name)
-= fonction qui compte le nombre d'arg et les met dans un char **
+= fonction qui recup les redirection en fonction de si c est dans deux str ou une seule (<, name OU <name)
+= fonction qui compte le nombre d arg et les met dans un char **
 = fonction qui cree les tokens de redirection (AAAARGH)
+
+<a echo truc
+<a
+echo
+truc
+
+
+echo<a truc
+echo<a
+truc
+
+<in> out echo truc
+<in>
+out
+echo
+truc

@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:09:12 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/13 12:57:32 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/20 14:19:29 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static void	copy_str(char *s, char *result, char quote, size_t *index)
 		index[0] += 1;
 		index[1] += 1;
 	}
+	index[0] += 1;
 }
 
-char	*expanded_quotes_dup(char *s, int len)
+char	*expanded_quotes_dup(char *s, char c, int len)
 {
 	char	*result;
 	size_t	*index;
@@ -31,7 +32,7 @@ char	*expanded_quotes_dup(char *s, int len)
 	result = ft_calloc(len + 1, sizeof(char));
 	if (!result)
 		return (NULL);
-	while (s[index[0]] != 0)
+	while (s[index[0]] != c && s[index[0]] != 0)
 	{
 		index[0] += 1;
 		if (s[index[0] - 1] == '\'' || s[index[0] - 1] == '\"')
@@ -62,7 +63,7 @@ char	**quote_expansion_split(char *s, char c)
 		if (*s != 0)
 		{
 			word_len = len_word_quotes(s, c);
-			result[i] = expanded_quotes_dup(s, word_len);
+			result[i] = expanded_quotes_dup(s, c, word_len);
 			if (!result[i])
 				return (ft_fsplit(result), NULL);
 			i++;
