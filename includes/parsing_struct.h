@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parsing_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 17:14:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/14 10:41:07 by jblaye           ###   ########.fr       */
+/*   Created: 2024/03/14 10:40:08 by jblaye            #+#    #+#             */
+/*   Updated: 2024/03/22 11:09:12 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSING_STRUCT_H
+# define PARSING_STRUCT_H
 
-# include <stdio.h>
-# include "struct.h"
-# include "../libs/libft/libft.h"
-# include "redirections.h"
-# include "exec.h"
-# include <errno.h>
-# include <sys/wait.h>
-# include "parsing.h"
-# include "parsing_struct.h"
-# include "builtins.h"
+typedef enum e_pars_type
+{
+	PARS_ARG = 1,
+	PARS_IN = 2,
+	PARS_HERE_DOC = 3,
+	PARS_TRUNC_OUT  = 4,
+	PARS_APP_OUT = 5,
+	PARS_CMD = 6
+}			t_pars_type;
 
-void	print_parsing(void);
-void	print_exec(void);
+typedef struct s_pars_list
+{
+	t_pars_type		type;
+	char				*s;
+	struct s_pars_list	*next;
+}				t_pars_list;
 
 #endif
