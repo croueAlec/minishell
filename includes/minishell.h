@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include "parsing.h"
 # include "parsing_struct.h"
+# include "builtins.h"
 
 void	print_parsing(void);
 void	print_exec(void);

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:22:08 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/06 15:19:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:50:59 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	free_tree(t_branch *branch)
 	tree = cmd->tree;
 	while (tree && tree[i] != NULL)
 	{
-		printf("%d\n", tree[i]->type);
 		if (tree[i]->type == T_INFILE)
-			free_infile_leaves(tree[i]->elmnt);
+			free_infile_branch(tree[i]);
 		else if (tree[i]->type == T_OUTFILE)
-			free_outfile_leaves(tree[i]->elmnt);
-		else if (tree[i]->type == T_PIPE && printf("Pipe free ???"))
+			free_outfile_branch(tree[i]);
+		else if (printf("What type is this %d ?", tree[i]->type))
 			continue ;
-		free(tree[i]);
 		i++;
 	}
+	if (cmd->next_cmd)
+		free_tree(cmd->next_cmd);
 	free(tree);
 	free_cmd(cmd);
 	free(branch);

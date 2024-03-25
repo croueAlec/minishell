@@ -22,7 +22,6 @@
 typedef enum e_type
 {
 	T_CMD = 1,
-	T_PIPE,
 	T_INFILE,
 	T_OUTFILE
 }			t_type;
