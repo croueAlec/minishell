@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:41:19 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/25 10:08:22 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/26 11:39:58 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,34 @@ int	main(int ac, char **av, char **env)
 		char **split_again = quotes_split(result, ' ');
 		ft_printstrtab(split_again);
 		printf("===========================\n");
-		t_pars_list **parsing = extract_input_data(split_again);
-		t_pars_list *first_arg = parsing[0];
-		t_pars_list *first_file = parsing[1];
-		while (first_arg != NULL)
+		// t_pars_list *first_arg = parsing[0];
+		// t_pars_list *first_file = parsing[1];
+		//char **args_tab = generate_args_tab(&first_arg);
+		// t_branch **redir = generate_redir_tab(&first_file, 0);
+		t_cmd *cmd = new_cmd(split_again, -1, env);
+		int j = 0;
+		while (cmd->args[j] != 0)
 		{
-			printf("ARG = %s\n", first_arg->s);
-			first_arg = first_arg->next;
+			printf("ARG = |%s|\n", cmd->args[j]);
+			j++;
 		}
-		while (first_file != NULL)
-		{
-			printf("FILE = %s\n", first_file->s);
-			first_file = first_file->next;
-		}
+		// j = 0;
+		// while (redir[j] != 0)
+		// {
+		// 	if (redir[j]->type == T_OUTFILE)
+		// 	{
+		// 		t_outfile *out = redir[j]->elmnt;
+		// 		printf("FILE = %s\n", out->path);
+		// 	}
+		// 	if (redir[j]->type == T_INFILE)
+		// 	{
+		// 		t_infile *in = redir[j]->elmnt;
+		// 		printf("FILE = %s\n", in->path);
+		// 	}
+		// 	j++;
+		// }
+		printf("===========================\n===========================\n");
 		i++;
 	}
-		// char **pipe_split = quote_expansion_split(result, ' ');
-	// 	printf("PIPE SPLIT\n");
-	// 	ft_printstrtab(pipe_split);
-	// 	printf("---------------------------\n");
-	// 	index = fetch_cmd_index(pipe_split);
-	// 	printf("cmd index = %zd\n", index);
-	// 	// char *cmd = dup_expanded_char(0, pipe_split[i], env);
-	// 	// printf ("cmd expanded is %s\n", cmd);
-	// 	// printf("cmd is builtin = %d\n", isbuiltin(cmd));
-	// 	// printf("cmd path = %s\n", fetch_cmd_path(cmd, env));
-	// 	printf("===========================\n===========================\n");
-	// i++;
-	// }
 	return (0);
 }
