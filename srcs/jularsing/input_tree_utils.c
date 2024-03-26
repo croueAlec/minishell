@@ -10,8 +10,7 @@ int	str_tab_len(char **tab)
 	return (i);
 }
 
-/*
-t_branch	*new_cmd_branch(void)
+t_branch	*new_cmd_branch(char **cmd_split, int hd_fd, char **env)
 {
 	t_branch	*node;
 
@@ -19,7 +18,6 @@ t_branch	*new_cmd_branch(void)
 	if (!node)
 		return (NULL);
 	node->type = T_CMD;
-	node->elmnt = new_cmd();
+	node->elmnt = new_cmd(cmd_split, hd_fd, env);
 	return (node);
 }
-*/

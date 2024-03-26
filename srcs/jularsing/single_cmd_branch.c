@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:51:34 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/26 13:42:35 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/26 15:35:59 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,9 @@ t_cmd	*new_cmd(char **cmd_split, int hd_fd, char **env)
 	cmd = ft_calloc(1, sizeof(t_cmd *));
 	if (!cmd)
 		return (NULL);
-	printf("next: %p\n", cmd->next_cmd);
 	cmd->args = generate_args_tab(&first_arg);
 	if (!cmd->args)
 		return (free(cmd), NULL);
-	for (size_t i = 0; cmd->args[i]; i++)
-		printf("%p %s\n", cmd->args[i], cmd->args[i]);
-	printf("next: %p\n", cmd->next_cmd);
 	cmd->tree = generate_redir_tab(&first_file, hd_fd);
 	if (!cmd->tree)
 		return (free(cmd), ft_fsplit(cmd->args), NULL);
