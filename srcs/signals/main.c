@@ -6,14 +6,13 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:36:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/26 11:46:00 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/26 19:43:13 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define _GNU_SOURCE
 #include "minishell.h"
 #include "minishell_signals.h"
-
-int	g_global;
 
 void	handle_ctrl_c(int signum)
 {
@@ -27,23 +26,25 @@ void	handle_c(int signum)
 	g_global = signum;
 }
 
-int	main(int argc, char *argv[])
+void	define_sig(int signum, void(*fun_ptr)(int))
 {
 	struct sigaction	sa;
-	struct sigaction	sa2;
-	g_global = 0;
-
-	sa.sa_handler = handle_ctrl_c;
+	
+	sa.sa_handler = fun_ptr;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
-	sa2.sa_handler = handle_c;
-	sa2.sa_flags = 0;
-	sigemptyset(&sa2.sa_mask);
-	sigaction(SIGINT, &sa, NULL);
+	sigaction(signum, &sa, NULL);
+}
+
+int	main(int argc, char *argv[])
+{
+	g_global = 0;
+	define_sig(SIGINT, &handle_ctrl_c);
+	define_sig(SIGQUIT, SIG_IGN);
 	while (g_global == 0 || g_global == 1)
 	{
 		if (g_global == 1)
-			sigaction(SIGINT, &sa2, NULL);
+			define_sig(SIGINT, &handle_c);
 	}
 	return ((void)argc, (void)argv, 0);
 }

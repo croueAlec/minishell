@@ -16,6 +16,8 @@
 # include "minishell.h"
 # include <signal.h>
 
+int	g_global;
+
 // typedef struct s_sigaction
 // {
 // void		(*sa_handler)(int);
