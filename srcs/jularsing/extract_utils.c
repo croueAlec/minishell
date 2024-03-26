@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:45:38 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/25 10:20:52 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/26 15:19:11 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,17 @@ t_pars_type	get_parsing_type(char **input, size_t *j, size_t *i)
 	if (input[*j][*i - 1] == '>' && input[*j][*i] == '>')
 	{
 		*i += 1;
-		return (PARS_HERE_DOC);
+		return (PARS_APP_OUT);
 	}
 	if (input[*j][*i - 1] == '<' && input[*j][*i] == '<')
 	{
 		*i += 1;
-		return (PARS_APP_OUT);
+		return (PARS_HERE_DOC);
 	}
 	if (input[*j][*i - 1] == '>' && input[*j][*i] != '>')
-		return (PARS_IN);
-	if (input[*j][*i - 1] == '<' && input[*j][*i] != '<')
 		return (PARS_TRUNC_OUT);
+	if (input[*j][*i - 1] == '<' && input[*j][*i] != '<')
+		return (PARS_IN);
 	*i -= 1;
 	if (input[*j][*i - 1] == '-')
 		return (PARS_ARG);
