@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:36:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/26 19:43:13 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/26 20:01:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	handle_c(int signum)
 void	define_sig(int signum, void(*fun_ptr)(int))
 {
 	struct sigaction	sa;
-	
+
 	sa.sa_handler = fun_ptr;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
