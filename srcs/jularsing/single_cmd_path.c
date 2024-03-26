@@ -90,7 +90,7 @@ int	isbuiltin(char *cmd_name)
 	i = 0;
 	while (builtins[i] != 0)
 	{
-		if (ft_strncmp(cmd_name, builtins[i], ft_strlen(builtins[i] + 1)) == 0)
+		if (ft_strncmp(cmd_name, builtins[i], ft_strlen(builtins[i]) + 1) == 0)
 			return (1);
 		i++;
 	}
