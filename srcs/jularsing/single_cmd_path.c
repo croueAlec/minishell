@@ -90,7 +90,7 @@ int	isbuiltin(char *cmd_name)
 	i = 0;
 	while (builtins[i] != 0)
 	{
-		if (ft_strncmp(cmd_name, builtins[i], ft_strlen(builtins[i] + 1)) == 0)
+		if (ft_strncmp(cmd_name, builtins[i], ft_strlen(builtins[i]) + 1) == 0)
 			return (1);
 		i++;
 	}
@@ -100,15 +100,21 @@ int	isbuiltin(char *cmd_name)
 char	*fetch_cmd_path(char *cmd_name, char **env)
 {
 	char	*path;
+	char	*result;
 
 	path = NULL;
 	if (cmd_name && isbuiltin(cmd_name) == 1)
-		return (free(cmd_name), NULL);
+		return (NULL);
 	if (cmd_name && ft_strchr(cmd_name, '/') != 0)
-		return (cmd_name);
+	{
+		result = ft_strdup(cmd_name);
+		if (result)
+			return (result);
+		return (NULL);
+	}
 	else
 		path = cmdpath(cmd_name, env);
 	if (!path)
-		return (free(cmd_name), NULL);
-	return (free(cmd_name), path);
+		return (NULL);
+	return (path);
 }

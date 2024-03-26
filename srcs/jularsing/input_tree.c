@@ -1,5 +1,5 @@
 #include "minishell.h"
-
+/*
 void	generate_cmd_branches(t_branch *first, int len)
 {
 	t_branch	*tmp;
@@ -16,7 +16,7 @@ void	generate_cmd_branches(t_branch *first, int len)
 		i++;
 	}
 }
-/*
+
 t_branch	*input_tree(char **input, char **env)
 {
 	t_branch	*first;

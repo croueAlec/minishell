@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/25 09:58:05 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/26 11:49:34 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,21 @@ char		*cmdpath(char *cmd, char **ev);
 int			isbuiltin(char *cmd_name);
 char		*fetch_cmd_path(char *cmd_name, char **env);
 
+/// SINGLE CMD BRANCH CREATION
+/// Utils
+int			pars_list_size(t_pars_list *lst);
+void		pars_lst_clear(t_pars_list **lst);
+t_branch	**generate_redir_tab(t_pars_list **files, int fd);
+char		**generate_args_tab(t_pars_list **args);
+/// Core functions
+t_cmd		*new_cmd(char **cmd_split, int hd_fd, char **env);
+
 /// INPUT TREE GENERATION
 /// Utils
 int			str_tab_len(char **tab);
-t_cmd		*new_cmd(void);
 t_branch	*new_cmd_branch(void);
 /// Core functions
 void		generate_cmd_branches(t_branch *first, int len);
-t_branch	*input_tree(char **input);
+//t_branch	*input_tree(char **input);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julieblaye <julieblaye@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:43:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/07 13:56:14 by julieblaye       ###   ########.fr       */
+/*   Updated: 2024/03/25 15:49:16 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum e_infile_type
 typedef struct s_infile
 {
 	t_int_type	type;
+	int			fd;
 	char		*path;
 }				t_infile;
 
