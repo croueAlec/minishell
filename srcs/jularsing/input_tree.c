@@ -1,40 +1,29 @@
 #include "minishell.h"
-/*
-void	generate_cmd_branches(t_branch *first, int len)
+
+t_branch	*input_tree(char **input, int hd_fd, char **env)
 {
+	t_branch	*tree;
 	t_branch	*tmp;
 	t_cmd		*cmd;
+	char		**cmd_split;
 	int			i;
 
 	i = 0;
-	tmp = first;
-	while (i < len)
+	tree = NULL;
+	tmp = tree;
+	cmd = NULL;
+	while (input[i])
 	{
-		tmp = new_cmd_branch();
+		cmd_split = quotes_split(input[i], ' ');
+		if (!cmd_split)
+			return (free_tree(tree), NULL);
+		tmp = new_cmd_branch(cmd_split, hd_fd, env);
+		if (i == 0)
+			tree = tmp;
 		cmd = tmp->elmnt;
-		tmp = cmd->next_cmd;
+		cmd->next_cmd = tmp;
+		ft_fsplit(cmd_split);
 		i++;
 	}
+	return (tree);
 }
-
-t_branch	*input_tree(char **input, char **env)
-{
-	t_branch	*first;
-	t_branch	*tmp;
-	t_cmd		*cmd;
-	int			len;
-	int			i;
-
-	i = 0;
-	len = str_tab_len(input);
-	generate_cmd_branches(first, len);
-	tmp = first;
-	while (i < len)
-	{
-		fill_cmd_token(input[i], tmp, env);
-		cmd = tmp->elmnt;
-		tmp = cmd->next_cmd;
-		i++;
-	}
-	return (first);
-}*/
