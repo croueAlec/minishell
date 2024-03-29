@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/03/25 09:26:04 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/28 11:25:35 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,42 +33,59 @@ int	all_quotes_are_closed(char *str)
 				while (str[i] != 0 && str[i] != c)
 					i++;
 				if (str[i] != c)
-					return (0);
+					return (ft_dprintf(2, "tacos: unclosed quotes\n"), 0);
 			}
 			i++;
 		}
 		return (1);
 	}
-	return (0);
+	return (ft_dprintf(2, "tacos: unclosed quotes\n"), 0);
+}
+
+static int	pipe_syntax_error(char *str, size_t i)
+{
+	ssize_t	j;
+
+	j = i - 1;
+	while (j >= 0 && str[j] == ' ')
+		j--;
+	if (j == -1)
+		return (ft_dprintf(2, "tacos: syntax error near unexpected token `|'\n"), 0);
+	return (1);
+}
+
+static int	redirection_syntax_error(char *str, size_t *i)
+{
+	*i += 1;
+	if (str[*i] == str[*i - 1])
+		*i += 1;
+	while (str[*i] == ' ')
+		*i += 1;
+	if (str[*i] == '<' || str[*i] == '>' || str[*i] == '|')
+		return (ft_dprintf(2, "tacos: syntax error near unexpected token `%c'\n", str[*i]), 0);
+	if (str[*i] == 0)
+		return (ft_dprintf(2, "tacos: syntax error near unexpected token `newline'\n"), 0);
+	return (1);
 }
 
 int	no_syntax_error(char *str)
 {
-	(void) str;
-	// A CODER : si < suivi d'un caractere pas file, unexpected error near token 'le caractere en question'
-	/// si | precede de rien, erreur syntax |
-	/// la premiere erreur detectee dans la str est celle renvoyee
-	/// si dernier caractere |, ouvre un prompt
-	/// si fini par | > ou | < token erreur newline
-	// size_t	i;
-	// int		ispipe;
-	// i = 0;
-	// ispipe = 0;
-	// while (str[i] != 0)
-	// {
-	// 	while (str[i] == ' ' || str[i] == '>' || str[i] == '<')
-	// 		i++;
-	// 	if (str[i] == '|' || (str[i] == 0 && ispipe == 1))
-	// 		return (0);
-	// 	while (str[i] != '|' && str[i] != 0)
-	// 		i++;
-	// 	if (str[i] == '|')
-	// 	{
-	// 		ispipe = 1;
-	// 		i++;
-	// 	}
-	// }
-	// if (str[i] == 0 && str[i - 1] == '|')
-	// 	return (0);
+	size_t	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '|')
+		{
+			if (pipe_syntax_error(str, i) == 0)
+				return (0);
+		}
+		if (str[i] == '<' || str[i] == '>')
+		{
+			if (redirection_syntax_error(str, &i) == 0)
+				return (0);
+		}
+		i++;
+	}
 	return (1);
 }

@@ -10,16 +10,22 @@ int	str_tab_len(char **tab)
 	return (i);
 }
 
-t_branch	*new_cmd_branch(char **cmd_split, int hd_fd, char **env)
+t_branch	*new_cmd_branch(char *cmd, int hd_fd, char **env)
 {
 	t_branch	*node;
+	char		**cmd_split;
 
+	cmd_split = quotes_split(cmd, ' ');
+	if (!cmd_split)
+		return (NULL);
 	node = ft_calloc(1, sizeof(t_branch));
 	if (!node)
-		return (NULL);
+		return (ft_fsplit(cmd_split), NULL);
 	node->type = T_CMD;
 	node->elmnt = new_cmd(cmd_split, hd_fd, env);
-	return (node);
+	if (!node->elmnt)
+		return (ft_fsplit(cmd_split), free(node), NULL);
+	return (ft_fsplit(cmd_split), node);
 }
 
 
@@ -28,7 +34,6 @@ t_branch	*input_tree(char **input, int hd_fd, char **env)
 	t_branch	*tree;
 	t_branch	*new_branch;
 	t_cmd		*prev_cmd;
-	char		**cmd_split;
 	int			i;
 
 	i = 0;
@@ -37,16 +42,14 @@ t_branch	*input_tree(char **input, int hd_fd, char **env)
 	prev_cmd = NULL;
 	while (input[i])
 	{
-		cmd_split = quotes_split(input[i], ' ');
-		if (!cmd_split)
+		new_branch = new_cmd_branch(input[i], hd_fd, env);
+		if (!new_branch)
 			return (free_tree(tree), NULL);
-		new_branch = new_cmd_branch(cmd_split, hd_fd, env);
 		if (prev_cmd)
 			prev_cmd->next_cmd = new_branch;
 		if (i == 0)
 			tree = new_branch;
 		prev_cmd = new_branch->elmnt;
-		ft_fsplit(cmd_split);
 		i++;
 	}
 	return (tree);

@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/27 13:47:02 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/28 11:26:09 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_branch	*parsing(char **env)
 		ft_heredoc();
 	}
 	else */
-		hd_fd = -1;
-	if (all_quotes_are_closed(input) == 0 /*|| no_pipe_syntax_error(input) == 0*/)
+		hd_fd = -2;
+	if (all_quotes_are_closed(input) == 0 || no_syntax_error(input) == 0)
 		return (NULL);
 	cmds = quotes_split(input, '|');
 	if (cmds == 0)

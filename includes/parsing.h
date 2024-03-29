@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/27 13:29:33 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:05:18 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 /// PRELEMINARY CHECK
 int			all_quotes_are_closed(char *str);
-int			no_pipe_syntax_error(char *str);
+int			no_syntax_error(char *str);
 
 /// QUOTES SPLIT
 int			count_words_quotes(char *s, char c);
@@ -82,7 +82,7 @@ t_cmd		*new_cmd(char **cmd_split, int hd_fd, char **env);
 /// INPUT TREE GENERATION
 /// Utils
 int			str_tab_len(char **tab);
-t_branch	*new_cmd_branch(char **cmd_split, int hd_fd, char **env);
+t_branch	*new_cmd_branch(char *cmd, int hd_fd, char **env);
 /// Core functions
 t_branch	*input_tree(char **input, int hd_fd, char **env);
 
