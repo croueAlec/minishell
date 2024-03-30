@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_branch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:51:34 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/27 16:13:43 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/30 12:17:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,17 @@ t_cmd	*new_cmd(char **cmd_split, int hd_fd, char **env)
 	t_pars_list	**parsing;
 	t_pars_list	*first_arg;
 	t_pars_list	*first_file;
-	
+
+	cmd = NULL;
+	parsing = NULL;
+	first_arg = NULL;
+	first_file = NULL;
 	parsing = extract_input_data(cmd_split);
 	first_arg = parsing[0];
 	first_file = parsing[1];
 	if (!parsing)
 		return (NULL);
-	cmd = ft_calloc(1, sizeof(t_cmd *));
+	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
 	cmd->args = generate_args_tab(&first_arg);

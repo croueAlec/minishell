@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_redirections.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/25 16:43:51 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/30 12:25:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 	t_outfile	*outfile;
 
 	new_branch->type = T_OUTFILE;
-	outfile = ft_calloc(1, sizeof(t_outfile *));
+	outfile = ft_calloc(1, sizeof(t_outfile));
 	if (!outfile)
 	{
 		free(new_branch);
@@ -41,7 +41,7 @@ void	it_s_an_infile(t_branch *new_branch, t_pars_list *redir, int fd)
 	t_infile	*infile;
 
 	new_branch->type = T_INFILE;
-	infile = ft_calloc(1, sizeof(t_infile *));
+	infile = ft_calloc(1, sizeof(t_infile));
 	if (!infile)
 	{
 		free(new_branch);
@@ -65,7 +65,7 @@ t_branch	*generate_redir_branch(t_pars_list	*redir, int fd)
 {
 	t_branch	*new_branch;
 	
-	new_branch = ft_calloc(1, sizeof(t_branch *));
+	new_branch = ft_calloc(1, sizeof(t_branch));
 	if (!new_branch)
 		return (NULL);
 	if (redir->type == PARS_APP_OUT || redir->type == PARS_TRUNC_OUT)
