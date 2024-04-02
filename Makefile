@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/06 15:26:09 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/02 10:54:05 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,29 @@ INCLUDES := $(INCS_DIR) \
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC :=	$(addprefix $(PARSING_DIR)/, \
-	parsing.c ) \
+	cmd_management.c \
+	expansion_utils.c \
+	expansion_var.c \
+	extract_args_and_redirect.c \
+	extract_utils.c \
+	input_tree.c \
+	parsing.c \
+	pre_parsing_checks.c \
+	quotes_split.c \
+	single_cmd_branch_utils.c \
+	single_cmd_branch.c \
+	single_cmd_path.c \
+	single_cmd_redirections.c \
+	test.c) \
 	$(addprefix $(EXEC_DIR)/, \
-	exec.c ) \
+	built_ins_handling.c \
+	display_tree.c \
+	error_handling.c \
+	execution.c \
+	free_tree.c \
+	open_infiles.c \
+	open_outfiles.c \
+	redirections.c ) \
 	main.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
