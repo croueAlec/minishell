@@ -34,7 +34,7 @@ BI_EXIT, 0};
 		return ((void)ft_dprintf(2, E_NULL_BUILTIN), 0);
 	while (builtins[i] != 0)
 	{
-		if (ft_strncmp(cmd_name, builtins[i], ft_strlen(builtins[i] + 1)) == 0)
+		if (ft_strncmp(cmd_name, builtins[i], ft_strlen(builtins[i]) + 1) == 0)
 			return (i + 1);
 		i++;
 	}
@@ -50,7 +50,7 @@ BI_EXIT, 0};
  * @param fd_out The file descriptor on which to execute the built-in.
  * @param cmd_nbr The current command number inside the pipeline.
  */
-void	printing_bltin(t_branch *branch, t_bltin type, int fd_out, int *cmd_nbr)
+void	printing_bltin(t_branch *br, t_bltin type, int fd_out, size_t *cmd_nbr)
 {
 	if (fd_out == UNDEFINED_FD)
 		fd_out = STDOUT_FILENO;
@@ -64,7 +64,7 @@ void	printing_bltin(t_branch *branch, t_bltin type, int fd_out, int *cmd_nbr)
 		ft_dprintf(fd_out, "je suis un env, PATH='PATH'\n");
 	else
 		ft_dprintf(fd_out, "Not supposed to happen in call print builtin\n");
-	(void)branch;
+	(void)br;
 	(void)cmd_nbr;
 }
 
@@ -76,7 +76,7 @@ void	printing_bltin(t_branch *branch, t_bltin type, int fd_out, int *cmd_nbr)
  * @param type The built-in's index in the e_builtin enum.
  * @param cmd_number The current command number inside the pipeline.
  */
-void	other_builtin(t_branch *branch, t_bltin type, int *cmd_number)
+void	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
 {
 	if (type == B_CD)
 		ft_printf("Je suis un cd, je change de directoire\n");
@@ -97,7 +97,7 @@ void	other_builtin(t_branch *branch, t_bltin type, int *cmd_number)
  * @param cmd_number The current command number inside the pipeline.
  * @return int Returns 0 on error and 1 on success.
  */
-int	handle_builtins(t_branch *branch, int *cmd_number)
+int	handle_builtins(t_branch *branch, size_t *cmd_number)
 {
 	t_bltin	type;
 	int		infile;
