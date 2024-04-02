@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:45:38 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/26 15:19:11 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/03/30 12:37:51 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_pars_list	*pars_list_new(t_pars_type type, char *content)
 {
 	t_pars_list	*node;
 	
-	node = malloc(sizeof(t_pars_list));
+	node = ft_calloc(1, sizeof(t_pars_list));
 	if (!node)
 		return (NULL);
 	node->s = content;

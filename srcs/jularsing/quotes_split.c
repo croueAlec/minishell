@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:28:48 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/05 18:56:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:49:09 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ char	**quotes_split(char *s, char c)
 	int		i;
 	int		word_len;
 
-	if (all_quotes_are_closed(s) == 0)
-		return (NULL);
 	result = ft_calloc(count_words_quotes(s, c) + 1, sizeof(char *));
+	if (result == 0)
+		return (NULL);
 	i = 0;
 	while (*s != 0)
 	{
