@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/30 11:59:59 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/02 10:19:37 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av, char **env)
 		// printf("d\n%p\n", tree->elmnt);
 	}
 	printf("je le print\n");
-	free_tree(first_branch);
+	execute_tree(first_branch, env);
+	// free_tree(first_branch);
 	return (0);
 }
