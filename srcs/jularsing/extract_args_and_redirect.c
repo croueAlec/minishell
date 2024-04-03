@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:40:59 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/25 10:19:32 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/03 14:03:49 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void	extract_redir(t_pars_list **files, char **input, size_t *j, size_t *i)
 	pars_list_add_back(files, redir);
 }
 
-t_pars_list **extract_input_data(char **input)
+void	extract_input_data(char **input, t_pars_list **a, t_pars_list **f)
 {
-	t_pars_list	**result;
 	t_pars_list	*args;
 	t_pars_list	*files;
 	size_t		j;
@@ -103,6 +102,6 @@ t_pars_list **extract_input_data(char **input)
 			j++;
 		i = 0;
 	}
-	result = (t_pars_list *[2]) {args, files};
-	return (result);
+	*a = args;
+	*f = files;
 }

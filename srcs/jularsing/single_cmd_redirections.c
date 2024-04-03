@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_redirections.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/30 12:25:46 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/03 13:06:50 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,19 @@ void	free_branch_tab(t_branch **branch_tab)
 	free(branch_tab);
 }
 
-t_branch	**generate_redir_tab(t_pars_list **files, int hd_fd)
+t_branch	**generate_redir_tab(t_pars_list *files, int hd_fd)
 {
 	t_branch	**files_tab;
 	t_pars_list	*tmp;
 	int			len;
 	int			i;
 
-	len = pars_list_size(*files);
+	len = pars_list_size(files);
 	files_tab = (t_branch **) ft_calloc(len + 1, sizeof(t_branch *));
 	if (!files_tab)
 		return (NULL);
 	i = 0;
-	tmp = *files;
+	tmp = files;
 	while (tmp)
 	{
 		files_tab[i] = generate_redir_branch(tmp, hd_fd);

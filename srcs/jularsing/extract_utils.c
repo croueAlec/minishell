@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:45:38 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/30 12:37:51 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/03 10:31:54 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_pars_type	get_parsing_type(char **input, size_t *j, size_t *i)
 	if (input[*j][*i - 1] == '<' && input[*j][*i] != '<')
 		return (PARS_IN);
 	*i -= 1;
-	if (input[*j][*i - 1] == '-')
+	if (input[*j][*i] == '-')
 		return (PARS_ARG);
 	return (PARS_CMD);
 }
