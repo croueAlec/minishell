@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:22:08 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/21 12:50:59 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/02 12:53:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,24 @@ void	free_cmd(t_cmd *cmd)
 	free(cmd->cmd_path);
 	free_tab((void **)cmd->args);
 	free(cmd);
+}
+
+void	free_file_tree(t_branch **tree)
+{
+	size_t	i;
+
+	i = 0;
+	while (tree && tree[i] != NULL)
+	{
+		if (tree[i]->type == T_INFILE)
+			free_infile_branch(tree[i]);
+		else if (tree[i]->type == T_OUTFILE)
+			free_outfile_branch(tree[i]);
+		else if (printf("What type is this %d ?", tree[i]->type))
+			continue ;
+		i++;
+	}
+	free(tree);
 }
 
 void	free_tree(t_branch *branch)

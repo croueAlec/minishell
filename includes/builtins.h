@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/13 19:34:36 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/03 15:02:24 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_builtin
 # define BI_UNSET "unset"
 # define BI_EXIT "exit"
 
-int		handle_builtins(t_branch *branch, int *cmd_number);
+int		is_built_in(t_branch *branch);
+int		handle_builtins(t_branch *branch, size_t *cmd_number);
 
 #endif
