@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/02 17:56:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/03 15:07:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,18 @@ int	open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile)
  * @return t_cmd* Returns a pointer to the current command if it has not been 
  * executed, or the next if it has.
  */
-t_cmd	*basic_check(t_branch *branch, size_t *cmd_nbr, int pfd[2], int tmp_out)
+t_cmd	*basic_check(t_branch *branch)
 {
 	t_cmd	*cmd;
 	int		is_directory;
 
 	cmd = branch->elmnt;
+	if (cmd && cmd->cmd_path)
+		return (cmd);
 	if (!cmd->cmd_path && !cmd->args)
 		return (open_close_redir(branch));
-	if (!cmd->cmd_path && !handle_builtins(branch, cmd_nbr))
-		return (return_next_cmd(branch));
+	if (!cmd->cmd_path && is_built_in(branch))
+		return (cmd);
 	is_directory = is_cmd_path(cmd->args[0], '/');
 	if (is_directory)
 	{
@@ -158,7 +160,7 @@ void	execute_tree(t_branch *branch, char **env)
 	define_execution_fd(&pipefd[0], &pipefd[1], &tmp_outfile);
 	while (branch)
 	{
-		cmd = basic_check(branch, &cmd_number, pipefd, tmp_outfile);
+		cmd = basic_check(branch);
 		if (cmd->next_cmd && (open_pipe(branch, pipefd, tmp_outfile)))
 			break ;
 		next_branch = cmd->next_cmd;

@@ -18,7 +18,7 @@
  * @param branch The current CMD Branch.
  * @return int A positive number if a built-in is recognized, 0 on error.
  */
-static int	is_built_in(t_branch *branch)
+int	is_built_in(t_branch *branch)
 {
 	t_cmd	*cmd;
 	char	*cmd_name;
@@ -38,7 +38,7 @@ BI_EXIT, 0};
 			return (i + 1);
 		i++;
 	}
-	return ((void)ft_dprintf(2, "%s : %s", cmd_name, E_NO_BUILTIN), B_ERR);
+	return (0);
 }
 
 /**
