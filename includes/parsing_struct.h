@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:40:08 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/22 11:09:12 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/03 16:25:35 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,15 @@ typedef struct s_pars_list
 	char				*s;
 	struct s_pars_list	*next;
 }				t_pars_list;
+
+typedef struct s_hd_fd_list
+{
+	int					fd;
+	struct s_hd_fd_list	*next;
+}				t_hd_fd_list;
+{
+	/* data */
+};
+
 
 #endif

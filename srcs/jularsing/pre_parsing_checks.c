@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/03/28 11:25:35 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/03 17:29:22 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ static int	redirection_syntax_error(char *str, size_t *i)
 	return (1);
 }
 
-int	no_syntax_error(char *str)
+t_hd_fd_list	*no_syntax_error(char *str)
 {
-	size_t	i;
+	size_t			i;
+	t_hd_fd_list	*first;
 
 	i = 0;
 	while (str && str[i])
@@ -78,14 +79,16 @@ int	no_syntax_error(char *str)
 		if (str[i] == '|')
 		{
 			if (pipe_syntax_error(str, i) == 0)
-				return (0);
+				return (NULL);
 		}
 		if (str[i] == '<' || str[i] == '>')
 		{
 			if (redirection_syntax_error(str, &i) == 0)
-				return (0);
+				return (NULL);
+			if (get_parsing_type(&str, 0, &i) == PARS_HERE_DOC)
+				get_heredoc_fd(str, i, first);
 		}
 		i++;
 	}
-	return (1);
+	return (first);
 }
