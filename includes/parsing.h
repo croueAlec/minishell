@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/28 14:05:18 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/03 14:03:22 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		expand_quotes(size_t *i, size_t *len, char *result, char *s);
 char		*dup_args_or_redirect(char *s, size_t *i);
 void		extract_arg(t_pars_list	**args, char **input, size_t *j, size_t *i);
 void		extract_redir(t_pars_list **files, char **input, size_t *j, size_t *i);
-t_pars_list **extract_input_data(char **input);
+void		extract_input_data(char **input, t_pars_list **a, t_pars_list **f);
 
 /// CMD PATH FETCHING
 char		**pathstab(char **ev);
@@ -73,9 +73,9 @@ char		*fetch_cmd_path(char *cmd_name, char **env);
 /// SINGLE CMD BRANCH CREATION
 /// Utils
 int			pars_list_size(t_pars_list *lst);
-void		pars_lst_clear(t_pars_list **lst);
-t_branch	**generate_redir_tab(t_pars_list **files, int fd);
-char		**generate_args_tab(t_pars_list **args);
+void		pars_lst_clear(t_pars_list *lst);
+t_branch	**generate_redir_tab(t_pars_list *files, int fd);
+char		**generate_args_tab(t_pars_list *args);
 /// Core functions
 t_cmd		*new_cmd(char **cmd_split, int hd_fd, char **env);
 

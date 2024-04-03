@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:13:35 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/25 16:09:48 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/03 13:03:30 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	pars_list_size(t_pars_list *lst)
 	return (i);
 }
 
-void	pars_lst_clear(t_pars_list **lst)
+void	pars_lst_clear(t_pars_list *lst)
 {
 	t_pars_list	*nxt;
 	t_pars_list	*l;
 
-	l = *lst;
-	if (lst && *lst)
+	l = lst;
+	if (lst)
 	{
 		while (l != 0)
 		{
@@ -40,6 +40,6 @@ void	pars_lst_clear(t_pars_list **lst)
 			free(l);
 			l = nxt;
 		}
-		*lst = NULL;
+		lst = NULL;
 	}
 }
