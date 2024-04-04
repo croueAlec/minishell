@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:03:55 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:26:40 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ int	is_here_doc(char *str)
 	return (1);
 }
 
-int	main(int argc, char *argv[])
+int	get_heredoc_fd(char *str)
 {
 	size_t	i;
-	char	*str;
 	char	*lim;
 	int		here_doc_fd;
 	int		is_expand;
@@ -35,20 +34,41 @@ int	main(int argc, char *argv[])
 	is_expand = 0;
 	here_doc_fd = UNDEFINED_FD;
 	i = 0;
-	str = argv[1];
 	lim = NULL;
-	if (argc != 2)
-		return ((void)ft_dprintf(2, "bad arg nbr, use ./a.out 'string'\n"), -1);
-	while (str[i])
+	if (find_lim(&str[i], &i, &lim, &is_expand))
 	{
-		if (is_here_doc(&str[i]) && find_lim(&str[i + 2], &i, &lim, &is_expand))
-		{
-			create_here_doc(lim, &here_doc_fd, is_expand);
-			if (!lim)
-				return ((void)ft_dprintf(2, "malloc fail\n"), -1);
-		}
-		else
-			printf("%c", str[i++]);
+		if (!lim)
+			return ((void)ft_dprintf(2, "malloc fail\n"), -1);
+		create_here_doc(lim, &here_doc_fd, is_expand);
 	}
-	return (0);
+	return (here_doc_fd);
 }
+
+// int	main(int argc, char *argv[])
+// {
+// 	size_t	i;
+// 	char	*str;
+// 	char	*lim;
+// 	int		here_doc_fd;
+// 	int		is_expand;
+
+// 	is_expand = 0;
+// 	here_doc_fd = UNDEFINED_FD;
+// 	i = 0;
+// 	str = argv[1];
+// 	lim = NULL;
+// 	if (argc != 2)
+// 		return ((void)ft_dprintf(2, "bad arg nbr, use ./a.out 'string'\n"), -1);
+// 	while (str[i])
+// 	{
+// 		if (is_here_doc(&str[i]) && find_lim(&str[i + 2], &i, &lim, &is_expand))
+// 		{
+// 			create_here_doc(lim, &here_doc_fd, is_expand);
+// 			if (!lim)
+// 				return ((void)ft_dprintf(2, "malloc fail\n"), -1);
+// 		}
+// 		else
+// 			printf("%c", str[i++]);
+// 	}
+// 	return (0);
+// }

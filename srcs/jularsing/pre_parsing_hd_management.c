@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:39:32 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 12:59:32 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:31:11 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	hd_fd_list_clear(t_hd_fd_list *lst)
 		while (lst != NULL)
 		{
 			tmp = lst->next;
+			close(lst->fd);
 			free(lst);
 			lst = tmp;
 		}

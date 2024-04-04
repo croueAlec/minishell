@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:05:17 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:26:31 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@
 
 int		find_lim(char *cmd, size_t *i, char **lim, int *is_expand);
 void	create_here_doc(char *lim, int *read_here_doc_fd, int is_expand);
+int		get_heredoc_fd(char *str);
 
 #endif

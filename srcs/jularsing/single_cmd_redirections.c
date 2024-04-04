@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 10:51:36 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:36:42 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 	new_branch->elmnt = outfile;
 }
 
-t_branch	*generate_redir_branch(t_pars_list	*redir, int fd)
+t_branch	*generate_redir_branch(t_pars_list	*redir, t_hd_fd_list *hd_fd_list)
 {
 	t_branch	*new_branch;
 	
@@ -89,7 +89,7 @@ t_branch	*generate_redir_branch(t_pars_list	*redir, int fd)
 	if (redir->type == PARS_APP_OUT || redir->type == PARS_TRUNC_OUT)
 		it_s_an_outfile(new_branch, redir);
 	else if (redir->type == PARS_IN || redir->type == PARS_HERE_DOC)
-		it_s_an_infile(new_branch, redir, fd);
+		it_s_an_infile(new_branch, redir, hd_fd_list);
 	else
 	{
 		free(new_branch);

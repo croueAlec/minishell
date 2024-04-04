@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_tree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 13:38:44 by jblaye            #+#    #+#             */
+/*   Updated: 2024/04/04 13:38:46 by jblaye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	str_tab_len(char **tab)
@@ -10,7 +22,7 @@ int	str_tab_len(char **tab)
 	return (i);
 }
 
-t_branch	*new_cmd_branch(char *cmd, int hd_fd, char **env)
+t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, char **env)
 {
 	t_branch	*node;
 	char		**cmd_split;
@@ -22,14 +34,14 @@ t_branch	*new_cmd_branch(char *cmd, int hd_fd, char **env)
 	if (!node)
 		return (ft_fsplit(cmd_split), NULL);
 	node->type = T_CMD;
-	node->elmnt = new_cmd(cmd_split, hd_fd, env);
+	node->elmnt = new_cmd(cmd_split, hd_fd_list, env);
 	if (!node->elmnt)
 		return (ft_fsplit(cmd_split), free(node), NULL);
 	return (ft_fsplit(cmd_split), node);
 }
 
 
-t_branch	*input_tree(char **input, int hd_fd, char **env)
+t_branch	*input_tree(char **input, t_hd_fd_list *hd_fd_list, char **env)
 {
 	t_branch	*tree;
 	t_branch	*new_branch;
@@ -42,7 +54,7 @@ t_branch	*input_tree(char **input, int hd_fd, char **env)
 	prev_cmd = NULL;
 	while (input[i])
 	{
-		new_branch = new_cmd_branch(input[i], hd_fd, env);
+		new_branch = new_cmd_branch(input[i], hd_fd_list, env);
 		if (!new_branch)
 			return (free_tree(tree), NULL);
 		if (prev_cmd)
