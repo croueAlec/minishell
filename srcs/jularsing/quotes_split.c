@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:28:48 by jblaye            #+#    #+#             */
-/*   Updated: 2024/03/28 13:49:09 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/03 16:00:21 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_words_quotes(char *s, char c)
 			count++;
 		while (s[i] != c && s[i] != 0)
 		{
-			if (s[i] == '\"' || s[i] == '\'')
+			if (s[i] == 34 || s[i] == 39)
 			{
 				quote = s[i];
 				i++;
@@ -49,7 +49,7 @@ int	len_word_quotes(char *s, char c)
 	i = 0;
 	while (s[i] != 0 && s[i] != c)
 	{
-		if (s[i] == '\"' || s[i] == '\'')
+		if (s[i] == 34 || s[i] == 39)
 		{
 			quote = s[i];
 			i++;
