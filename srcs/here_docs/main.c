@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:03:55 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:30:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_here_doc(char *str)
 	return (1);
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *argv[], char **env)
 {
 	size_t	i;
 	char	*str;
@@ -43,7 +43,7 @@ int	main(int argc, char *argv[])
 	{
 		if (is_here_doc(&str[i]) && find_lim(&str[i + 2], &i, &lim, &is_expand))
 		{
-			create_here_doc(lim, &here_doc_fd, is_expand);
+			create_here_doc(lim, &here_doc_fd, is_expand, env);
 			if (!lim)
 				return ((void)ft_dprintf(2, "malloc fail\n"), -1);
 		}

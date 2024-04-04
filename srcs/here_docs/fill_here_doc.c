@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:16:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/03/25 20:00:05 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*here_doc_name(void)
 }
 // doesnt work properly
 
-void	fill_here_doc(int write_here_doc_fd, char *lim, int expand_var)
+void	fill_here_doc(int write_hd_fd, char *lim, int expand_var, char **env)
 {
 	char	*line;
 	size_t	lim_len;
@@ -63,11 +63,11 @@ void	fill_here_doc(int write_here_doc_fd, char *lim, int expand_var)
 		if (!line || ft_strncmp(line, lim, lim_len + 1) == 0)
 			break ;
 		if (expand_var)
-			printf("expand_var\n");
+			line = str_expand_var(line, env);
 		printf("|%s|\n", line);
-		ft_dprintf(write_here_doc_fd, "%s\n", line);
+		ft_dprintf(write_hd_fd, "%s\n", line);
 	}
-	close(write_here_doc_fd);
+	close(write_hd_fd);
 	(free(lim), lim = NULL);
 }
 
@@ -79,24 +79,24 @@ void	fill_here_doc(int write_here_doc_fd, char *lim, int expand_var)
  * @param read_here_doc_fd The here_doc's file descriptor, used in the exec for
  *  reading.
  */
-void	create_here_doc(char *lim, int *read_here_doc_fd, int is_expand)
+void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, char **env)
 {
 	int		write_here_doc_fd;
 	char	*name;
 
-	if (*read_here_doc_fd != UNDEFINED_FD)
-		close(*read_here_doc_fd);
+	if (*read_hd_fd != UNDEFINED_FD)
+		close(*read_hd_fd);
 	name = here_doc_name();
 	if (!name)
 	{
-		*read_here_doc_fd = E_FD;
+		*read_hd_fd = E_FD;
 		return ;
 	}
 	write_here_doc_fd = open(name, O_WRONLY | O_CREAT, 0644);
 	if (write_here_doc_fd == -1)
 		return (perror(name), free(name), free(lim));
-	*read_here_doc_fd = open(name, O_RDONLY);
-	if (*read_here_doc_fd == -1)
+	*read_hd_fd = open(name, O_RDONLY);
+	if (*read_hd_fd == -1)
 	{
 		close(write_here_doc_fd);
 		return (perror(name), (void)unlink(name), free(name), free(lim));
@@ -105,5 +105,5 @@ void	create_here_doc(char *lim, int *read_here_doc_fd, int is_expand)
 		return (perror(name), free(name), free(lim));
 	(free(name), name = NULL);
 	printf("\n{%s}\n", lim);
-	fill_here_doc(write_here_doc_fd, lim, is_expand);
+	fill_here_doc(write_here_doc_fd, lim, is_expand, env);
 }
