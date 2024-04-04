@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/02 14:03:54 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/04 13:53:11 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	error_handling.c \
 	execution_utils.c \
 	execution.c \
+	fork_builtins.c \
 	free_tree.c \
 	open_infiles.c \
 	open_outfiles.c \
