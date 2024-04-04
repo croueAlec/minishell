@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/03 17:29:22 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:00:17 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ t_hd_fd_list	*no_syntax_error(char *str)
 			if (redirection_syntax_error(str, &i) == 0)
 				return (NULL);
 			if (get_parsing_type(&str, 0, &i) == PARS_HERE_DOC)
-				get_heredoc_fd(str, i, first);
+			{
+				if (list_heredocs_fd(str, i, first) == 0)
+					return (NULL);
+			}
 		}
 		i++;
 	}

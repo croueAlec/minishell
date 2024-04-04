@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:39:32 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 17:37:01 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 12:59:32 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	hd_fd_list_clear(t_hd_fd_list *lst)
 			free(lst);
 			lst = tmp;
 		}
+		lst = NULL;
 	}
 }
 
@@ -44,8 +45,8 @@ int	hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd)
 			*lst = node;
 		else
 		{
-			last = lst;
-			while (last && last->next != 0)
+			last = *lst;
+			while (last->next != 0)
 				last = last->next;
 			last->next = node;
 		}
@@ -54,7 +55,10 @@ int	hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd)
 	return (0);
 }
 
-void	get_heredoc_fd(t_hd_fd_list	*first)
+int	list_heredocs_fds(char *input, size_t i, t_hd_fd_list *first)
 {
-	
+	int	hd_fd;
+
+	hd_fd = get_heredoc_fd(input, i);
+	return (hd_fd_list_add_back(&first, hd_fd));
 }

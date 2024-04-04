@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 17:02:35 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 11:16:18 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 # define LEN 0
 # define EXP_LEN 1
 
-/// PRELEMINARY CHECK
+/// PRELEMINARY CHECK & HEREDOC OPEN
 int				all_quotes_are_closed(char *str);
 t_hd_fd_list	*no_syntax_error(char *str);
+/// heredoc utils
+void			hd_fd_list_clear(t_hd_fd_list *lst);
+int				hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd);
 
 /// QUOTES SPLIT
 int				count_words_quotes(char *s, char c);
@@ -64,19 +67,24 @@ void			extract_arg(t_pars_list	**args, char **input, size_t *j, size_t *i);
 void			extract_redir(t_pars_list **files, char **input, size_t *j, size_t *i);
 void			extract_input_data(char **input, t_pars_list **a, t_pars_list **f);
 
-/// CMD PATH FETCHING
-char			**pathstab(char **ev);
-char			*cmdpath(char *cmd, char **ev);
-int				isbuiltin(char *cmd_name);
-char			*fetch_cmd_path(char *cmd_name, char **env);
-
 /// SINGLE CMD BRANCH CREATION
 /// Utils
 int				pars_list_size(t_pars_list *lst);
 void			pars_lst_clear(t_pars_list *lst);
+/// Redirection utils
+void			it_s_a_heredoc(t_infile	*infile, t_hd_fd_list *nxt_fd);
+void			it_s_an_infile(t_branch *new_branch, t_pars_list *redir, t_hd_fd_list *nxt_fd);
+void			it_s_an_outfile(t_branch *new_branch, t_pars_list *redir);
+t_branch		*generate_redir_branch(t_pars_list	*redir, int fd);
+void			free_branch_tab(t_branch **branch_tab);
+/// Path fetching
+char			**pathstab(char **ev);
+char			*cmdpath(char *cmd, char **ev);
+int				isbuiltin(char *cmd_name);
+char			*fetch_cmd_path(char *cmd_name, char **env);
+/// Core functions
 t_branch		**generate_redir_tab(t_pars_list *files, int fd);
 char			**generate_args_tab(t_pars_list *args);
-/// Core functions
 t_cmd			*new_cmd(char **cmd_split, int hd_fd, char **env);
 
 /// INPUT TREE GENERATION

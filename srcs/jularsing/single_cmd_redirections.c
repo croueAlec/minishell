@@ -6,11 +6,52 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 13:06:50 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 10:51:36 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	it_s_a_heredoc(t_infile	*infile, t_hd_fd_list *nxt_fd)
+{
+	t_hd_fd_list	*tmp;
+
+	tmp = nxt_fd->next;
+	infile->type = IT_HERE_DOC;
+	infile->path = NULL;
+	infile->fd = nxt_fd->fd;
+	free(nxt_fd);
+	nxt_fd = tmp;
+}
+
+void	it_s_an_infile(t_branch *new_branch, t_pars_list *redir, t_hd_fd_list *nxt_fd)
+{
+	t_infile	*infile;
+
+	new_branch->type = T_INFILE;
+	infile = ft_calloc(1, sizeof(t_infile));
+	if (!infile)
+	{
+		free(new_branch);
+		new_branch = NULL;
+		return ;
+	}
+	if (redir->type == PARS_IN)
+	{
+		infile->type = IT_RDONLY;
+		infile->fd = -2;
+		infile->path = ft_strdup(redir->s);
+		if (!infile->path)
+		{
+			(free(infile), free(new_branch));
+			new_branch = NULL;
+			return ;
+		}
+	}
+	if (redir->type == PARS_HERE_DOC)
+		it_s_a_heredoc(infile, nxt_fd);
+	new_branch->elmnt = infile;
+}
 
 void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 {
@@ -21,6 +62,7 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 	if (!outfile)
 	{
 		free(new_branch);
+		new_branch = NULL;
 		return ;
 	}
 	if (redir->type == PARS_APP_OUT)
@@ -31,34 +73,10 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 	if (!outfile->path)
 	{
 		(free(outfile), free(new_branch));
+		new_branch = NULL;
 		return ;
 	}
 	new_branch->elmnt = outfile;
-}
-
-void	it_s_an_infile(t_branch *new_branch, t_pars_list *redir, int fd)
-{
-	t_infile	*infile;
-
-	new_branch->type = T_INFILE;
-	infile = ft_calloc(1, sizeof(t_infile));
-	if (!infile)
-	{
-		free(new_branch);
-		return ;
-	}
-	if (redir->type == PARS_IN)
-		infile->type = IT_RDONLY;
-	if (redir->type == PARS_HERE_DOC)
-		infile->type = IT_HERE_DOC;
-	infile->path = ft_strdup(redir->s);
-	if (!infile->path)
-	{
-		(free(infile), free(new_branch));
-		return ;
-	}
-	infile->fd = fd;
-	new_branch->elmnt = infile;
 }
 
 t_branch	*generate_redir_branch(t_pars_list	*redir, int fd)
@@ -104,28 +122,4 @@ void	free_branch_tab(t_branch **branch_tab)
 		i++;
 	}
 	free(branch_tab);
-}
-
-t_branch	**generate_redir_tab(t_pars_list *files, int hd_fd)
-{
-	t_branch	**files_tab;
-	t_pars_list	*tmp;
-	int			len;
-	int			i;
-
-	len = pars_list_size(files);
-	files_tab = (t_branch **) ft_calloc(len + 1, sizeof(t_branch *));
-	if (!files_tab)
-		return (NULL);
-	i = 0;
-	tmp = files;
-	while (tmp)
-	{
-		files_tab[i] = generate_redir_branch(tmp, hd_fd);
-		if (!files_tab)
-			return (free_branch_tab(files_tab), NULL);
-		tmp = tmp->next;
-		i++;
-	}
-	return (files_tab);
 }
