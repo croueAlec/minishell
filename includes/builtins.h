@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 13:54:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:07:42 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef enum e_builtin
 # define BI_UNSET "unset"
 # define BI_EXIT "exit"
 
-void	fork_built_ins(int	fd_in, t_branch *branch);
+void	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
-int		handle_builtins(t_branch *branch, size_t *cmd_number);
+int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);
 
 #endif

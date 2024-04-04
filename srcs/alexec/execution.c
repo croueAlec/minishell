@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 13:51:57 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:04:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	execute_tree(t_branch *branch, char **env)
 			break ;
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
-			fork_built_ins(pipefd[1], branch);
+			fork_built_ins(pipefd[1], branch, &cmd_number);
 		else
 			fork_cmd(branch, env, pipefd, tmp_outfile);
 		tmp_outfile = pipefd[0];

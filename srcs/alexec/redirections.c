@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/22 14:31:14 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:25:39 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	open_redirections(int *infile, int *outfile, t_branch *branch)
 			printf("hmm what kind of branch is %d ?\n", cmd->tree[i]->type);
 		if (*outfile == E_FD || *infile == E_FD)
 			return (redirection_error(branch, i));
+		cmd->tree[i] = NULL;
 		i++;
 	}
 }
