@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/05 13:30:00 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/05 13:32:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 		outfile->type = OT_APPEND;
 	if (redir->type == PARS_TRUNC_OUT)
 		outfile->type = OT_TRUNC;
-	outfile->path = redir->s;
+	outfile->path = ft_strdup(redir->s);
+	free(redir->s);
 	free(redir);
 	if (!outfile->path)
 	{
@@ -52,7 +53,8 @@ void	it_s_an_infile(t_branch *new_branch, t_pars_list *redir, int fd)
 		infile->type = IT_RDONLY;
 	if (redir->type == PARS_HERE_DOC)
 		infile->type = IT_HERE_DOC;
-	infile->path = redir->s;
+	infile->path = ft_strdup(redir->s);
+	free(redir->s);
 	free(redir);
 	if (!infile->path)
 	{
