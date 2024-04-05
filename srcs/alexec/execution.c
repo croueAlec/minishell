@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 18:04:56 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/05 14:53:51 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	execute_cmd(t_branch *branch, char **env, int infile, int outfile)
 		close(outfile);
 }
 
-void	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
+pid_t	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 {
 	pid_t	pid;
 	int		infile;
@@ -140,6 +140,7 @@ void	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 	if (tmp_in > 0)
 		close(tmp_in);
 	free_curr_branch(branch);
+	return (pid);
 }
 
 /**
@@ -148,15 +149,14 @@ void	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
  * @param branch A pointer to the Branch Command Structure
  * @param env The Minishell's local environment
  */
-void	execute_tree(t_branch *branch, char **env)
+void	execute_tree(t_branch *branch, char **env, size_t cmd_number)
 {
 	t_branch	*next_branch;
-	size_t		cmd_number;
 	int			tmp_outfile;
 	int			pipefd[2];
 	t_cmd		*cmd;
+	pid_t		last_pid;
 
-	cmd_number = 0;
 	define_execution_fd(&pipefd[0], &pipefd[1], &tmp_outfile);
 	while (branch)
 	{
@@ -165,14 +165,13 @@ void	execute_tree(t_branch *branch, char **env)
 			break ;
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
-			fork_built_ins(pipefd[1], branch, &cmd_number);
+			last_pid = fork_built_ins(pipefd[1], branch, &cmd_number);
 		else
-			fork_cmd(branch, env, pipefd, tmp_outfile);
+			last_pid = fork_cmd(branch, env, pipefd, tmp_outfile);
 		tmp_outfile = pipefd[0];
 		if (pipefd[1] >= 0 && !isatty(pipefd[1]))
 			close(pipefd[1]);
 		pipefd[1] = UNDEFINED_FD;
 		branch = next_branch;
-		cmd_number++;
 	}
 }
