@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:39:01 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 17:09:59 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:19:09 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	export_built_in(t_branch *br, int fd_out)
 	return (err_no);
 }
 
-int	main(int argc, char *argv[])
+/* int	main(int fd, char *argv[])
 {
 	char		*test[5] = {"salut", "bjr", "cc", "hello", 0};
 	t_branch	*br;
@@ -99,6 +99,9 @@ int	main(int argc, char *argv[])
 	t_env		*env;
 	int			err;
 
+	fd = open("/dev/stdout", O_WRONLY);
+	if (fd < 0)
+		return (-1);
 	env = ft_calloc(1, sizeof(t_env));
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	br = ft_calloc(1, sizeof(t_branch));
@@ -106,7 +109,6 @@ int	main(int argc, char *argv[])
 	cmd->env = env;
 	cmd->args = argv;
 	br->elmnt = cmd;
-	err = export_built_in(br, 1);
-	(void)argc;
+	err = export_built_in(br, fd);
 	return (free(cmd), free(br), free(env), err);
-}
+} */
