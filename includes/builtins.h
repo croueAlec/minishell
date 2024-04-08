@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 12:00:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 16:54:27 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,18 @@ typedef enum e_builtin
 # define BI_CD "cd"
 # define BI_UNSET "unset"
 # define BI_EXIT "exit"
-# define ECHO_FILE_FULL "echo: write error: No space left on device\n"
+# define WRITE_FILE_FULL "tacOS: %s: write error: No space left on device\n"
 
 size_t	tab_len(char **tab);
+
+/* 			UNSET			 */
+char	**remove_from_env(char **env, char *var);
+/* 			EXPORT			 */
+char	**add_to_env(char **env, char *arg);
+int		is_valid_env_var(const char *s);
+size_t	length_until_char(const char *str, char ch);
+int		export_print_env(t_cmd *cmd, int fd_out);
+/* 			UTILS			 */
 pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
 int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);
