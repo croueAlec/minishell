@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:59:48 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 12:24:23 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 16:53:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int	echo_built_in(t_branch *branch, int fd_out)
 	while (args[i])
 	{
 		if (i && write(fd_out, " ", (i > 0)) < 0)
-			return ((void)ft_dprintf(2, ECHO_FILE_FULL), 1);
+			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "echo"), 1);
 		if (write(fd_out, args[i], ft_safe_strlen(args[i])) < 0)
-			return ((void)ft_dprintf(2, ECHO_FILE_FULL), 1);
+			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "echo"), 1);
 		i++;
 	}
 	if (print_newline && write(fd_out, "\n", print_newline) < 0)
-		return ((void)ft_dprintf(2, ECHO_FILE_FULL), 1);
+		return ((void)ft_dprintf(2, WRITE_FILE_FULL, "echo"), 1);
 	return (0);
 }
 
@@ -98,4 +98,3 @@ int	echo_built_in(t_branch *branch, int fd_out)
 	(void)argc;
 	return (err);
 } */
-
