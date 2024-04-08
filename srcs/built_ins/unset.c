@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:59:57 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/05 19:42:16 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:55:35 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**remove_from_env(char **env, char *var)
 	new_env = ft_calloc(i, sizeof(char *));
 	if (!new_env)
 		return (NULL);
-	new_env[i] = NULL;
+	new_env[i - 1] = NULL;
 	i = 0;
 	while (env[i])
 	{
