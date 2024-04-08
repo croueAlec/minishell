@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:14:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/05 18:59:00 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:21:37 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Returns 1 if s1 is smaller than s2.
  */
-static int compare_str(char *s1, char *s2)
+static int	compare_str(char *s1, char *s2)
 {
 	size_t	i;
 
@@ -59,7 +59,7 @@ static void	ft_swap(char **s1, char **s2)
 /**
  * @brief Sorts a string array.
  */
-char **sort_char_tab(char **tab)
+char	**sort_char_tab(char **tab)
 {
 	size_t	i;
 

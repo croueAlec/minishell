@@ -6,13 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:19:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 15:27:56 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:23:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char **sort_char_tab(char **tab);
 
 size_t	tab_len(char **tab)
 {
@@ -43,6 +41,9 @@ static char	**dup_tab(char **tab, size_t len)
 	return (new_tab);
 }
 
+/**
+ * @brief Makes the Minishell's Environnment from the default Env
+ */
 t_env	*make_env(char **env_tab)
 {
 	size_t	len;
