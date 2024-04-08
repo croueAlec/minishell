@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:33:02 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 18:06:02 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 19:14:26 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ int	export_print_env(t_cmd *cmd, int fd_out)
 		return ((void)ft_dprintf(2, WRITE_FILE_FULL, "export"), 1);
 	while (env && env->env_tab[i])
 	{
-		if (write(fd_out, "declare -x", 10) < 0)
+		if (write(fd_out, "declare -x ", 11) < 0)
 			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "export"), 1);
 		if (write(fd_out, env->env_tab[i], ft_safe_strlen(env->env_tab[i])) < 0)
+			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "export"), 1);
+		if (write(fd_out, "\n", 1) < 0)
 			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "export"), 1);
 		i++;
 	}
