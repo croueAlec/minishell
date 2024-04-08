@@ -6,13 +6,12 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:19:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/05 19:45:14 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 15:27:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**remove_from_env(char **env, char *var);
 char **sort_char_tab(char **tab);
 
 size_t	tab_len(char **tab)
@@ -76,6 +75,15 @@ t_env	*make_env(char **env_tab)
 	env->env_tab =  sort_char_tab(env->env_tab);
 	printf("\n\n\n\n");
 	env->env_tab = remove_from_env(env->env_tab, "SHELL");
+	while (env->env_tab && env->env_tab[i])
+	{
+		printf("[%s]\n", env->env_tab[i]);
+		i++;
+	}
+	printf("\n\n\n\n");
+	i = 0;
+	env->env_tab = add_to_env(env->env_tab, ft_strdup("SHELL=\"b\""));
+	env->env_tab =  sort_char_tab(env->env_tab);
 	while (env->env_tab && env->env_tab[i])
 	{
 		printf("[%s]\n", env->env_tab[i]);
