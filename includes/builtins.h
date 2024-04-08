@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 17:21:03 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:51:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ typedef enum e_builtin
 # define BI_UNSET "unset"
 # define BI_EXIT "exit"
 # define WRITE_FILE_FULL "tacOS: %s: write error: No space left on device\n"
+# define ENV_WRITE_FULL "%s: write error: No space left on device\n"
 
-
+/* 			ENV				 */
+int		env_built_in(t_cmd *cmd, int fd_out);
 /* 			UNSET			 */
 char	**remove_from_env(char **env, char *var);
 /* 			EXPORT			 */
