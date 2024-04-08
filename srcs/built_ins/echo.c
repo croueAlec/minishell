@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:59:48 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/05 15:49:28 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 12:24:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ static char	**skip_n_flag(t_cmd *cmd, int *print_newline)
 	return (&args[i]);
 }
 
-void	echo_built_in(t_branch *branch, int fd_out)
+/**
+ * @brief Prints the strings passed as args on the FD.
+ * Also manages errors for full files
+ * 
+ * @param branch The Command Branch.
+ * @return int The errno
+ */
+int	echo_built_in(t_branch *branch, int fd_out)
 {
 	char	**args;
 	int		print_newline;
@@ -59,26 +66,36 @@ void	echo_built_in(t_branch *branch, int fd_out)
 	args = skip_n_flag(branch->elmnt, &print_newline);
 	while (args[i])
 	{
-		write(fd_out, " ", (i > 0));
-		ft_putstr_fd(args[i], fd_out);
+		if (i && write(fd_out, " ", (i > 0)) < 0)
+			return ((void)ft_dprintf(2, ECHO_FILE_FULL), 1);
+		if (write(fd_out, args[i], ft_safe_strlen(args[i])) < 0)
+			return ((void)ft_dprintf(2, ECHO_FILE_FULL), 1);
 		i++;
 	}
-	write(fd_out, "\n", print_newline);
+	if (print_newline && write(fd_out, "\n", print_newline) < 0)
+		return ((void)ft_dprintf(2, ECHO_FILE_FULL), 1);
+	return (0);
 }
 
 /* int	main(int argc, char *argv[])
 {
 	t_branch	*br;
 	t_cmd		*cmd;
+	int			fd;
+	int			err;
 
+	fd = open("/dev/full", O_WRONLY);
+	if (fd < 0)
+		return (perror("/dev/full"), 1);
 	br = ft_calloc(1, sizeof(t_branch));
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	br->elmnt = cmd;
 	cmd->args = argv;
-	echo_built_in(br, 1);
+	err = echo_built_in(br, fd);
 	free(cmd);
 	free(br);
+	close(fd);
 	(void)argc;
-	return (0);
+	return (err);
 } */
 

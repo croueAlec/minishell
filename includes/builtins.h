@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/05 18:04:56 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/08 12:00:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_builtin
 # define BI_CD "cd"
 # define BI_UNSET "unset"
 # define BI_EXIT "exit"
+# define ECHO_FILE_FULL "echo: write error: No space left on device\n"
 
 size_t	tab_len(char **tab);
 pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
