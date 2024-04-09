@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 09:32:43 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:39:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_here_doc(char *str)
 	return (1);
 }
 
-int	get_heredoc_fd(char *str)
+int	get_heredoc_fd(char *str, char **env)
 {
 	size_t	i;
 	char	*lim;
@@ -38,7 +38,7 @@ int	get_heredoc_fd(char *str)
 	{
 		if (!lim)
 			return ((void)ft_dprintf(2, "malloc fail\n"), -1);
-		create_here_doc(lim, &here_doc_fd, is_expand);
+		create_here_doc(lim, &here_doc_fd, is_expand, env);
 	}
 	return (here_doc_fd);
 }

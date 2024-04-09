@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
+#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/04 14:30:50 by jblaye           ###   ########.fr        #
+#    Updated: 2024/04/09 16:44:09 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ INCLUDES := $(INCS_DIR) \
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC :=	$(addprefix $(PARSING_DIR)/, \
-	cmd_management.c \
 	expansion_utils.c \
 	expansion_var.c \
 	extract_args_and_redirect.c \

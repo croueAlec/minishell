@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_hd_management.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:39:32 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 15:06:29 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:42:06 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int	hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd)
 	return (0);
 }
 
-int	list_heredocs_fds(char *input, size_t i, t_hd_fd_list *first)
+int	lst_hd_fds(char *input, size_t i, t_hd_fd_list *first, char **env)
 {
 	int	hd_fd;
 
-	hd_fd = get_heredoc_fd(&input[i]);
+	hd_fd = get_heredoc_fd(&input[i], env);
 	printf("HD FD %d\n", hd_fd);
 	return (hd_fd_list_add_back(&first, hd_fd));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_checks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/04 15:03:36 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:42:24 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	redirection_syntax_error(char *str, size_t *i)
 	return (1);
 }
 
-int	no_syntax_error(char *str, t_hd_fd_list *first)
+int	no_syntax_error(char *str, t_hd_fd_list *first, char **env)
 {
 	size_t			i;
 
@@ -92,7 +92,7 @@ int	no_syntax_error(char *str, t_hd_fd_list *first)
 			if (is_here_doc(&str[i]))
 			{
 				ft_dprintf(2, "coucou\n");
-				if (list_heredocs_fds(str, i, first) == 0)
+				if (lst_hd_fds(str, i, first, env) == 0)
 					return (hd_fd_list_clear(first), 0);
 			}
 		}
