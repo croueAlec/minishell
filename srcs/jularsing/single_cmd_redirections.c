@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:36:42 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:41:21 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ void	it_s_a_heredoc(t_infile	*infile, t_hd_fd_list *nxt_fd)
 {
 	t_hd_fd_list	*tmp;
 
-	tmp = nxt_fd->next;
-	infile->type = IT_HERE_DOC;
-	infile->path = NULL;
-	infile->fd = nxt_fd->fd;
-	free(nxt_fd);
-	nxt_fd = tmp;
+	if (nxt_fd)
+	{
+		tmp = nxt_fd->next;
+		infile->type = IT_HERE_DOC;
+		infile->path = NULL;
+		infile->fd = nxt_fd->fd;
+		free(nxt_fd);
+		nxt_fd = tmp;
+	}
 }
 
-void	it_s_an_infile(t_branch *new_branch, t_pars_list *redir, t_hd_fd_list *nxt_fd)
+void	it_s_an_infile(t_branch *new_branch, t_pars_list *redir,
+						t_hd_fd_list *nxt_fd)
 {
 	t_infile	*infile;
 
@@ -79,10 +83,11 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 	new_branch->elmnt = outfile;
 }
 
-t_branch	*generate_redir_branch(t_pars_list	*redir, t_hd_fd_list *hd_fd_list)
+t_branch	*generate_redir_branch(t_pars_list	*redir,
+									t_hd_fd_list *hd_fd_list)
 {
 	t_branch	*new_branch;
-	
+
 	new_branch = ft_calloc(1, sizeof(t_branch));
 	if (!new_branch)
 		return (NULL);

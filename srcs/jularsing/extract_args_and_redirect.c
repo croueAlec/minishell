@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:40:59 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 14:03:49 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:52:25 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*dup_args_or_redirect(char *s, size_t *i)
 	size_t	len;
 	char	*result;
 
-	result = (char *) ft_calloc(len_exp_args_or_redirect(s, i) + 1, sizeof(char));
+	result = ft_calloc(len_exp_args_or_redirect(s, i) + 1, sizeof(char));
 	if (!result)
 		return (NULL);
 	len = 0;

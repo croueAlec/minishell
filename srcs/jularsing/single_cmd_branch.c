@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:51:34 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:37:15 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:54:00 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**generate_args_tab(t_pars_list *args)
 	t_pars_list	*tmp;
 	int			len;
 	int			i;
-	
+
 	len = pars_list_size(args);
 	args_tab = (char **) ft_calloc(len + 1, sizeof(char *));
 	if (!args_tab)

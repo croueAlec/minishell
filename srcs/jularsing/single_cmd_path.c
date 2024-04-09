@@ -1,31 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   single_cmd_path.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 13:48:46 by jblaye            #+#    #+#             */
+/*   Updated: 2024/04/04 13:50:33 by jblaye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-// ssize_t	fetch_cmd_index(char **args)
-// {	
-// 	ssize_t	i;
-// 	size_t	index;
-
-// 	i = 0;
-// 	if (args && args[i] != 0)
-// 	{
-// 		while (args[i][0] == '<' || args[i][0] == '>' || ft_isdigit(args[i][0]) == 1)
-// 		{
-// 			if (i > 0)
-// 			{
-// 				index = ft_strlen(args[i - 1]) - 1;
-// 				if (args[i - 1][index] == '<' || args[i - 1][index] == '>')
-// 					i++;
-				
-// 			}
-// 			i++;
-// 		}
-// 		if (args[i] == 0)
-// 			return (-1);
-// 	}
-// 	return (i);
-// }
-
-/// @brief fetches in the env parameters the one starting with path then split it into a str array with : separator
+/// @brief builds a char** table of potential paths
 /// @param ev array with mallocked env variables
 /// @return the cmd path
 char	**pathstab(char **ev)
@@ -46,7 +33,7 @@ char	**pathstab(char **ev)
 	return (paths);
 }
 
-/// @brief cmdpath parcours le tableau de chemins potentiels pour la commande cmd et renvoie la str qui correspond au bon chemin, null sinon
+/// @brief finds the path of the cmd, returns null otherwise
 /// @param cmd name of the cmd
 /// @param ev array with mallocked env variables
 /// @return the cmd path if found null otherwise
@@ -85,8 +72,9 @@ int	isbuiltin(char *cmd_name)
 {
 	char	**builtins;
 	int		i;
-	
-	builtins = (char *[]) {"echo", "cd", "pwd", "export", "unset", "env", "exit", 0};
+
+	builtins = (char *[]){"echo", "cd", "pwd", "export",
+		"unset", "env", "exit", 0};
 	i = 0;
 	while (builtins[i] != 0)
 	{

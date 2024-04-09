@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 13:41:54 by jblaye            #+#    #+#             */
+/*   Updated: 2024/04/04 13:44:02 by jblaye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	move_forward_single_quotes(size_t *len, char *str)
@@ -13,9 +25,9 @@ void	move_forward_single_quotes(size_t *len, char *str)
 
 void	move_forward_double_quotes(size_t *len, char *str, char **env)
 {
-	size_t *var_len;
+	size_t	*var_len;
 
-	var_len = (size_t [2]) {0, 0};
+	var_len = (size_t [2]){0, 0};
 	len[EXP_LEN] += 2;
 	while (str[len[LEN]] != '\"')
 	{
@@ -48,7 +60,8 @@ void	copy_single_quote(char *result, char *str, size_t *index)
 	index[1] += 1;
 }
 
-void	copy_double_quote_expand(char *result, char *str, size_t *index, char **env)
+void	copy_double_quote_expand(char *result, char *str,
+									size_t *index, char **env)
 {
 	result[index[1]] = str[index[0]];
 	index[1] += 1;

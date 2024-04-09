@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:38:44 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:38:46 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:51:16 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, char **env)
 		return (ft_fsplit(cmd_split), free(node), NULL);
 	return (ft_fsplit(cmd_split), node);
 }
-
 
 t_branch	*input_tree(char **input, t_hd_fd_list *hd_fd_list, char **env)
 {

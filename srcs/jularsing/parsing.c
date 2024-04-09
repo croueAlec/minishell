@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 13:33:43 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 15:07:05 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_branch	*parsing(char **env)
 	t_branch		*tree;
 	t_hd_fd_list	*hd_fd_list;
 
+	hd_fd_list = NULL;
 	input = readline("tacos > ");
 	if (all_quotes_are_closed(input) == 0
 		|| no_syntax_error(input, hd_fd_list) == 0)
