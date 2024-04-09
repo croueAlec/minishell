@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:14:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/14 10:41:07 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:28:28 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "parsing.h"
 # include "parsing_struct.h"
 # include "builtins.h"
+# include "here_doc.h"
 
 void	print_parsing(void);
 void	print_exec(void);

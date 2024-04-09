@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   limiter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 15:30:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:10:01 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:29:19 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "here_doc.h"
 
 /**
  * @brief Will remove invisible quotes from the Limiter

@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/03/13 15:38:29 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:48:32 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	*variable_len(char *variable, char **env)
 	size_t	i;
 	char	*content;
 
-	len = (size_t [2]) {0, 0};
+	len = (size_t [2]){0, 0};
 	i = 0;
 	content = variable_value(variable, env);
 	if (content)
@@ -51,7 +51,8 @@ char	*variable_value(char *variable, char **env)
 	i = 0;
 	while (env[i] != 0)
 	{
-		if (ft_strncmp(env[i], variable, len_var) == 0 && env[i][len_var] == '=')
+		if (ft_strncmp(env[i], variable, len_var) == 0
+			&& env[i][len_var] == '=')
 			return (&env[i][len_var + 1]);
 		i++;
 	}
@@ -64,7 +65,7 @@ size_t	var_expanded_len(char *str, char **env)
 	size_t	*var_len;
 
 	len = (size_t [2]){0, 0};
-	var_len = (size_t [2]) {0, 0};
+	var_len = (size_t [2]){0, 0};
 	while (str[len[LEN]] != 0)
 	{
 		len[LEN] += 1;
@@ -90,7 +91,7 @@ char	*str_expand_var(char *str, char **env)
 	size_t	*index;
 
 	result = (char *) ft_calloc(var_expanded_len(str, env) + 1, sizeof(char));
-	index = (size_t [2]) {0, 0};
+	index = (size_t [2]){0, 0};
 	if (!result)
 		return (NULL);
 	while (str[index[0]] != 0)

@@ -6,11 +6,35 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:51:34 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 14:04:07 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:54:00 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_branch	**generate_redir_tab(t_pars_list *files, t_hd_fd_list *hd_fd_list)
+{
+	t_branch	**files_tab;
+	t_pars_list	*tmp;
+	int			len;
+	int			i;
+
+	len = pars_list_size(files);
+	files_tab = (t_branch **) ft_calloc(len + 1, sizeof(t_branch *));
+	if (!files_tab)
+		return (NULL);
+	i = 0;
+	tmp = files;
+	while (tmp)
+	{
+		files_tab[i] = generate_redir_branch(tmp, hd_fd_list);
+		if (!files_tab)
+			return (free_branch_tab(files_tab), NULL);
+		tmp = tmp->next;
+		i++;
+	}
+	return (files_tab);
+}
 
 char	**generate_args_tab(t_pars_list *args)
 {
@@ -18,7 +42,7 @@ char	**generate_args_tab(t_pars_list *args)
 	t_pars_list	*tmp;
 	int			len;
 	int			i;
-	
+
 	len = pars_list_size(args);
 	args_tab = (char **) ft_calloc(len + 1, sizeof(char *));
 	if (!args_tab)
@@ -37,7 +61,7 @@ char	**generate_args_tab(t_pars_list *args)
 	return (args_tab);
 }
 
-t_cmd	*new_cmd(char **cmd_split, int hd_fd, char **env)
+t_cmd	*new_cmd(char **cmd_split, t_hd_fd_list *hd_fd_list, char **env)
 {
 	t_cmd		*cmd;
 	t_pars_list	*first_arg;
@@ -53,7 +77,7 @@ t_cmd	*new_cmd(char **cmd_split, int hd_fd, char **env)
 	cmd->args = generate_args_tab(first_arg);
 	if (!cmd->args)
 		return (free(cmd), NULL);
-	cmd->tree = generate_redir_tab(first_file, hd_fd);
+	cmd->tree = generate_redir_tab(first_file, hd_fd_list);
 	if (!cmd->tree)
 		return (free(cmd), ft_fsplit(cmd->args), NULL);
 	cmd->cmd_path = fetch_cmd_path(cmd->args[0], env);
