@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:43:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 15:49:16 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:25:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,19 @@ typedef struct s_branch
 	void	*elmnt;
 }			t_branch;
 
+typedef struct s_env
+{
+	char		**env_tab;
+	int			err_no;
+}			t_env;
+
 typedef struct s_cmd
 {
 	char		*cmd_path;
 	char		**args;
 	t_branch	*next_cmd;
 	t_branch	**tree;
+	t_env		*env;
 }			t_cmd;
 
 #endif

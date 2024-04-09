@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/21 12:48:39 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:16:59 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	free_infile_branch(t_branch *branch)
 	infile = branch->elmnt;
 	if (infile->path)
 		(free(infile->path), infile->path = NULL);
-	free(infile);
-	free(branch);
+	(free(infile), infile = NULL);
+	(free(branch), branch = NULL);
 }
 
 int	open_here_doc(int fd)

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/22 14:30:17 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:54:29 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	free_outfile_branch(t_branch *branch)
 	t_infile	*outfile;
 
 	outfile = branch->elmnt;
-	free(outfile->path);
-	outfile->path = NULL;
-	free(outfile);
-	free(branch);
+	if (outfile->path)
+		(printf("\n%s\n", outfile->path), free(outfile->path), outfile->path = NULL);
+	(free(outfile), outfile = NULL);
+	(free(branch), branch = NULL);
 }
 
 /**
@@ -44,7 +44,7 @@ int	open_outfile(t_branch *branch, int outfile_fd)
 	int			open_flags;
 
 	outfile = branch->elmnt;
-	if (outfile_fd != UNDEFINED_FD)
+	if (outfile_fd != UNDEFINED_FD && !isatty(outfile_fd))
 		close(outfile_fd);
 	open_flags = O_WRONLY | O_APPEND | O_CREAT;
 	if (outfile->type == OT_TRUNC)

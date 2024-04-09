@@ -77,6 +77,7 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	error_handling.c \
 	execution_utils.c \
 	execution.c \
+	fork_builtins.c \
 	free_tree.c \
 	open_infiles.c \
 	open_outfiles.c \

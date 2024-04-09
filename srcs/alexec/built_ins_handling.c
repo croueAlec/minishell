@@ -97,14 +97,12 @@ void	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
  * @param cmd_number The current command number inside the pipeline.
  * @return int Returns 0 on error and 1 on success.
  */
-int	handle_builtins(t_branch *branch, size_t *cmd_number)
+int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile)
 {
 	t_bltin	type;
 	int		infile;
-	int		outfile;
 
 	infile = UNDEFINED_FD;
-	outfile = UNDEFINED_FD;
 	type = is_built_in(branch);
 	if (type == B_ERR)
 		free_curr_branch(branch);
@@ -113,15 +111,15 @@ int	handle_builtins(t_branch *branch, size_t *cmd_number)
 		close(infile);
 	if (infile == E_FD || outfile == E_FD)
 	{
-		if (outfile >= 0)
+		if (outfile >= 0 && !isatty(outfile))
 			close(outfile);
 		return (0);
 	}
 	if (type <= B_ENV)
 		printing_bltin(branch, type, outfile, cmd_number);
-	close(outfile);
+	if (!isatty(outfile))
+		close(outfile);
 	if (type > B_ENV)
 		other_builtin(branch, type, cmd_number);
-	(void)cmd_number;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/03 15:02:24 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 13:00:59 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,26 @@ typedef enum e_builtin
 # define BI_CD "cd"
 # define BI_UNSET "unset"
 # define BI_EXIT "exit"
+# define WRITE_FILE_FULL "tacOS: %s: write error: No space left on device\n"
+# define ENV_WRITE_FULL "%s: write error: No space left on device\n"
 
+/* 			ENV				 */
+int		env_built_in(t_cmd *cmd, int fd_out);
+/* 			UNSET			 */
+char	**remove_from_env(char **env, char *var);
+/* 			EXPORT			 */
+char	**add_to_env(char **env, char *arg);
+int		is_valid_env_var(const char *s);
+size_t	length_until_char(const char *str, char ch);
+int		export_print_env(t_cmd *cmd, int fd_out);
+/* 			ENV UTILS			 */
+t_env	*make_env(char **env_tab);
+size_t	tab_len(char **tab);
+char	**sort_char_tab(char **tab);
+size_t	length_until_char(const char *str, char ch);
+/* 			BUILTINS UTILS		 */
+pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
-int		handle_builtins(t_branch *branch, size_t *cmd_number);
+int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);
 
 #endif
