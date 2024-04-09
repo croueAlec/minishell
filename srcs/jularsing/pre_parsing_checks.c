@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/09 16:42:24 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:02:13 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	all_quotes_are_closed(char *str)
 				while (str[i] != 0 && str[i] != c)
 					i++;
 				if (str[i] != c)
-					return (ft_dprintf(2, "tacos: unclosed quotes\n"), 0);
+					return (ft_dprintf(2, "tacOS: unclosed quotes\n"), 0);
 			}
 			i++;
 		}
 		return (1);
 	}
-	return (ft_dprintf(2, "tacos: unclosed quotes\n"), 0);
+	return (ft_dprintf(2, "tacOS: unclosed quotes\n"), 0);
 }
 
 static int	pipe_syntax_error(char *str, size_t i)
@@ -51,7 +51,7 @@ static int	pipe_syntax_error(char *str, size_t i)
 		j--;
 	if (j == -1)
 		return (ft_dprintf(2,
-				"tacos: syntax error near unexpected token `|'\n"), 0);
+				"tacOS: syntax error near unexpected token `|'\n"), 0);
 	return (1);
 }
 
@@ -65,10 +65,10 @@ static int	redirection_syntax_error(char *str, size_t *i)
 		*i += 1;
 	if (str[*i] == '<' || str[*i] == '>' || str[*i] == '|')
 		return (ft_dprintf(2,
-				"tacos: syntax error near unexpected token `%c'\n", str[*i]), 0);
+				"tacOS: syntax error near unexpected token `%c'\n", str[*i]), 0);
 	if (str[*i] == 0)
 		return (ft_dprintf(2,
-				"tacos: syntax error near unexpected token `newline'\n"), 0);
+				"tacOS: syntax error near unexpected token `newline'\n"), 0);
 	*i = before;
 	return (1);
 }
