@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:06:58 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/09 09:35:17 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 10:57:56 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	it_s_an_outfile(t_branch *new_branch, t_pars_list *redir)
 	if (redir->type == PARS_TRUNC_OUT)
 		outfile->type = OT_TRUNC;
 	outfile->path = ft_strdup(redir->s);
-	free(redir->s);
-	free(redir);
 	if (!outfile->path)
 	{
 		(free(outfile), free(new_branch));

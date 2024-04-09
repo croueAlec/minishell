@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:51:34 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:54:00 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 10:57:27 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_branch	**generate_redir_tab(t_pars_list *files, t_hd_fd_list *hd_fd_list)
 		tmp = tmp->next;
 		i++;
 	}
+	pars_lst_clear(files);
 	return (files_tab);
 }
 
