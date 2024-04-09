@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 19:06:24 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 18:38:53 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ char	*here_doc_name(void)
 {
 	char	*name;
 	char	letter[2];
-	size_t	i;
 
-	i = 0;
 	letter[0] = 'A';
 	letter[1] = '\0';
 	name = ft_strdup(HERE_DOC_NAME);
