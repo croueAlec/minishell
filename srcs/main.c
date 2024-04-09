@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 15:07:20 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 18:24:37 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		tree = parsing(env);
-		execute_tree(tree, env);
+		execute_tree(tree, env, 0);
 	}
 	return (0);
 }
