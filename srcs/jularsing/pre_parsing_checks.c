@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_checks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/09 17:02:13 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:02:04 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	redirection_syntax_error(char *str, size_t *i)
 	return (1);
 }
 
-int	no_syntax_error(char *str, t_hd_fd_list *first, char **env)
+int	no_syntax_error(char *str, t_hd_fd_list **first, char **env)
 {
 	size_t			i;
 
@@ -83,17 +83,16 @@ int	no_syntax_error(char *str, t_hd_fd_list *first, char **env)
 		if (str[i] == '|')
 		{
 			if (pipe_syntax_error(str, i) == 0)
-				return (hd_fd_list_clear(first), 0);
+				return (hd_fd_list_clear(*first), 0);
 		}
 		if (str[i] == '<' || str[i] == '>')
 		{
 			if (redirection_syntax_error(str, &i) == 0)
-				return (hd_fd_list_clear(first), 0);
+				return (hd_fd_list_clear(*first), 0);
 			if (is_here_doc(&str[i]))
 			{
-				ft_dprintf(2, "coucou\n");
 				if (lst_hd_fds(str, i, first, env) == 0)
-					return (hd_fd_list_clear(first), 0);
+					return (hd_fd_list_clear(*first), 0);
 			}
 		}
 		i++;

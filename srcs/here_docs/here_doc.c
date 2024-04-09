@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 16:39:34 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 18:52:59 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_heredoc_fd(char *str, char **env)
 	here_doc_fd = UNDEFINED_FD;
 	i = 0;
 	lim = NULL;
-	if (find_lim(&str[i], &i, &lim, &is_expand))
+	if (find_lim(&str[i + 2], &i, &lim, &is_expand))
 	{
 		if (!lim)
 			return ((void)ft_dprintf(2, "malloc fail\n"), -1);
