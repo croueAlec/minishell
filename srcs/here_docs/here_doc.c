@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 18:30:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 09:32:43 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "here_doc.h"
 
 int	is_here_doc(char *str)
 {
@@ -24,7 +23,27 @@ int	is_here_doc(char *str)
 	return (1);
 }
 
-int	main(int argc, char *argv[], char **env)
+int	get_heredoc_fd(char *str)
+{
+	size_t	i;
+	char	*lim;
+	int		here_doc_fd;
+	int		is_expand;
+
+	is_expand = 0;
+	here_doc_fd = UNDEFINED_FD;
+	i = 0;
+	lim = NULL;
+	if (find_lim(&str[i], &i, &lim, &is_expand))
+	{
+		if (!lim)
+			return ((void)ft_dprintf(2, "malloc fail\n"), -1);
+		create_here_doc(lim, &here_doc_fd, is_expand);
+	}
+	return (here_doc_fd);
+}
+
+/* int	main(int argc, char *argv[])
 {
 	size_t	i;
 	char	*str;
@@ -43,7 +62,7 @@ int	main(int argc, char *argv[], char **env)
 	{
 		if (is_here_doc(&str[i]) && find_lim(&str[i + 2], &i, &lim, &is_expand))
 		{
-			create_here_doc(lim, &here_doc_fd, is_expand, env);
+			create_here_doc(lim, &here_doc_fd, is_expand);
 			if (!lim)
 				return ((void)ft_dprintf(2, "malloc fail\n"), -1);
 		}
@@ -51,4 +70,4 @@ int	main(int argc, char *argv[], char **env)
 			printf("%c", str[i++]);
 	}
 	return (0);
-}
+} */

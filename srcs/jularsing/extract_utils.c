@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:45:38 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 10:31:54 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/04 13:50:52 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_pars_list	*pars_list_new(t_pars_type type, char *content)
 {
 	t_pars_list	*node;
-	
+
 	node = ft_calloc(1, sizeof(t_pars_list));
 	if (!node)
 		return (NULL);
@@ -42,7 +42,7 @@ t_pars_list	*pars_list_last(t_pars_list *lst)
 void	pars_list_add_back(t_pars_list **lst, t_pars_list *new)
 {
 	t_pars_list	*last;
-	
+
 	if (lst)
 	{
 		if (*lst)

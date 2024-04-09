@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   fill_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/25 20:00:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 09:33:30 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "here_doc.h"
-#include "limits.h"
+#include <limits.h>
 
 /**
  * @brief Finds an unused here_doc name.
