@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/09 19:02:21 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 20:19:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		copy_double_quote_expand(char *result, char *str,
 void		single_var_expansion(size_t *index, char *str,
 				char *result, char **env);
 /// Expand variables
-size_t		*variable_len(char *variable, char **env);
+size_t	*variable_len(char *variable, char **env, size_t *len_a, size_t *len_b);
 char		*variable_value(char *variable, char **env);
 size_t		var_expanded_len(char *str, char **env);
 char		*str_expand_var(char *str, char **env);

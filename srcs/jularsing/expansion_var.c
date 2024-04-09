@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/04 13:48:32 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 20:18:57 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	*variable_len(char *variable, char **env)
+size_t	*variable_len(char *variable, char **env, size_t *len_a, size_t *len_b)
 {
-	size_t	*len;
 	size_t	i;
 	char	*content;
 
-	len = (size_t [2]){0, 0};
 	i = 0;
 	content = variable_value(variable, env);
 	if (content)
 	{
-		len[1] = ft_strlen(content);
+		*len_b = ft_strlen(content);
 		while (ft_isalnum(variable[i]) == 1 || variable[i] == '_')
 		{
-			len[0] += 1;
+			*len_a += 1;
 			i++;
 		}
 	}
-	return (len);
+	return (NULL);
 }
 
 char	*variable_value(char *variable, char **env)
@@ -61,11 +59,13 @@ char	*variable_value(char *variable, char **env)
 
 size_t	var_expanded_len(char *str, char **env)
 {
-	size_t	*len;
-	size_t	*var_len;
+	size_t	len[2];
+	size_t	var_len[2];
 
-	len = (size_t [2]){0, 0};
-	var_len = (size_t [2]){0, 0};
+	len[0] = 0;
+	len[1] = 0;
+	var_len[0] = 0;
+	var_len[1] = 0;
 	while (str[len[LEN]] != 0)
 	{
 		len[LEN] += 1;
@@ -75,7 +75,7 @@ size_t	var_expanded_len(char *str, char **env)
 			move_forward_double_quotes(len, str, env);
 		else if (str[len[LEN] - 1] == 36)
 		{
-			var_len = variable_len(&(str)[len[LEN]], env);
+			variable_len(&(str)[len[LEN]], env, &var_len[0], &var_len[1]);
 			len[LEN] += var_len[LEN];
 			len[EXP_LEN] += var_len[EXP_LEN];
 		}
@@ -88,10 +88,11 @@ size_t	var_expanded_len(char *str, char **env)
 char	*str_expand_var(char *str, char **env)
 {
 	char	*result;
-	size_t	*index;
+	size_t	index[2];
 
 	result = (char *) ft_calloc(var_expanded_len(str, env) + 1, sizeof(char));
-	index = (size_t [2]){0, 0};
+	index[0] = 0;
+	index[1] = 0;
 	if (!result)
 		return (NULL);
 	while (str[index[0]] != 0)
