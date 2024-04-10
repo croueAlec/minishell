@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:59:57 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 14:47:01 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 15:48:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**remove_from_env(char **env, char *var)
 			new_env[i - offset] = env[i];
 		i++;
 	}
-	return (free(env), new_env);
+	return (free(env), sort_char_tab(new_env));
 }
 
 static int	is_valid_unset(const char *str)

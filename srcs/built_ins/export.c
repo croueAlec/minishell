@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:39:01 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 17:19:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 15:50:57 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**add_to_env(char **env, char *arg)
 	}
 	new_env[i] = arg;
 	free(env);
-	return (new_env);
+	return (sort_char_tab(new_env));
 }
 
 int	export_built_in(t_branch *br, int fd_out)

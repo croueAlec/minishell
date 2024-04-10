@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:19:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 17:23:32 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 15:52:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_env	*make_env(char **env_tab)
 	if (!env)
 		return (NULL);
 	env->err_no = 0;
-	env->env_tab = dup_tab(env_tab, len);
+	env->env_tab = sort_char_tab(dup_tab(env_tab, len));
 	if (!env->env_tab)
 		return (free(env), NULL);
 	return (env);
