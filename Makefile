@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
+#    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/09 16:44:09 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/10 13:58:17 by jblaye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS_DIR = srcs
 EXEC_DIR = alexec
 PARSING_DIR = jularsing
 HEREDOC_DIR = here_docs
+BUILTIN_DIR = built_ins
 INCS_DIR = includes
 OBJS_DIR = objs
 LIBFT_DIR = $(LIBS_DIR)/libft
@@ -85,6 +86,8 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	fill_here_doc.c \
 	limiter.c \
 	here_doc.c ) \
+	$(addprefix $(BUILTIN_DIR)/, \
+	pwd.c ) \
 	main.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
@@ -104,6 +107,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)/$(PARSING_DIR)
 	@mkdir -p $(OBJS_DIR)/$(EXEC_DIR)
 	@mkdir -p $(OBJS_DIR)/$(HEREDOC_DIR)
+	@mkdir -p $(OBJS_DIR)/$(BUILTIN_DIR)
 	@$(CC) $(DEP_FLAGS) $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
 
 clean:
