@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 18:35:06 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 13:45:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ pid_t	execute_tree(t_branch *branch, char **env, size_t cmd_number)
 	while (branch)
 	{
 		cmd = basic_check(branch);
-		if (cmd->next_cmd && (open_pipe(branch, pipefd, tmp_outfile)))
+		if (!cmd || (cmd->next_cmd && (open_pipe(branch, pipefd, tmp_outfile))))
 			break ;
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
