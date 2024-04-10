@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/09 19:02:04 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:35:32 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ static int	pipe_syntax_error(char *str, size_t i)
 
 static int	redirection_syntax_error(char *str, size_t *i)
 {
-	int before = *i;
+	int	before;
+
+	before = *i;
 	*i += 1;
 	if (str[*i] == str[*i - 1])
-		(*i+=1);
+		(*i += 1);
 	while (str[*i] == ' ')
 		*i += 1;
 	if (str[*i] == '<' || str[*i] == '>' || str[*i] == '|')
