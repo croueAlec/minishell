@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 12:31:22 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/02 17:49:47 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 13:45:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cmd	*return_next_cmd(t_branch *branch)
 	curr_cmd = branch->elmnt;
 	next_branch = curr_cmd->next_cmd;
 	if (!next_branch)
-		return ((void)ft_dprintf(2, "Not supposed to happen (ERR48)\n"), NULL);
+		return (NULL);
 	next_cmd = next_branch->elmnt;
 	branch->elmnt = next_cmd;
 	free_file_tree(curr_cmd->tree);
