@@ -89,7 +89,7 @@ int	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
 	else if (type == B_UNSET)
 		err_no = unset_built_in(branch);
 	else if (type == B_EXIT)
-		err_no = ft_printf("Je suis un exit et j'exit (je crois)\n");
+		err_no = exit_built_in(branch);
 	else
 		err_no = printf("Not supposed to happen in call non print builtin\n");
 	(void)branch;

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 17:52:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 18:30:22 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ typedef enum e_builtin
 # define ENV_WRITE_FULL "%s: write error: No space left on device\n"
 # define EXPORT_MALLOC_FAIL "tacOS: %s: Malloc failed, environnment was \
 not changed\n"
+# define EXIT_NON_NUM_ARG "tacOS: exit: %s: numeric argument required\n"
+# define EXIT_TOO_MANY_ARG "tacOS: exit: too many arguments\n"
 
+/* 			EXIT			 */
+int		exit_built_in(t_branch *branch);
 /* 			ECHO			 */
 int		echo_built_in(t_branch *branch, int fd_out);
 /* 			PWD				 */
