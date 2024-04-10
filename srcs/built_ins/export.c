@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:39:01 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 15:50:57 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 17:35:44 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**replace_in_env(char **env, char *arg)
 	while (env && env[i] && ft_strncmp(env[i], arg, key_length) != 0)
 		i++;
 	free(env[i]);
-	env[i] = arg;
+	env[i] = ft_strdup(arg);
 	return (env);
 }
 
@@ -64,7 +64,7 @@ char	**add_to_env(char **env, char *arg)
 		new_env[i] = env[i];
 		i++;
 	}
-	new_env[i] = arg;
+	new_env[i] = ft_strdup(arg);
 	free(env);
 	return (sort_char_tab(new_env));
 }
@@ -75,7 +75,7 @@ int	export_built_in(t_branch *br, int fd_out)
 	size_t	i;
 	int		err_no;
 
-	i = 0;
+	i = 1;
 	err_no = 0;
 	cmd = br->elmnt;
 	if (cmd && cmd->args && !cmd->args[1])
