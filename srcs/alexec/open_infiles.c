@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 18:16:59 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:47:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	free_infile_branch(t_branch *branch)
 	(free(branch), branch = NULL);
 }
 
-int	open_here_doc(int fd)
+int	open_here_doc(t_branch *branch)
 {
-	fd = open(HEREDOC_TEST_PATH, O_RDONLY);
-	printf("Je suis un redirect de here_doc,");
-	printf(" alec ne doit pas oublier de free ma struct !\n");
-	return (fd);
+	t_infile	*infile;
+	int	fd;
+
+	infile = branch->elmnt;
+	fd = infile->fd;
+	return (free_infile_branch(branch), fd);
 }
 
 /**
@@ -53,7 +55,7 @@ int	open_infile(t_branch *branch, int infile_fd)
 	if (infile_fd != UNDEFINED_FD)
 		close(infile_fd);
 	if (infile->type == IT_HERE_DOC)
-		return (open_here_doc(infile_fd));
+		return (open_here_doc(branch));
 	printf("Je suis un redirect de infile\n");
 	if (infile->type == IT_RDONLY)
 	{

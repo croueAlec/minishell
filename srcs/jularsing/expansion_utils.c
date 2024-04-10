@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:41:54 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:44:02 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/09 20:23:29 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void	move_forward_single_quotes(size_t *len, char *str)
 
 void	move_forward_double_quotes(size_t *len, char *str, char **env)
 {
-	size_t	*var_len;
+	size_t	var_len[2];
 
-	var_len = (size_t [2]){0, 0};
+	var_len[0] = 0;
+	var_len[1] = 0;
 	len[EXP_LEN] += 2;
 	while (str[len[LEN]] != '\"')
 	{
 		len[LEN] += 1;
 		if (str[len[LEN] - 1] == 36)
 		{
-			var_len = variable_len(&(str)[len[LEN]], env);
+			variable_len(&(str)[len[LEN]], env, &var_len[0], &var_len[1]);
 			len[LEN] += var_len[LEN];
 			len[EXP_LEN] += var_len[EXP_LEN];
 		}
