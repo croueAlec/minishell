@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_branch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:51:34 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/09 10:57:27 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/10 14:58:17 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**generate_args_tab(t_pars_list *args)
 	return (args_tab);
 }
 
-t_cmd	*new_cmd(char **cmd_split, t_hd_fd_list *hd_fd_list, char **env)
+t_cmd	*new_cmd(char **cmd_split, t_hd_fd_list *hd_fd_list, t_env *env)
 {
 	t_cmd		*cmd;
 	t_pars_list	*first_arg;
@@ -81,6 +81,7 @@ t_cmd	*new_cmd(char **cmd_split, t_hd_fd_list *hd_fd_list, char **env)
 	cmd->tree = generate_redir_tab(first_file, hd_fd_list);
 	if (!cmd->tree)
 		return (free(cmd), ft_fsplit(cmd->args), NULL);
-	cmd->cmd_path = fetch_cmd_path(cmd->args[0], env);
+	cmd->env = env;
+	cmd->cmd_path = fetch_cmd_path(cmd->args[0], env->env_tab);
 	return (cmd);
 }

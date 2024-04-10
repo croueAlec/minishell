@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/09 20:19:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 15:00:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,15 @@ char		*fetch_cmd_path(char *cmd_name, char **env);
 /// Core functions
 t_branch	**generate_redir_tab(t_pars_list *files, t_hd_fd_list *hd_fd_list);
 char		**generate_args_tab(t_pars_list *args);
-t_cmd		*new_cmd(char **cmd_split, t_hd_fd_list *hd_fd_list, char **env);
+t_cmd		*new_cmd(char **cmd_split, t_hd_fd_list *hd_fd_list, t_env *env);
 
 /// INPUT TREE GENERATION
 /// Utils
 int			str_tab_len(char **tab);
-t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, char **env);
+t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, t_env *env);
 /// Core functions
-t_branch	*input_tree(char **input, t_hd_fd_list *hd_fd_list, char **env);
+t_branch	*input_tree(char **input, t_hd_fd_list *hd_fd_list, t_env *env);
 
-t_branch	*parsing(char **env);
+t_branch	*parsing(t_env *env);
 
 #endif
