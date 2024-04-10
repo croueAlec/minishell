@@ -87,7 +87,7 @@ int	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
 	if (type == B_CD)
 		err_no = ft_printf("Je suis un cd, je change de directoire\n");
 	else if (type == B_UNSET)
-		err_no = ft_printf("Je suis un unset\n");
+		err_no = unset_built_in(branch);
 	else if (type == B_EXIT)
 		err_no = ft_printf("Je suis un exit et j'exit (je crois)\n");
 	else
