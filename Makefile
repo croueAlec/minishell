@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/10 14:49:50 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/10 18:26:11 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	$(addprefix $(BUILTIN_DIR)/, \
 	echo.c \
 	env.c \
+	exit.c \
 	export_utils.c \
 	export.c \
 	make_env.c \
