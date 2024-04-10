@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 14:47:25 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 17:52:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef enum e_builtin
 # define BI_EXIT "exit"
 # define WRITE_FILE_FULL "tacOS: %s: write error: No space left on device\n"
 # define ENV_WRITE_FULL "%s: write error: No space left on device\n"
+# define EXPORT_MALLOC_FAIL "tacOS: %s: Malloc failed, environnment was \
+not changed\n"
 
 /* 			ECHO			 */
 int		echo_built_in(t_branch *branch, int fd_out);
@@ -50,7 +52,7 @@ int		env_built_in(t_cmd *cmd, int fd_out);
 char	**remove_from_env(char **env, char *var);
 int		unset_built_in(t_branch *branch);
 /* 			EXPORT			 */
-char	**add_to_env(char **env, char *arg);
+char	**add_to_env(char **env, char *arg, int *err_no);
 int		is_valid_env_var(const char *s);
 size_t	length_until_char(const char *str, char ch);
 int		export_print_env(t_cmd *cmd, int fd_out);
