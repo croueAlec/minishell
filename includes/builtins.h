@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 13:00:59 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 13:53:35 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef enum e_builtin
 # define WRITE_FILE_FULL "tacOS: %s: write error: No space left on device\n"
 # define ENV_WRITE_FULL "%s: write error: No space left on device\n"
 
+/*			PWD					*/
+int	pwd_built_in(void);
 /* 			ENV				 */
 int		env_built_in(t_cmd *cmd, int fd_out);
 /* 			UNSET			 */

@@ -57,7 +57,8 @@ void	printing_bltin(t_branch *br, t_bltin type, int fd_out, size_t *cmd_nbr)
 	if (type == B_ECHO)
 		ft_dprintf(fd_out, "je suis un echo, echo, echo, echo...\n");
 	else if (type == B_PWD)
-		ft_dprintf(fd_out, "je suis un pwd, /home/acroue/Documents\n");
+		pwd_built_in();
+	//ft_dprintf(fd_out, "je suis un pwd, /home/acroue/Documents\n");
 	else if (type == B_EXPORT)
 		ft_dprintf(fd_out, "je suis un export, j'ai pas de blague\n");
 	else if (type == B_ENV)
