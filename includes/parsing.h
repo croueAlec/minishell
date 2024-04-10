@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/10 15:00:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:01:37 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int			len_word_quotes(char *s, char c);
 void		ft_fsplit(char **tab);
 char		**quotes_split(char *s, char c);
 
-/// INFILE MANAGEMENT
-int			in_outfile_len(char *str);
-
 /// VAR EXPANSION
 /// Utils
 void		move_forward_single_quotes(size_t *len, char *str);
@@ -48,13 +45,11 @@ void		copy_double_quote_expand(char *result, char *str,
 void		single_var_expansion(size_t *index, char *str,
 				char *result, char **env);
 /// Expand variables
-size_t	*variable_len(char *variable, char **env, size_t *len_a, size_t *len_b);
+size_t		*variable_len(char *variable, char **env,
+				size_t *len_a, size_t *len_b);
 char		*variable_value(char *variable, char **env);
 size_t		var_expanded_len(char *str, char **env);
 char		*str_expand_var(char *str, char **env);
-
-/// QUOTES EXPANSION
-char		**quote_expansion_split(char *s, char c);
 
 /// REDIRECTIONS AND ARGS EXTRACTION
 /// Utils

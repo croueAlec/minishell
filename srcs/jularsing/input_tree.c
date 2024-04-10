@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:38:44 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/10 14:58:57 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:34:21 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, t_env *env)
 {
 	t_branch	*node;
 	char		**cmd_split;
+	char		*input;
 
-	cmd_split = quotes_split(cmd, ' ');
+	input = str_expand_var(cmd, env);
+	if (!input)
+		return (NULL);
+	cmd_split = quotes_split(input, ' ');
+	free(input);
 	if (!cmd_split)
 		return (NULL);
 	node = ft_calloc(1, sizeof(t_branch));
