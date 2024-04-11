@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 18:30:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 12:01:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ size_t	tab_len(char **tab);
 char	**sort_char_tab(char **tab);
 size_t	length_until_char(const char *str, char ch);
 /* 			BUILTINS UTILS	 */
-pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
+pid_t	fork_built_ins(int fd_out, t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
 int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);
 

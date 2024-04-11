@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 15:03:02 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 12:00:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ t_cmd	*basic_check(t_branch *branch)
 	is_directory = is_cmd_path(cmd->args[0], '/');
 	if (is_directory)
 	{
-		//env[find_env_index("PATH")] == NULL || 
 		errno = 127;
 		perror(cmd->args[0]);
 		return (return_next_cmd(branch));
