@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:48:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 16:20:58 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:40:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pid_t	fork_built_ins(int fd_out, t_branch *branch, size_t *cmd_number)
 	t_cmd	*cmd;
 	int		err_no;
 
-	pid = -1;
+	pid = UNDEFINED_FD;
 	cmd = branch->elmnt;
 	if (fd_out < 0)
 		fd_out = STDOUT_FILENO;
