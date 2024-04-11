@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 17:46:01 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 20:02:16 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int	open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile)
 {
 	if (pipe(pipefd) == 0)
-		return (0);
+		return ((void)printf("\t\tPIPE\n"), 0);
 	if (tmp_outfile >= 0)
 		close(tmp_outfile);
 	return (free_tree(branch), perror("pipe"), 1);
@@ -111,7 +111,7 @@ pid_t	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 		if (outfile >= 0)
 			close(outfile);
 	}
-	if (tmp_in > 0)
+	if (tmp_in > 0 && !isatty(tmp_in))
 		close(tmp_in);
 	free_curr_branch(branch);
 	return (pid);
@@ -139,7 +139,7 @@ pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 			break ;
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
-			last_pid = fork_built_ins(pipefd[1], branch, &cmd_number);
+			last_pid = fork_built_ins(pipefd, branch, &cmd_number);
 		else
 			last_pid = fork_cmd(branch, env->env_tab, pipefd, tmp_outfile);
 		tmp_outfile = pipefd[0];

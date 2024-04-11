@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:56:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 16:31:48 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 19:24:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_exit_first_arg(char *arg)
 	return (1);
 }
 
-static void	free_and_exit(int code, t_branch *branch, t_env *env)
+void	free_and_exit(int code, t_branch *branch, t_env *env)
 {
 	free_env(env);
 	free_tree(branch);
