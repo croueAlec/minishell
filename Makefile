@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
+#    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/10 18:26:11 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/11 12:08:08 by jblaye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	limiter.c \
 	here_doc.c ) \
 	$(addprefix $(BUILTIN_DIR)/, \
+	cd.c \
 	echo.c \
 	env.c \
 	exit.c \

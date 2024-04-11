@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 12:01:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 14:50:55 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		exit_built_in(t_branch *branch);
 int		echo_built_in(t_branch *branch, int fd_out);
 /* 			PWD				 */
 int		pwd_built_in(int fd_out);
+/*			CD				 */
+int		cd_built_in(t_cmd *cd_cmd);
 /* 			ENV				 */
 int		env_built_in(t_cmd *cmd, int fd_out);
 /* 			UNSET			 */
