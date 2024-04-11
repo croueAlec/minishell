@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:48:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:50:33 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 17:11:18 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**pathstab(char **ev)
 		return (NULL);
 	while (ev[i] && ft_strncmp("PATH=", ev[i], 5) != 0)
 		i++;
-	if (ft_strncmp("PATH=", ev[i], 5) != 0)
+	if (!ev[i] || ft_strncmp("PATH=", ev[i], 5) != 0)
 		return (NULL);
 	paths = ft_split(ev[i] + 5, ':');
 	if (!paths)
