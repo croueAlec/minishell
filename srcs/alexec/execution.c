@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 20:02:16 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 20:15:00 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_cmd	*basic_check(t_branch *branch)
 	cmd = branch->elmnt;
 	if (cmd && cmd->cmd_path)
 		return (cmd);
-	if (!cmd->cmd_path && !cmd->args)
+	if (!cmd->cmd_path && !cmd->args[0])
 		return (open_close_redir(branch));
 	if (!cmd->cmd_path && is_built_in(branch))
 		return (cmd);
@@ -131,6 +131,7 @@ pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 	t_cmd		*cmd;
 	pid_t		last_pid;
 
+	last_pid = UNDEFINED_FD;
 	define_execution_fd(&pipefd[0], &pipefd[1], &tmp_outfile);
 	while (branch)
 	{
