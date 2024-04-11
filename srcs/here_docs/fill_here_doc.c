@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 18:38:53 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 17:45:40 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,5 @@ void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, char **env)
 	if (unlink(name) == -1)
 		return (perror(name), free(name), free(lim));
 	(free(name), name = NULL);
-	printf("\n{%s}\n", lim);
 	fill_here_doc(write_here_doc_fd, lim, is_expand, env);
 }

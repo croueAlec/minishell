@@ -6,36 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 17:34:47 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 17:46:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// /**
-//  * @brief Executes the command once pipes and redirects have been done
-//  * 
-//  * @param cmd A pointer to the Command structure
-//  * @param env The Minishell's local environment
-//  */
-// void	execute_cmd(t_cmd *cmd, char **env)
-// {
-// 	pid_t	pid;
-
-// 	printf("Je suis une commande\n");
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		if (execve(cmd->cmd_path, cmd->args, env) == -1)
-// 		{
-// 			perror("Command failed, why ??");
-// 		}
-// 	}
-// 	free_tab((void **)cmd->args);
-// 	free(cmd->tree);
-// 	free(cmd->cmd_path);
-// 	free(cmd);
-// }
 
 /**
  * @brief Opens pipe. In case of error, frees the current command and passes to
