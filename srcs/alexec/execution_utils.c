@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 12:31:22 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 17:34:33 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 21:19:47 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ t_cmd	*return_next_cmd(t_branch *branch)
 	curr_cmd = branch->elmnt;
 	next_branch = curr_cmd->next_cmd;
 	if (!next_branch)
-		return (NULL);
+		return (free_tree(branch), NULL);
 	next_cmd = next_branch->elmnt;
 	branch->elmnt = next_cmd;
 	free_file_tree(curr_cmd->tree);
 	free_cmd(curr_cmd);
+	free(next_branch);
 	return (next_cmd);
 }
