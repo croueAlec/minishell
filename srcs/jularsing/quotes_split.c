@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:28:48 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/03 16:00:21 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:35:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,9 @@ char	**quotes_split(char *s, char c)
 				return (ft_fsplit(result), NULL);
 			i++;
 		}
+		else
+			break ;
 		s = s + word_len;
 	}
-	result[i] = NULL;
 	return (result);
 }
