@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 18:54:29 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 11:59:04 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_outfile_branch(t_branch *branch)
 
 	outfile = branch->elmnt;
 	if (outfile->path)
-		(printf("\n%s\n", outfile->path), free(outfile->path), outfile->path = NULL);
+		(free(outfile->path), outfile->path = NULL);
 	(free(outfile), outfile = NULL);
 	(free(branch), branch = NULL);
 }
@@ -49,7 +49,6 @@ int	open_outfile(t_branch *branch, int outfile_fd)
 	open_flags = O_WRONLY | O_APPEND | O_CREAT;
 	if (outfile->type == OT_TRUNC)
 		open_flags = O_WRONLY | O_TRUNC | O_CREAT;
-	printf("Je suis un redirect de outfile\n");
 	if (outfile->type == OT_TRUNC || outfile->type == OT_APPEND)
 	{
 		outfile_fd = open(outfile->path, open_flags, 0644);

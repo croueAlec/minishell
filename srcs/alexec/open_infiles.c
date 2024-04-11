@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:15:40 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 19:47:32 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 11:59:29 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_infile_branch(t_branch *branch)
 int	open_here_doc(t_branch *branch)
 {
 	t_infile	*infile;
-	int	fd;
+	int			fd;
 
 	infile = branch->elmnt;
 	fd = infile->fd;
@@ -56,7 +56,6 @@ int	open_infile(t_branch *branch, int infile_fd)
 		close(infile_fd);
 	if (infile->type == IT_HERE_DOC)
 		return (open_here_doc(branch));
-	printf("Je suis un redirect de infile\n");
 	if (infile->type == IT_RDONLY)
 	{
 		infile_fd = open(infile->path, O_RDONLY);

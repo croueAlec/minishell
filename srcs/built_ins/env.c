@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:34:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 16:29:19 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 12:06:53 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Condition to only print vars that have a value.
  */
-static int find_char(char *str, char ch)
+static int	find_char(char *str, char ch)
 {
 	size_t	i;
 
