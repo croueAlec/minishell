@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:48:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/11 17:11:18 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 17:42:33 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ char	*cmdpath(char *cmd, char **ev)
 	i = 0;
 	paths = pathstab(ev);
 	if (!paths)
-		return (ft_dprintf(2, "Command '%s' not found\n", cmd), NULL);
+		return (NULL);
 	cmd_name = ft_strjoin("/", cmd);
 	if (!cmd_name)
-		return (ft_dprintf(2, "Command '' not found\n"), ft_fsplit(paths), NULL);
+		return (ft_fsplit(paths), NULL);
 	while (paths[i] != 0)
 	{	
 		cmd_path = ft_strjoin(paths[i], cmd_name);
@@ -61,7 +61,6 @@ char	*cmdpath(char *cmd, char **ev)
 		free(cmd_path);
 		i++;
 	}
-	ft_dprintf(2, "Command '%s' not found\n", cmd);
 	return (free(cmd_name), ft_fsplit(paths), NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 12:00:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 17:34:47 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,16 @@ t_cmd	*basic_check(t_branch *branch)
 	if (!cmd->cmd_path && is_built_in(branch))
 		return (cmd);
 	is_directory = is_cmd_path(cmd->args[0], '/');
-	if (is_directory)
+	if (is_directory || is_path_unset(cmd->env))
 	{
-		errno = 127;
-		perror(cmd->args[0]);
+		cmd->env->err_no = 127;
+		ft_dprintf(2, NO_SUCH_FILE_OR_DIR, cmd->args[0]);
 		return (return_next_cmd(branch));
 	}
 	else if (!is_directory)
 	{
-		errno = 2;
-		perror(cmd->args[0]);
+		cmd->env->err_no = 127;
+		ft_dprintf(2, CMD_NOT_FOUND, cmd->args[0]);
 		return (return_next_cmd(branch));
 	}
 	return (cmd);
