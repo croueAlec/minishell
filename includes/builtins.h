@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 13:53:35 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 10:40:36 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef enum e_builtin
 # define ENV_WRITE_FULL "%s: write error: No space left on device\n"
 
 /*			PWD					*/
-int	pwd_built_in(void);
+int		pwd_built_in(void);
+/*			CD					*/
+int 	cd_built_in(t_env *env, t_cmd *cd_cmd);
 /* 			ENV				 */
 int		env_built_in(t_cmd *cmd, int fd_out);
 /* 			UNSET			 */
@@ -57,8 +59,8 @@ size_t	tab_len(char **tab);
 char	**sort_char_tab(char **tab);
 size_t	length_until_char(const char *str, char ch);
 /* 			BUILTINS UTILS		 */
-pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
+pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number, t_env *env);
 int		is_built_in(t_branch *branch);
-int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);
+int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile, t_env *env);
 
 #endif

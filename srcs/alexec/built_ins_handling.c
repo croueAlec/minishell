@@ -77,10 +77,10 @@ void	printing_bltin(t_branch *br, t_bltin type, int fd_out, size_t *cmd_nbr)
  * @param type The built-in's index in the e_builtin enum.
  * @param cmd_number The current command number inside the pipeline.
  */
-void	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
+void	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number, t_env *env)
 {
 	if (type == B_CD)
-		ft_printf("Je suis un cd, je change de directoire\n");
+		cd_built_in(env, branch->elmnt);
 	else if (type == B_UNSET)
 		ft_printf("Je suis un unset\n");
 	else if (type == B_EXIT)
@@ -98,7 +98,7 @@ void	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
  * @param cmd_number The current command number inside the pipeline.
  * @return int Returns 0 on error and 1 on success.
  */
-int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile)
+int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile, t_env *env)
 {
 	t_bltin	type;
 	int		infile;
@@ -121,6 +121,6 @@ int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile)
 	if (!isatty(outfile))
 		close(outfile);
 	if (type > B_ENV)
-		other_builtin(branch, type, cmd_number);
+		other_builtin(branch, type, cmd_number, env);
 	return (1);
 }

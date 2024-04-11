@@ -6,7 +6,7 @@
 #    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/10 13:58:17 by jblaye           ###   ########.fr        #
+#    Updated: 2024/04/11 10:43:12 by jblaye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,8 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	limiter.c \
 	here_doc.c ) \
 	$(addprefix $(BUILTIN_DIR)/, \
-	pwd.c ) \
+	pwd.c \
+	cd.c ) \
 	main.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))

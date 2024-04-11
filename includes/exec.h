@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:12:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 18:33:38 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 10:42:45 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		free_tab(void **tab);
 void		free_cmd(t_cmd *cmd);
 void		free_file_tree(t_branch **tree);
 void		free_tree(t_branch *branch);
-pid_t		execute_tree(t_branch *branch, char **env, size_t cmd_number);
+pid_t		execute_tree(t_branch *branch, t_env *env, size_t cmd_number);
 void		differentiate_branches(t_branch *branch);
 
 #endif

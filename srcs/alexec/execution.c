@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 13:45:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 10:41:25 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ pid_t	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
  * @param branch A pointer to the Branch Command Structure
  * @param env The Minishell's local environment
  */
-pid_t	execute_tree(t_branch *branch, char **env, size_t cmd_number)
+pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 {
 	t_branch	*next_branch;
 	int			tmp_outfile;
@@ -165,9 +165,9 @@ pid_t	execute_tree(t_branch *branch, char **env, size_t cmd_number)
 			break ;
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
-			last_pid = fork_built_ins(pipefd[1], branch, &cmd_number);
+			last_pid = fork_built_ins(pipefd[1], branch, &cmd_number, env);
 		else
-			last_pid = fork_cmd(branch, env, pipefd, tmp_outfile);
+			last_pid = fork_cmd(branch, env->env_tab, pipefd, tmp_outfile);
 		tmp_outfile = pipefd[0];
 		if (pipefd[1] >= 0 && !isatty(pipefd[1]))
 			close(pipefd[1]);
