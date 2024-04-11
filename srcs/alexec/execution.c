@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 20:15:00 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 20:47:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ pid_t	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 	}
 	if (tmp_in > 0 && !isatty(tmp_in))
 		close(tmp_in);
+	track_and_close_hd_fd(branch);
 	free_curr_branch(branch);
 	return (pid);
 }
