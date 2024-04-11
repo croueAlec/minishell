@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:56:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 18:34:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:31:48 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static int	check_exit_first_arg(char *arg)
 	return (1);
 }
 
+static void	free_and_exit(int code, t_branch *branch, t_env *env)
+{
+	free_env(env);
+	free_tree(branch);
+	exit(code);
+}
+
 int	exit_built_in(t_branch *branch)
 {
 	t_cmd	*cmd;
@@ -34,15 +41,15 @@ int	exit_built_in(t_branch *branch)
 	cmd = branch->elmnt;
 	ft_dprintf(2, "exit\n");
 	if (!cmd->args[1])
-		exit(cmd->env->err_no);
+		free_and_exit(cmd->env->err_no, branch, cmd->env);
 	if (!check_exit_first_arg(cmd->args[1]))
 	{
 		ft_dprintf(2, EXIT_NON_NUM_ARG, cmd->args[1]);
-		exit(2);
+		free_and_exit(2, branch, cmd->env);
 	}
 	if (cmd->args[1] && cmd->args[2])
 		return ((ft_dprintf(2, EXIT_TOO_MANY_ARG) > 0));
 	code = ft_atoi(cmd->args[1]) % 256;
-	exit(code);
+	free_and_exit(code, branch, cmd->env);
 	return (1);
 }
