@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:59:57 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 12:56:57 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 15:48:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**remove_from_env(char **env, char *var)
 			new_env[i - offset] = env[i];
 		i++;
 	}
-	return (free(env), new_env);
+	return (free(env), sort_char_tab(new_env));
 }
 
 static int	is_valid_unset(const char *str)
@@ -91,7 +91,7 @@ int	unset_built_in(t_branch *branch)
 	return (0);
 }
 
-void	freetab(char **tab)
+/* void	freetab(char **tab)
 {
 	size_t	i;
 
@@ -102,9 +102,9 @@ void	freetab(char **tab)
 		tab[i] = NULL;
 		i++;
 	}
-}
+} */
 
-int	main(int argc, char *argv[], char **envp)
+/* int	main(int argc, char *argv[], char **envp)
 {
 	t_branch	*br;
 	t_cmd		*cmd;
@@ -124,4 +124,4 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argc;
 	freetab(env->env_tab);
 	return (free(env->env_tab), free(cmd), free(br), free(env), err);
-}
+} */

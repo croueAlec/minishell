@@ -6,12 +6,16 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:59:48 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 16:53:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 14:20:20 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * @brief Handles the edge case when echo has a parameter such as '-nnnnnnnn'
+ * @return 1 if string is only 'ch', 0 otherwise
+ */
 static int	str_only_n(char *str, char ch)
 {
 	size_t	i;

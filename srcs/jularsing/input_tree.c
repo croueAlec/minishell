@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:38:44 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/10 16:34:21 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 11:13:39 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	str_tab_len(char **tab)
 	return (i);
 }
 
-t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, char **env)
+t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, t_env *env)
 {
 	t_branch	*node;
 	char		**cmd_split;
 	char		*input;
 
-	input = str_expand_var(cmd, env);
+	input = str_expand_var(cmd, env->env_tab);
 	if (!input)
 		return (NULL);
 	cmd_split = quotes_split(input, ' ');
@@ -45,7 +45,7 @@ t_branch	*new_cmd_branch(char *cmd, t_hd_fd_list *hd_fd_list, char **env)
 	return (ft_fsplit(cmd_split), node);
 }
 
-t_branch	*input_tree(char **input, t_hd_fd_list *hd_fd_list, char **env)
+t_branch	*input_tree(char **input, t_hd_fd_list *hd_fd_list, t_env *env)
 {
 	t_branch	*tree;
 	t_branch	*new_branch;

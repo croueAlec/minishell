@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:39:01 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/08 17:19:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/10 17:51:10 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_var_exist(char **env, char *arg, size_t *var_exist)
 	return (1);
 }
 
-char	**replace_in_env(char **env, char *arg)
+char	**replace_in_env(char **env, char *arg, int *err_no)
 {
 	size_t	i;
 	size_t	key_length;
@@ -41,11 +41,13 @@ char	**replace_in_env(char **env, char *arg)
 	while (env && env[i] && ft_strncmp(env[i], arg, key_length) != 0)
 		i++;
 	free(env[i]);
-	env[i] = arg;
+	env[i] = ft_strdup(arg);
+	if (!env[i])
+		*err_no = (ft_dprintf(2, EXPORT_MALLOC_FAIL, arg) > 0);
 	return (env);
 }
 
-char	**add_to_env(char **env, char *arg)
+char	**add_to_env(char **env, char *arg, int *err_no)
 {
 	char	**new_env;
 	size_t	i;
@@ -53,7 +55,7 @@ char	**add_to_env(char **env, char *arg)
 
 	i = tab_len(env) + check_var_exist(env, arg, &var_exist);
 	if (var_exist)
-		return (replace_in_env(env, arg));
+		return (replace_in_env(env, arg, err_no));
 	new_env = ft_calloc(i + 1, sizeof(char *));
 	if (!new_env)
 		return (NULL);
@@ -64,26 +66,30 @@ char	**add_to_env(char **env, char *arg)
 		new_env[i] = env[i];
 		i++;
 	}
-	new_env[i] = arg;
+	new_env[i] = ft_strdup(arg);
+	if (!new_env[i])
+		*err_no = (ft_dprintf(2, EXPORT_MALLOC_FAIL, arg) > 0);
 	free(env);
-	return (new_env);
+	return (sort_char_tab(new_env));
 }
 
 int	export_built_in(t_branch *br, int fd_out)
 {
 	t_cmd	*cmd;
+	t_env	*env_t;
 	size_t	i;
 	int		err_no;
 
-	i = 0;
+	i = 1;
 	err_no = 0;
 	cmd = br->elmnt;
+	env_t = cmd->env;
 	if (cmd && cmd->args && !cmd->args[1])
 		return (export_print_env(cmd, fd_out));
 	while (cmd && cmd->args && cmd->args[i])
 	{
 		if (is_valid_env_var(cmd->args[i]))
-			cmd->env->env_tab = add_to_env(cmd->env->env_tab, cmd->args[i]);
+			env_t->env_tab = add_to_env(env_t->env_tab, cmd->args[i], &err_no);
 		else
 			err_no = 1;
 		i++;

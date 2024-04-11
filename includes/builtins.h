@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 13:53:35 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/10 18:30:22 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,34 @@ typedef enum e_builtin
 # define BI_EXIT "exit"
 # define WRITE_FILE_FULL "tacOS: %s: write error: No space left on device\n"
 # define ENV_WRITE_FULL "%s: write error: No space left on device\n"
+# define EXPORT_MALLOC_FAIL "tacOS: %s: Malloc failed, environnment was \
+not changed\n"
+# define EXIT_NON_NUM_ARG "tacOS: exit: %s: numeric argument required\n"
+# define EXIT_TOO_MANY_ARG "tacOS: exit: too many arguments\n"
 
-/*			PWD					*/
-int	pwd_built_in(void);
+/* 			EXIT			 */
+int		exit_built_in(t_branch *branch);
+/* 			ECHO			 */
+int		echo_built_in(t_branch *branch, int fd_out);
+/* 			PWD				 */
+int		pwd_built_in(int fd_out);
 /* 			ENV				 */
 int		env_built_in(t_cmd *cmd, int fd_out);
 /* 			UNSET			 */
 char	**remove_from_env(char **env, char *var);
+int		unset_built_in(t_branch *branch);
 /* 			EXPORT			 */
-char	**add_to_env(char **env, char *arg);
+char	**add_to_env(char **env, char *arg, int *err_no);
 int		is_valid_env_var(const char *s);
 size_t	length_until_char(const char *str, char ch);
 int		export_print_env(t_cmd *cmd, int fd_out);
-/* 			ENV UTILS			 */
+int		export_built_in(t_branch *br, int fd_out);
+/* 			ENV UTILS		 */
 t_env	*make_env(char **env_tab);
 size_t	tab_len(char **tab);
 char	**sort_char_tab(char **tab);
 size_t	length_until_char(const char *str, char ch);
-/* 			BUILTINS UTILS		 */
+/* 			BUILTINS UTILS	 */
 pid_t	fork_built_ins(int	fd_out, t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
 int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);

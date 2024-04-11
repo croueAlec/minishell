@@ -50,23 +50,25 @@ BI_EXIT, 0};
  * @param fd_out The file descriptor on which to execute the built-in.
  * @param cmd_nbr The current command number inside the pipeline.
  */
-void	printing_bltin(t_branch *br, t_bltin type, int fd_out, size_t *cmd_nbr)
+int	printing_bltin(t_branch *br, t_bltin type, int fd_out, size_t *cmd_nbr)
 {
+	int	err_no;
+
 	if (fd_out == UNDEFINED_FD)
 		fd_out = STDOUT_FILENO;
 	if (type == B_ECHO)
-		ft_dprintf(fd_out, "je suis un echo, echo, echo, echo...\n");
+		err_no = echo_built_in(br, fd_out);
 	else if (type == B_PWD)
-		pwd_built_in();
-	//ft_dprintf(fd_out, "je suis un pwd, /home/acroue/Documents\n");
+		err_no = pwd_built_in(fd_out);
 	else if (type == B_EXPORT)
-		ft_dprintf(fd_out, "je suis un export, j'ai pas de blague\n");
+		err_no = export_built_in(br, fd_out);
 	else if (type == B_ENV)
-		ft_dprintf(fd_out, "je suis un env, PATH='PATH'\n");
+		err_no = env_built_in(br->elmnt, fd_out);
 	else
-		ft_dprintf(fd_out, "Not supposed to happen in call print builtin\n");
+		err_no = 188;
 	(void)br;
 	(void)cmd_nbr;
+	return (err_no);
 }
 
 /**
@@ -77,18 +79,22 @@ void	printing_bltin(t_branch *br, t_bltin type, int fd_out, size_t *cmd_nbr)
  * @param type The built-in's index in the e_builtin enum.
  * @param cmd_number The current command number inside the pipeline.
  */
-void	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
+int	other_builtin(t_branch *branch, t_bltin type, size_t *cmd_number)
 {
+	int	err_no;
+
+	err_no = 0;
 	if (type == B_CD)
-		ft_printf("Je suis un cd, je change de directoire\n");
+		err_no = ft_printf("Je suis un cd, je change de directoire\n");
 	else if (type == B_UNSET)
-		ft_printf("Je suis un unset\n");
+		err_no = unset_built_in(branch);
 	else if (type == B_EXIT)
-		ft_printf("Je suis un exit et j'exit (je crois)\n");
+		err_no = exit_built_in(branch);
 	else
-		printf("Not supposed to happen in call non print builtin\n");
+		err_no = printf("Not supposed to happen in call non print builtin\n");
 	(void)branch;
 	(void)cmd_number;
+	return (err_no);
 }
 
 /**
@@ -102,7 +108,9 @@ int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile)
 {
 	t_bltin	type;
 	int		infile;
+	int		err_no;
 
+	err_no = 0;
 	infile = UNDEFINED_FD;
 	type = is_built_in(branch);
 	if (type == B_ERR)
@@ -114,13 +122,13 @@ int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile)
 	{
 		if (outfile >= 0 && !isatty(outfile))
 			close(outfile);
-		return (0);
+		return (1);
 	}
 	if (type <= B_ENV)
-		printing_bltin(branch, type, outfile, cmd_number);
+		err_no = printing_bltin(branch, type, outfile, cmd_number);
 	if (!isatty(outfile))
 		close(outfile);
 	if (type > B_ENV)
-		other_builtin(branch, type, cmd_number);
-	return (1);
+		err_no = other_builtin(branch, type, cmd_number);
+	return (err_no);
 }
