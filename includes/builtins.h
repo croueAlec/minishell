@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 19:27:17 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/12 14:14:22 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef enum e_builtin
 not changed\n"
 # define EXIT_NON_NUM_ARG "tacOS: exit: %s: numeric argument required\n"
 # define EXIT_TOO_MANY_ARG "tacOS: exit: too many arguments\n"
+# define CD_MALLOC_FAIL "tacOS: Malloc failed, could not change directory\n"
 
 /* 			EXIT			 */
 int		exit_built_in(t_branch *branch);

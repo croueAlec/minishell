@@ -6,53 +6,70 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 14:25:42 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/11 15:18:00 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/12 17:12:12 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	reset_env_param(char *name, char *new_value, t_env *env)
+static char	*full_env_parameter(char *name, char *value)
 {
-	int		i;
-	int		len;
-	char	*new_param;
-	char	*malloc_name;
+	char	*result;
+
+	result = ft_strjoin(name, value);
+	if (!result)
+		return (free(value), NULL);
+	return (free(value), result);
+}
+
+static void	update_pwd_and_oldpwd(char *pwd, char *old_pwd, t_env *env)
+{
+	int	i;
+	int	yes;
 
 	i = 0;
-	len = ft_safe_strlen(name);
-	while (env->env_tab && env->env_tab[i] != 0)
+	yes = 0;
+	while (env->env_tab && env->env_tab[i])
 	{
-		if (ft_strncmp(name, env->env_tab[i], len) == 0
-			&& env->env_tab[i][len] == 61)
+		if (ft_strncmp("PWD=", env->env_tab[i], 4) == 0)
 		{
-			malloc_name = ft_strdup(name);
-			if (!malloc)
-				return (ENOMEM);
-			new_param = ft_sep_join(malloc_name, new_value, "=");
-			if (!new_param)
-				return (ENOMEM);
 			free(env->env_tab[i]);
-			env->env_tab[i] = new_param;
-			return (EXIT_SUCCESS);
+			env->env_tab[i] = pwd;
+		}
+		if (ft_strncmp("OLDPWD=", env->env_tab[i], 7) == 0)
+		{
+			free(env->env_tab[i]);
+			env->env_tab[i] = old_pwd;
+			yes = 1;
 		}
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	if (yes == 0)
+		env->env_tab = add_to_env(env->env_tab, old_pwd, &(env->err_no));
 }
 
 int	cd_built_in(t_cmd *cd_cmd)
 {
-	char	*pwd;
-	char	*env_pwd;
+	char	*tmp_pwd;
+	char	*new_pwd;
 
+	cd_cmd->env->err_no = 0;
 	if (cd_cmd->args[2] != NULL)
 		return (ft_dprintf(2, "tacOS: cd: too many arguments\n"), 1);
-	chdir(cd_cmd->args[1]);
-	if (errno != 0)
-		return (strerror(errno), errno);
-	pwd = getcwd(0, 0);
-	
-	cd_cmd->env->err_no = 0;
-	return (errno);
+	tmp_pwd = ft_strdup(variable_value("PWD", cd_cmd->env->env_tab));
+	if (!tmp_pwd)
+		return (ft_dprintf(2, CD_MALLOC_FAIL), ENOMEM);
+	if (chdir(cd_cmd->args[1]) != 0)
+		return (free(tmp_pwd), strerror(errno), errno);
+	new_pwd = getcwd(0, 0);
+	if (!new_pwd)
+		return (free(tmp_pwd), strerror(errno), errno);
+	tmp_pwd = full_env_parameter("OLDPWD=", tmp_pwd);
+	if (!tmp_pwd)
+		return (free(new_pwd), ft_dprintf(2, EXPORT_MALLOC_FAIL), ENOMEM);
+	new_pwd = full_env_parameter("PWD=", new_pwd);
+	if (!new_pwd)
+		return (free(tmp_pwd), ft_dprintf(2, EXPORT_MALLOC_FAIL), ENOMEM);
+	update_pwd_and_oldpwd(new_pwd, tmp_pwd, cd_cmd->env);
+	return (cd_cmd->env->err_no);
 }
