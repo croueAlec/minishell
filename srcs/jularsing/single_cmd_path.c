@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:48:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/04 13:50:33 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 17:42:33 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**pathstab(char **ev)
 		return (NULL);
 	while (ev[i] && ft_strncmp("PATH=", ev[i], 5) != 0)
 		i++;
-	if (ft_strncmp("PATH=", ev[i], 5) != 0)
+	if (!ev[i] || ft_strncmp("PATH=", ev[i], 5) != 0)
 		return (NULL);
 	paths = ft_split(ev[i] + 5, ':');
 	if (!paths)
@@ -47,10 +47,10 @@ char	*cmdpath(char *cmd, char **ev)
 	i = 0;
 	paths = pathstab(ev);
 	if (!paths)
-		return (ft_dprintf(2, "Command '%s' not found\n", cmd), NULL);
+		return (NULL);
 	cmd_name = ft_strjoin("/", cmd);
 	if (!cmd_name)
-		return (ft_dprintf(2, "Command '' not found\n"), ft_fsplit(paths), NULL);
+		return (ft_fsplit(paths), NULL);
 	while (paths[i] != 0)
 	{	
 		cmd_path = ft_strjoin(paths[i], cmd_name);
@@ -61,7 +61,6 @@ char	*cmdpath(char *cmd, char **ev)
 		free(cmd_path);
 		i++;
 	}
-	ft_dprintf(2, "Command '%s' not found\n", cmd);
 	return (free(cmd_name), ft_fsplit(paths), NULL);
 }
 

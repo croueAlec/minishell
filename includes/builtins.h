@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 14:50:55 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 19:27:17 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ not changed\n"
 
 /* 			EXIT			 */
 int		exit_built_in(t_branch *branch);
+void	free_and_exit(int code, t_branch *branch, t_env *env);
 /* 			ECHO			 */
 int		echo_built_in(t_branch *branch, int fd_out);
 /* 			PWD				 */
@@ -68,8 +69,9 @@ t_env	*make_env(char **env_tab);
 size_t	tab_len(char **tab);
 char	**sort_char_tab(char **tab);
 size_t	length_until_char(const char *str, char ch);
+void	free_env(t_env *env);
 /* 			BUILTINS UTILS	 */
-pid_t	fork_built_ins(int fd_out, t_branch *branch, size_t *cmd_number);
+pid_t	fork_built_ins(int fd_out[2], t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
 int		handle_builtins(t_branch *branch, size_t *cmd_number, int outfile);
 
