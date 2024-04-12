@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/09 18:52:59 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/11 20:47:02 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/**
+ * @brief This function finds and closes any here_doc FD in branch.
+ */
+void	track_and_close_hd_fd(t_branch *branch)
+{
+	size_t		i;
+	t_cmd		*cmd;
+	t_infile	*infile;
+
+	i = 0;
+	cmd = branch->elmnt;
+	while (cmd && cmd->tree && cmd->tree[i] && cmd->tree[i]->elmnt)
+	{
+		if (cmd->tree[i]->type == T_INFILE)
+		{
+			infile = cmd->tree[i]->elmnt;
+			if (infile->type == IT_HERE_DOC)
+				close(infile->fd);
+		}
+		i++;
+	}
+}
 
 int	is_here_doc(char *str)
 {

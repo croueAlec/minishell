@@ -6,11 +6,17 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:19:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 15:52:34 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:19:44 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_env(t_env *env)
+{
+	ft_fsplit(env->env_tab);
+	free(env);
+}
 
 size_t	tab_len(char **tab)
 {

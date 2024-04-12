@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:39:01 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 17:51:10 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 21:00:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	**replace_in_env(char **env, char *arg, int *err_no)
 	size_t	key_length;
 
 	key_length = length_until_char(arg, '=');
+	if (!arg[key_length])
+		return (env);
 	i = 0;
 	while (env && env[i] && ft_strncmp(env[i], arg, key_length) != 0)
 		i++;

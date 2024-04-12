@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 15:02:36 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:40:40 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	main(int ac, char **av, char **default_env)
 	{
 		tree = parsing(env_struct);
 		last_pid = execute_tree(tree, env_struct, 0);
-		wait_children(last_pid);
+		if (last_pid != UNDEFINED_FD)
+			wait_children(last_pid);
 	}
 	return (0);
 }

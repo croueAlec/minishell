@@ -6,36 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 12:00:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/11 20:47:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// /**
-//  * @brief Executes the command once pipes and redirects have been done
-//  * 
-//  * @param cmd A pointer to the Command structure
-//  * @param env The Minishell's local environment
-//  */
-// void	execute_cmd(t_cmd *cmd, char **env)
-// {
-// 	pid_t	pid;
-
-// 	printf("Je suis une commande\n");
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		if (execve(cmd->cmd_path, cmd->args, env) == -1)
-// 		{
-// 			perror("Command failed, why ??");
-// 		}
-// 	}
-// 	free_tab((void **)cmd->args);
-// 	free(cmd->tree);
-// 	free(cmd->cmd_path);
-// 	free(cmd);
-// }
 
 /**
  * @brief Opens pipe. In case of error, frees the current command and passes to
@@ -49,7 +24,7 @@
 int	open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile)
 {
 	if (pipe(pipefd) == 0)
-		return (0);
+		return ((void)printf("\t\tPIPE\n"), 0);
 	if (tmp_outfile >= 0)
 		close(tmp_outfile);
 	return (free_tree(branch), perror("pipe"), 1);
@@ -72,21 +47,21 @@ t_cmd	*basic_check(t_branch *branch)
 	cmd = branch->elmnt;
 	if (cmd && cmd->cmd_path)
 		return (cmd);
-	if (!cmd->cmd_path && !cmd->args)
+	if (!cmd->cmd_path && !cmd->args[0])
 		return (open_close_redir(branch));
 	if (!cmd->cmd_path && is_built_in(branch))
 		return (cmd);
 	is_directory = is_cmd_path(cmd->args[0], '/');
-	if (is_directory)
+	if (is_directory || is_path_unset(cmd->env))
 	{
-		errno = 127;
-		perror(cmd->args[0]);
+		cmd->env->err_no = 127;
+		ft_dprintf(2, NO_SUCH_FILE_OR_DIR, cmd->args[0]);
 		return (return_next_cmd(branch));
 	}
 	else if (!is_directory)
 	{
-		errno = 2;
-		perror(cmd->args[0]);
+		cmd->env->err_no = 127;
+		ft_dprintf(2, CMD_NOT_FOUND, cmd->args[0]);
 		return (return_next_cmd(branch));
 	}
 	return (cmd);
@@ -136,8 +111,9 @@ pid_t	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 		if (outfile >= 0)
 			close(outfile);
 	}
-	if (tmp_in > 0)
+	if (tmp_in > 0 && !isatty(tmp_in))
 		close(tmp_in);
+	track_and_close_hd_fd(branch);
 	free_curr_branch(branch);
 	return (pid);
 }
@@ -156,6 +132,7 @@ pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 	t_cmd		*cmd;
 	pid_t		last_pid;
 
+	last_pid = UNDEFINED_FD;
 	define_execution_fd(&pipefd[0], &pipefd[1], &tmp_outfile);
 	while (branch)
 	{
@@ -164,7 +141,7 @@ pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 			break ;
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
-			last_pid = fork_built_ins(pipefd[1], branch, &cmd_number);
+			last_pid = fork_built_ins(pipefd, branch, &cmd_number);
 		else
 			last_pid = fork_cmd(branch, env->env_tab, pipefd, tmp_outfile);
 		tmp_outfile = pipefd[0];
