@@ -3,32 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/09 20:18:57 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/12 17:46:51 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	*variable_len(char *variable, char **env, size_t *len_a, size_t *len_b)
+size_t	*variable_len(char *variable, t_env *env, size_t *len_a, size_t *len_b)
 {
 	size_t	i;
 	char	*content;
 
 	i = 0;
-	content = variable_value(variable, env);
-	if (content)
+	if (ft_strncmp(variable, "?", 2) == 0)
 	{
-		*len_b = ft_strlen(content);
-		while (ft_isalnum(variable[i]) == 1 || variable[i] == '_')
-		{
-			*len_a += 1;
-			i++;
-		}
+		content = itoa(env->err_no);
+		*len_a = 1;
+		*len_b = ft_safe_strlen(content);
+		free(content);
+		return (NULL);
 	}
-	return (NULL);
+	else
+	{
+		content = variable_value(variable, env->env_tab);
+		if (content)
+		{
+			*len_b = ft_strlen(content);
+			while (ft_isalnum(variable[i]) == 1 || variable[i] == '_')
+			{
+				*len_a += 1;
+				i++;
+			}
+		}
+		return (NULL);
+	}
 }
 
 char	*variable_value(char *variable, char **env)
