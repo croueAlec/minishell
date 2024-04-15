@@ -6,7 +6,7 @@
 #    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/11 12:08:08 by jblaye           ###   ########.fr        #
+#    Updated: 2024/04/15 12:16:51 by jblaye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ INCLUDES := $(INCS_DIR) \
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC :=	$(addprefix $(PARSING_DIR)/, \
+	expansion_question_mark.c \
 	expansion_utils.c \
 	expansion_var.c \
 	extract_args_and_redirect.c \

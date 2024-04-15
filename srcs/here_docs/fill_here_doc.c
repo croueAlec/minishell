@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 17:50:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:11:37 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*here_doc_name(void)
 /**
  * @brief Fills the here_doc with readline and expands Vars if needed.
  */
-void	fill_here_doc(int write_hd_fd, char *lim, int expand_var, char **env)
+void	fill_here_doc(int write_hd_fd, char *lim, int expand_var, t_env *env)
 {
 	char	*line;
 	size_t	lim_len;
@@ -77,7 +77,7 @@ void	fill_here_doc(int write_hd_fd, char *lim, int expand_var, char **env)
  * @param read_here_doc_fd The here_doc's file descriptor, used in the exec for
  *  reading.
  */
-void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, char **env)
+void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, t_env *env)
 {
 	int		write_here_doc_fd;
 	char	*name;

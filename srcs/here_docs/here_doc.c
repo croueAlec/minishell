@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:43:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 20:47:02 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:13:41 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_here_doc(char *str)
 	return (1);
 }
 
-int	get_heredoc_fd(char *str, char **env)
+int	get_heredoc_fd(char *str, t_env *env)
 {
 	size_t	i;
 	char	*lim;
