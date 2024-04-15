@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:12:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 11:18:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 14:58:09 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			is_path_unset(t_env *env);
 void		define_execution_fd(int *fd_one, int *fd_two, int *fd_three);
 int			is_cmd_path(char *cmd, char ch);
 int			open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile);
-t_cmd		*handle_cmd_not_found(t_branch *branch);
+t_cmd		*handle_cmd_not_found(t_branch *branch, int *tmp_outfile);
 t_cmd		*return_next_cmd(t_branch *branch);
 void		cmd_error(t_branch *branch, char *err_msg);
 void		redirection_error(t_branch *branch, size_t tree_index);

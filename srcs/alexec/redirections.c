@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 12:44:42 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 14:35:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_cmd	*open_close_redir(t_branch *branch, t_branch *old_curr_branch)
 {
 	t_branch	*next_branch;
 	t_cmd		*cmd;
+	t_cmd		*next_cmd;
 	int			infile;
 	int			outfile;
 
@@ -40,7 +41,8 @@ t_cmd	*open_close_redir(t_branch *branch, t_branch *old_curr_branch)
 	free(cmd);
 	if (!next_branch)
 		return (NULL);
-	return (free(old_curr_branch), next_branch->elmnt);
+	next_cmd = next_branch->elmnt;
+	return (free(old_curr_branch), next_cmd);
 }
 /* soucis dans le return apparemment */
 

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 12:47:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 14:57:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @return t_cmd* Returns a pointer to the current command if it has not been 
  * executed, or the next if it has.
  */
-t_cmd	*basic_check(t_branch *branch)
+t_cmd	*basic_check(t_branch *branch, int *tmp_outfile)
 {
 	t_branch	*old_curr_branch;
 	t_cmd		*cmd;
@@ -35,11 +35,14 @@ t_cmd	*basic_check(t_branch *branch)
 		if (cmd && cmd->next_cmd)
 			old_curr_branch = cmd->next_cmd;
 		if (!cmd->cmd_path && !cmd->args[0])
+		{
+			(close(*tmp_outfile), *tmp_outfile = UNDEFINED_FD);
 			cmd = open_close_redir(branch, old_curr_branch);
+		}
 		else if (!cmd->cmd_path && is_built_in(branch))
 			return (cmd);
 		else
-			cmd = handle_cmd_not_found(branch);
+			cmd = handle_cmd_not_found(branch, tmp_outfile);
 		branch->elmnt = cmd;
 		old_curr_branch = NULL;
 	}
@@ -115,9 +118,9 @@ pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 	define_execution_fd(&pipefd[0], &pipefd[1], &tmp_outfile);
 	while (branch)
 	{
-		cmd = basic_check(branch);
+		cmd = basic_check(branch, &tmp_outfile);
 		if (!cmd || (cmd->next_cmd && (open_pipe(branch, pipefd, tmp_outfile))))
-			break ;
+			return (free(branch), last_pid);
 		next_branch = cmd->next_cmd;
 		if (!cmd->cmd_path)
 			last_pid = fork_built_ins(pipefd, branch, &cmd_number);
@@ -128,5 +131,5 @@ pid_t	execute_tree(t_branch *branch, t_env *env, size_t cmd_number)
 			(close(pipefd[1]), pipefd[1] = UNDEFINED_FD);
 		branch = next_branch;
 	}
-	return (free(branch), last_pid);
+	return (last_pid);
 }
