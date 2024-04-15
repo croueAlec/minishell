@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:39:32 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/09 19:02:32 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:13:11 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd)
 	return (0);
 }
 
-int	lst_hd_fds(char *input, size_t i, t_hd_fd_list **first, char **env)
+int	lst_hd_fds(char *input, size_t i, t_hd_fd_list **first, t_env *env)
 {
 	int	hd_fd;
 

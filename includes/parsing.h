@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/10 16:01:37 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:15:05 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 /// PRELEMINARY CHECK & HEREDOC OPEN
 int			all_quotes_are_closed(char *str);
-int			no_syntax_error(char *str, t_hd_fd_list **first, char **env);
+int			no_syntax_error(char *str, t_hd_fd_list **first, t_env *env);
 /// heredoc utils
 void		hd_fd_list_clear(t_hd_fd_list *lst);
 int			hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd);
-int			lst_hd_fds(char *input, size_t i, t_hd_fd_list **first, char **env);
+int			lst_hd_fds(char *input, size_t i, t_hd_fd_list **first, t_env *env);
 
 /// QUOTES SPLIT
 int			count_words_quotes(char *s, char c);
@@ -36,20 +36,22 @@ void		ft_fsplit(char **tab);
 char		**quotes_split(char *s, char c);
 
 /// VAR EXPANSION
+/// ? var
+int			is_question_mark_var(char *variable);
 /// Utils
 void		move_forward_single_quotes(size_t *len, char *str);
-void		move_forward_double_quotes(size_t *len, char *str, char **env);
+void		move_forward_double_quotes(size_t *len, char *str, t_env *env);
 void		copy_single_quote(char *result, char *str, size_t *index);
 void		copy_double_quote_expand(char *result, char *str,
-				size_t *index, char **env);
+				size_t *index, t_env *env);
 void		single_var_expansion(size_t *index, char *str,
-				char *result, char **env);
+				char *result, t_env *env);
 /// Expand variables
-size_t		*variable_len(char *variable, char **env,
+void		variable_len(char *variable, t_env *env,
 				size_t *len_a, size_t *len_b);
-char		*variable_value(char *variable, char **env);
-size_t		var_expanded_len(char *str, char **env);
-char		*str_expand_var(char *str, char **env);
+char		*variable_value(char *variable, t_env *env);
+size_t		var_expanded_len(char *str, t_env *env);
+char		*str_expand_var(char *str, t_env *env);
 
 /// REDIRECTIONS AND ARGS EXTRACTION
 /// Utils
