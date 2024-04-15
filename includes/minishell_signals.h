@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   minishell_signals.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 15:14:45 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 17:30:38 by acroue           ###   ########.fr       */
+/*   Created: 2024/04/15 15:53:34 by acroue            #+#    #+#             */
+/*   Updated: 2024/04/15 19:04:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_SIGNALS_H
+# define MINISHELL_SIGNALS_H
 
-int	is_line_empty(char	*str)
-{
-	size_t	i;
+# include "minishell.h"
+# include <signal.h>
 
-	i = 0;
-	while (str && str[i] !='\0')
-	{
-		if (str[i] != 32 && (str[i] <= 9 || str[i] >= 13))
-			return (1);
-		i++;
-	}
-	return (0);
-}
+/* 			SIGNALS			 */
+void	sig_handle_c_hd(int signum);
+/* 			UTILS			 */
+void	set_signals_default(t_env *env);
+int		define_sig(int signum, void(*fun_ptr)(int), t_env *env);
+
+#endif

@@ -6,11 +6,13 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 15:23:00 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 18:34:16 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_global = 0;
 
 int	wait_children(int pid)
 {
@@ -34,8 +36,12 @@ int	main(int ac, char **av, char **default_env)
 	(void) ac;
 	(void) av;
 	env_struct = make_env(default_env);
+	set_signals_default(env_struct);
 	while (1)
 	{
+		if (g_global == SIGINT)
+			env_struct->err_no = 130;
+		g_global = 0;
 		tree = parsing(env_struct);
 		last_pid = execute_tree(tree, env_struct, 0);
 		if (last_pid != UNDEFINED_FD)

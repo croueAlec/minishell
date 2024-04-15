@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:43:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/10 16:01:37 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:36:54 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 /// PRELEMINARY CHECK & HEREDOC OPEN
 int			all_quotes_are_closed(char *str);
-int			no_syntax_error(char *str, t_hd_fd_list **first, char **env);
+int			no_syntax_error(char *str, t_hd_fd_list **first, t_env *env);
 /// heredoc utils
 void		hd_fd_list_clear(t_hd_fd_list *lst);
 int			hd_fd_list_add_back(t_hd_fd_list **lst, int new_fd);
-int			lst_hd_fds(char *input, size_t i, t_hd_fd_list **first, char **env);
+int			lst_hd_fds(char *input, size_t i, t_hd_fd_list **first, t_env *env);
 
 /// QUOTES SPLIT
 int			count_words_quotes(char *s, char c);

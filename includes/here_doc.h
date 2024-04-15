@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 20:47:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:01:53 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 int		is_here_doc(char *str);
 int		find_lim(char *cmd, size_t *i, char **lim, int *is_expand);
-void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, char **env);
-int		get_heredoc_fd(char *str, char **env);
+void	create_here_doc(char *lim, int *read_hd_fd, int is_expand, t_env *env);
+int		get_heredoc_fd(char *str, t_env *env);
 void	track_and_close_hd_fd(t_branch *branch);
 
 #endif

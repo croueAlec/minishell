@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/11 12:14:56 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:36:41 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	redirection_syntax_error(char *str, size_t *i)
 	return (1);
 }
 
-int	no_syntax_error(char *str, t_hd_fd_list **first, char **env)
+int	no_syntax_error(char *str, t_hd_fd_list **first, t_env *env)
 {
 	size_t			i;
 
