@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:56:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 19:24:11 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:24:19 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_and_exit(int code, t_branch *branch, t_env *env)
 {
 	free_env(env);
 	free_tree(branch);
+	rl_clear_history();
 	exit(code);
 }
 

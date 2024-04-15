@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 16:40:40 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:23:00 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int	main(int ac, char **av, char **default_env)
 		if (last_pid != UNDEFINED_FD)
 			wait_children(last_pid);
 	}
+	rl_clear_history();
 	return (0);
 }

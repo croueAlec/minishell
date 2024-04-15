@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 17:14:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 15:17:33 by acroue           ###   ########.fr       */
+/*   Created: 2024/04/15 15:14:45 by acroue            #+#    #+#             */
+/*   Updated: 2024/04/15 15:16:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include "struct.h"
-# include "../libs/libft/libft.h"
-# include "redirections.h"
-# include "exec.h"
-# include <errno.h>
-# include <sys/wait.h>
-# include "parsing.h"
-# include "parsing_struct.h"
-# include "builtins.h"
-# include "here_doc.h"
+int	is_line_empty(char	*str)
+{
+	size_t	i;
 
-void	print_parsing(void);
-void	print_exec(void);
-int		is_line_empty(char	*str);
-
-
-#endif
+	i = 0;
+	while (str[i] !='\0')
+	{
+		if (str[i] != 32 && (str[i] <= 9 || str[i] >= 13))
+			return (1);
+		i++;
+	}
+	return (0);
+}

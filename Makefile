@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/15 11:18:49 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/15 15:24:54 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	pwd.c \
 	sort_tab.c \
 	unset.c ) \
-	main.c
+	main.c \
+	readline.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
 DEPS := $(patsubst %.c,$(OBJS_DIR)/%.d,$(SRC))

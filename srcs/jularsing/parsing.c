@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 15:00:16 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:22:06 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_branch	*parsing(t_env *env)
 
 	hd_fd_list = NULL;
 	input = readline("tacOS > ");
+	if (is_line_empty(input))
+		add_history(input);
 	if (all_quotes_are_closed(input) == 0
 		|| no_syntax_error(input, &hd_fd_list, env->env_tab) == 0)
 		return (free(input), NULL);
