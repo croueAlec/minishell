@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
+#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/11 12:08:08 by jblaye           ###   ########.fr        #
+#    Updated: 2024/04/15 11:18:49 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	built_ins_handling.c \
 	display_tree.c \
 	error_handling.c \
+	execution_utils_utils.c \
 	execution_utils.c \
 	execution.c \
 	fork_builtins.c \
