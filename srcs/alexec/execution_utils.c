@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 12:31:22 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 11:06:51 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:09:02 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_cmd	*return_next_cmd(t_branch *branch)
 	curr_cmd = branch->elmnt;
 	next_branch = curr_cmd->next_cmd;
 	if (!next_branch)
-		return (free_tree(branch), NULL);
+		return (free_file_tree(curr_cmd->tree), free_cmd(curr_cmd), NULL);
 	next_cmd = next_branch->elmnt;
 	branch->elmnt = next_cmd;
 	free_file_tree(curr_cmd->tree);
@@ -96,7 +96,7 @@ t_cmd	*return_next_cmd(t_branch *branch)
 int	open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile)
 {
 	if (pipe(pipefd) == 0)
-		return ((void)printf("\t\tPIPE\n"), 0);
+		return (0);
 	if (tmp_outfile >= 0)
 		close(tmp_outfile);
 	return (free_tree(branch), perror("pipe"), 1);
