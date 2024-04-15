@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 20:12:24 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:44:42 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param branch The current CMD Branch which has cmd_path and args to NULL.
  * @return *t_cmd A pointer to the next cmd or NULL if there is none.
  */
-t_cmd	*open_close_redir(t_branch *branch)
+t_cmd	*open_close_redir(t_branch *branch, t_branch *old_curr_branch)
 {
 	t_branch	*next_branch;
 	t_cmd		*cmd;
@@ -35,10 +35,12 @@ t_cmd	*open_close_redir(t_branch *branch)
 		close(infile);
 	if (outfile >= 0)
 		close(outfile);
-	free_curr_branch(branch);
+	free_branch_tab(cmd->tree);
+	free(cmd->args);
+	free(cmd);
 	if (!next_branch)
 		return (NULL);
-	return (next_branch->elmnt);
+	return (free(old_curr_branch), next_branch->elmnt);
 }
 /* soucis dans le return apparemment */
 

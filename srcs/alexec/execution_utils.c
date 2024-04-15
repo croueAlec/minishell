@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 12:31:22 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 21:19:47 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:06:51 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,22 @@ t_cmd	*return_next_cmd(t_branch *branch)
 	free_cmd(curr_cmd);
 	free(next_branch);
 	return (next_cmd);
+}
+
+/**
+ * @brief Opens pipe. In case of error, frees the current command and passes to
+ *  the next.
+ * 
+ * @param branch The address of the Branch Pointer.
+ * @param pipefd The pipe to open.
+ * @param tmp_outfile The previously opened pipe. Closes on error.
+ * @return 0 on error, 1 when successful
+ */
+int	open_pipe(t_branch *branch, int pipefd[2], int tmp_outfile)
+{
+	if (pipe(pipefd) == 0)
+		return ((void)printf("\t\tPIPE\n"), 0);
+	if (tmp_outfile >= 0)
+		close(tmp_outfile);
+	return (free_tree(branch), perror("pipe"), 1);
 }
