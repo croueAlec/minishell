@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 14:57:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 20:02:59 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	execute_cmd(t_branch *branch, char **env, int infile, int outfile)
 	if (!isatty(outfile))
 		close(outfile);
 	execve(cmd->cmd_path, cmd->args, env);
+	ft_dprintf(2, "tacOS: ");
 	perror(cmd->args[0]);
 	if (infile >= 0)
 		close(infile);
@@ -96,8 +97,8 @@ pid_t	fork_cmd(t_branch *branch, char **env, int pipefd[2], int tmp_in)
 	if (tmp_in > 0 && !isatty(tmp_in))
 		close(tmp_in);
 	track_and_close_hd_fd(branch);
-	free_curr_branch(branch);
-	return (pid);
+	on_cmd_error(pid, branch);
+	return ((void)free_curr_branch(branch), pid);
 }
 
 /**

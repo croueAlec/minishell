@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:12:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 14:58:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 20:02:20 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void		free_file_tree(t_branch **tree);
 void		free_tree(t_branch *branch);
 pid_t		execute_tree(t_branch *branch, t_env *env, size_t cmd_number);
 void		differentiate_branches(t_branch *branch);
+void		on_cmd_error(pid_t pid, t_branch *branch);
 
 #endif

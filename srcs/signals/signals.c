@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:51:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 14:14:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 19:30:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	sig_handle_c_hd(int signum)
 {
-	g_global = signum;
+	(void)signum;
+	g_global = SIGINT_HD;
 	close(STDIN_FILENO);
 	rl_on_new_line();
 	rl_redisplay();

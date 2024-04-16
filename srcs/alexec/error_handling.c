@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:18:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 17:06:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 20:02:16 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,22 @@ int	did_file_open_correctly(int infile, int outfile)
 		return (0);
 	}
 	return (1);
+}
+
+/**
+ * @brief Exits forks when commands fail with execve.
+ * 
+ * @param err_no Exit's return code.
+ */
+void	on_cmd_error(pid_t pid, t_branch *branch)
+{
+	t_cmd	*cmd;
+
+	cmd = branch->elmnt;
+	if (pid == 0)
+	{
+		free_env(cmd->env);
+		free_tree(branch);
+		exit(126);
+	}
 }
