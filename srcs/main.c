@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 20:53:04 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:02:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	main(int ac, char **av, char **default_env)
 	set_signals_default(env_struct);
 	while (1)
 	{
-		if (g_global == SIGINT)
-			env_struct->err_no = 130;
 		g_global = 0;
 		tree = parsing(env_struct);
 		if (g_global == SIGINT_HD && skip_cmd_hd_sigint(tree, env_struct))
