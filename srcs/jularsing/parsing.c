@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 19:37:39 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:47:28 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_branch	*parsing(t_env *env)
 
 	hd_fd_list = NULL;
 	input = readline("tacOS > ");
-	if (!input)
+	if (!input && ft_dprintf(2, "exit\n"))
 		free_and_exit(env->err_no, NULL, env);
 	if (is_line_empty(input))
 		add_history(input);

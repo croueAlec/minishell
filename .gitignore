@@ -1,5 +1,6 @@
 # Own ignores
 minishell
+ls
 
 # Prerequisites
 *.d

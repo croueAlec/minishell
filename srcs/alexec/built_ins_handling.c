@@ -126,7 +126,7 @@ int	handle_builtins(t_branch *branch, size_t *cmd_number, int outfile)
 	}
 	if (type <= B_ENV)
 		err_no = printing_bltin(branch, type, outfile, cmd_number);
-	if (!isatty(outfile))
+	if (!isatty(outfile) && outfile >= 0)
 		close(outfile);
 	if (type > B_ENV)
 		err_no = other_builtin(branch, type, cmd_number);
