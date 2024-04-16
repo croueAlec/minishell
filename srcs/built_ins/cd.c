@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 14:25:42 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/15 12:16:07 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/16 11:33:05 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int	cd_built_in(t_cmd *cd_cmd)
 	char	*new_pwd;
 
 	cd_cmd->env->err_no = 0;
-	if (cd_cmd->args[2] != NULL)
-		return (ft_dprintf(2, "tacOS: cd: too many arguments\n"), 1);
+	if (cd_cmd->args[1] != NULL && cd_cmd->args[2] != NULL)
+		return (ft_dprintf(2, "tacOS: cd: too many arguments\n"), 7);
+	if (cd_cmd->args[1] == NULL)
+		return (ft_dprintf(2, "tacOS: cd: please specify the path\n"), 20);
 	tmp_pwd = ft_strdup(variable_value("PWD", cd_cmd->env));
 	if (!tmp_pwd)
 		return (ft_dprintf(2, CD_MALLOC_FAIL), ENOMEM);
