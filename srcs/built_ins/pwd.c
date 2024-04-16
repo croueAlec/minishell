@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:03:17 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/11 12:01:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 21:22:06 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 int	pwd_built_in(int fd_out)
 {
-	char	*to_be_freed;
+	char	*pwd;
 
-	to_be_freed = getcwd(0, 0);
-	if (to_be_freed == NULL)
+	pwd = getcwd(0, 0);
+	if (pwd == NULL)
 		strerror(errno);
 	else
-		ft_dprintf(fd_out, "%s\n", to_be_freed);
-	free(to_be_freed);
+	{
+		if (write(fd_out, pwd, ft_strlen(pwd)) < 0)
+			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "echo"), free(pwd), 1);
+		if (write(fd_out, "\n", 1) < 0)
+			return ((void)ft_dprintf(2, WRITE_FILE_FULL, "echo"), free(pwd), 1);
+	}
+	free(pwd);
 	return (errno);
 }

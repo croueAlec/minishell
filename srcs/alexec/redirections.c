@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 14:35:34 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 16:48:24 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_cmd	*open_close_redir(t_branch *branch, t_branch *old_curr_branch)
 		close(infile);
 	if (outfile >= 0)
 		close(outfile);
-	free_branch_tab(cmd->tree);
+	free(cmd->tree);
 	free(cmd->args);
 	free(cmd);
 	if (!next_branch)
@@ -62,7 +62,7 @@ void	open_redirections(int *infile, int *outfile, t_branch *branch)
 		else
 			printf("hmm what kind of branch is %d ?\n", cmd->tree[i]->type);
 		if (*outfile == E_FD || *infile == E_FD)
-			return (redirection_error(branch, i));
+			return (redirection_error(branch, i + 1));
 		cmd->tree[i] = NULL;
 		i++;
 	}

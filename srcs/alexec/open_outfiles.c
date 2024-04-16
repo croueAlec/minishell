@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:23:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 11:59:04 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:32:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	open_outfile(t_branch *branch, int outfile_fd)
 	{
 		outfile_fd = open(outfile->path, open_flags, 0644);
 		if (outfile_fd < 0)
-			return (perror(outfile->path), free_outfile_branch(branch), E_FD);
+			return ((void)ft_dprintf(2, "tacOS: "), perror(outfile->path), \
+			free_outfile_branch(branch), E_FD);
 	}
 	return (free_outfile_branch(branch), outfile_fd);
 }

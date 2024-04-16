@@ -6,7 +6,7 @@
 /*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 16:46:23 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:02:55 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_branch	*parsing(t_env *env)
 	input = readline("tacOS > ");
 	if (!input && ft_dprintf(2, "exit\n"))
 		free_and_exit(env->err_no, NULL, env);
+	if (g_global == SIGINT)
+		env->err_no = 130;
+	g_global = 0;
 	if (is_white_space_str(input) == 1)
 		free_and_exit(env->err_no, NULL, env);
 	if (is_line_empty(input))

@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:41:54 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/15 12:07:41 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:34:19 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	move_forward_single_quotes(size_t *len, char *str)
-{
-	len[EXP_LEN] += 2;
-	while (str[len[LEN]] != '\'')
-	{
-		len[EXP_LEN] += 1;
-		len[LEN] += 1;
-	}
-	len[LEN] += 1;
-}
 
 void	move_forward_double_quotes(size_t *len, char *str, t_env *env)
 {
@@ -86,7 +75,7 @@ void	copy_double_quote_expand(char *result, char *str,
 static void	expand_err_no(size_t *index, char *result, t_env *env)
 {
 	int	err_no;
-	
+
 	err_no = env->err_no;
 	if (err_no >= 100)
 	{

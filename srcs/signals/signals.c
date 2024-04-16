@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:51:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 14:14:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:36:28 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	sig_handle_c_hd(int signum)
 {
-	g_global = signum;
+	(void)signum;
+	g_global = SIGINT_HD;
 	close(STDIN_FILENO);
 	rl_on_new_line();
 	rl_redisplay();
@@ -39,7 +40,7 @@ void	set_signals_default(t_env *env)
 	define_sig(SIGQUIT, SIG_IGN, env);
 }
 
-int	define_sig(int signum, void(*fun_ptr)(int), t_env *env)
+int	define_sig(int signum, void (*fun_ptr)(int), t_env *env)
 {
 	struct sigaction	sa;
 

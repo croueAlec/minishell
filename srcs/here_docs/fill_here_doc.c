@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 15:01:54 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:45:41 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*here_doc_name(void)
 
 static void	here_doc_close_sigint(int *read_hd_fd, t_env *env)
 {
-	if (g_global == SIGINT && *read_hd_fd != UNDEFINED_FD)
+	if (g_global == SIGINT_HD && *read_hd_fd != UNDEFINED_FD)
 	{
 		close(*read_hd_fd);
 		*read_hd_fd = UNDEFINED_FD;
@@ -57,7 +57,7 @@ static void	here_doc_close_sigint(int *read_hd_fd, t_env *env)
 
 void	here_doc_manage_sigint(int save_stdin, char *lim, int write_hd_fd)
 {
-	if (g_global == SIGINT)
+	if (g_global == SIGINT_HD)
 		dup2(save_stdin, STDIN_FILENO);
 	close(save_stdin);
 	close(write_hd_fd);
@@ -81,7 +81,7 @@ void	fill_here_doc(int write_hd_fd, char *lim, int expand_var, t_env *env)
 	{
 		free(line);
 		line = readline(HERE_DOC_PROMPT);
-		if (g_global == SIGINT)
+		if (g_global == SIGINT_HD)
 			return (here_doc_manage_sigint(save_stdin, lim, write_hd_fd));
 		if (!line || ft_strncmp(line, lim, lim_len + 1) == 0)
 			break ;
