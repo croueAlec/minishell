@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   expansion_utils_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 15:14:45 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 23:30:58 by acroue           ###   ########.fr       */
+/*   Created: 2024/04/16 23:33:55 by acroue            #+#    #+#             */
+/*   Updated: 2024/04/16 23:34:26 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_line_empty(char	*str)
+void	move_forward_single_quotes(size_t *len, char *str)
 {
-	size_t	i;
-
-	i = 0;
-	while (str && str[i] != '\0')
+	len[EXP_LEN] += 2;
+	while (str[len[LEN]] != '\'')
 	{
-		if (str[i] != 32 && (str[i] <= 9 || str[i] >= 13))
-			return (1);
-		i++;
+		len[EXP_LEN] += 1;
+		len[LEN] += 1;
 	}
-	return (0);
+	len[LEN] += 1;
 }

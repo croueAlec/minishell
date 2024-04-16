@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/15 12:16:51 by jblaye           ###   ########.fr        #
+#    Updated: 2024/04/16 23:34:52 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC :=	$(addprefix $(PARSING_DIR)/, \
 	expansion_question_mark.c \
+	expansion_utils_utils.c \
 	expansion_utils.c \
 	expansion_var.c \
 	extract_args_and_redirect.c \

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:18:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 20:02:16 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:31:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ void	redirection_error(t_branch *branch, size_t tree_index)
 			free_outfile_branch(cmd->tree[tree_index]);
 		tree_index++;
 	}
-	// free(cmd->tree);
-	// free_cmd(cmd);
-	// free(branch);
 }
 
 /**

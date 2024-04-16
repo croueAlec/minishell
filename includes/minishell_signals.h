@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:53:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 19:35:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:36:55 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 void	sig_handle_c_hd(int signum);
 /* 			UTILS			 */
 void	set_signals_default(t_env *env);
-int		define_sig(int signum, void(*fun_ptr)(int), t_env *env);
+int		define_sig(int signum, void (*fun_ptr)(int), t_env *env);
 
 #endif
