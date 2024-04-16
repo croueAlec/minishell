@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 14:12:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 14:48:33 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int	wait_children(int pid)
 	return (error_status);
 }
 
-static int	skip_cmd_hd_sigint(t_branch *tree)
+static int	skip_cmd_hd_sigint(t_branch *tree, t_env *env)
 {
+	env->err_no = 130;
 	free_tree(tree);
 	g_global = 0;
 	return (1);
@@ -50,7 +51,7 @@ int	main(int ac, char **av, char **default_env)
 			env_struct->err_no = 130;
 		g_global = 0;
 		tree = parsing(env_struct);
-		if (g_global == SIGINT && skip_cmd_hd_sigint(tree))
+		if (g_global == SIGINT && skip_cmd_hd_sigint(tree, env_struct))
 			continue ;
 		last_pid = execute_tree(tree, env_struct, 0);
 		if (last_pid != UNDEFINED_FD)
