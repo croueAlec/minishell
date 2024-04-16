@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 15:47:28 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 16:46:23 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_white_space_str(char *s)
+{
+	if (s)
+	{
+		while (*s == ' ' || (*s >= 9 && *s <= 13))
+			s++;
+		if (*s == 0)
+			return (1);
+		return (0);
+	}
+	return (-1);
+}
 
 t_branch	*parsing(t_env *env)
 {
@@ -22,6 +35,8 @@ t_branch	*parsing(t_env *env)
 	hd_fd_list = NULL;
 	input = readline("tacOS > ");
 	if (!input && ft_dprintf(2, "exit\n"))
+		free_and_exit(env->err_no, NULL, env);
+	if (is_white_space_str(input) == 1)
 		free_and_exit(env->err_no, NULL, env);
 	if (is_line_empty(input))
 		add_history(input);
