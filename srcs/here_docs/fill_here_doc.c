@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   fill_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:30 by acroue            #+#    #+#             */
 /*   Updated: 2024/04/16 14:16:28 by acroue           ###   ########.fr       */

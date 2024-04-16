@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:41:54 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/09 20:23:29 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:07:41 by jblaye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	move_forward_single_quotes(size_t *len, char *str)
 	len[LEN] += 1;
 }
 
-void	move_forward_double_quotes(size_t *len, char *str, char **env)
+void	move_forward_double_quotes(size_t *len, char *str, t_env *env)
 {
 	size_t	var_len[2];
 
@@ -62,7 +62,7 @@ void	copy_single_quote(char *result, char *str, size_t *index)
 }
 
 void	copy_double_quote_expand(char *result, char *str,
-									size_t *index, char **env)
+									size_t *index, t_env *env)
 {
 	result[index[1]] = str[index[0]];
 	index[1] += 1;
@@ -83,22 +83,52 @@ void	copy_double_quote_expand(char *result, char *str,
 	index[1] += 1;
 }
 
-void	single_var_expansion(size_t *index, char *str, char *result, char **env)
+static void	expand_err_no(size_t *index, char *result, t_env *env)
+{
+	int	err_no;
+	
+	err_no = env->err_no;
+	if (err_no >= 100)
+	{
+		result[index[1]] = '1';
+		index[1] += 1;
+		err_no = err_no % 100;
+	}
+	if (err_no >= 10)
+	{
+		result[index[1]] = err_no / 10 + '0';
+		index[1] += 1;
+		err_no = err_no % 10;
+	}
+	result[index[1]] = err_no + '0';
+	index[1] += 1;
+	index[0] += 1;
+}
+
+void	single_var_expansion(size_t *index, char *str, char *result, t_env *env)
 {
 	char	*var_val;
 	size_t	i;
 
 	index[0] += 1;
-	var_val = variable_value(&str[index[0]], env);
-	i = 0;
-	while (var_val && var_val[i] != 0)
+	if (is_question_mark_var(&str[index[0]]) == 1)
 	{
-		result[index[1]] = var_val[i];
-		index[1] += 1;
-		i++;
+		expand_err_no(index, result, env);
+		return ;
 	}
-	i = 0;
-	while (ft_isalnum(str[index[0] + i]) == 1 || str[index[0] + i] == '_')
-		i++;
-	index[0] += i;
+	else
+	{
+		var_val = variable_value(&str[index[0]], env);
+		i = 0;
+		while (var_val && var_val[i] != 0)
+		{
+			result[index[1]] = var_val[i];
+			index[1] += 1;
+			i++;
+		}
+		i = 0;
+		while (ft_isalnum(str[index[0] + i]) == 1 || str[index[0] + i] == '_')
+			i++;
+		index[0] += i;
+	}
 }

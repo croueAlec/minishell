@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_checks.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:48:00 by julieblaye        #+#    #+#             */
 /*   Updated: 2024/04/15 19:36:41 by acroue           ###   ########.fr       */

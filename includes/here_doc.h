@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:59 by acroue            #+#    #+#             */
 /*   Updated: 2024/04/15 19:01:53 by acroue           ###   ########.fr       */

@@ -36,20 +36,22 @@ void		ft_fsplit(char **tab);
 char		**quotes_split(char *s, char c);
 
 /// VAR EXPANSION
+/// ? var
+int			is_question_mark_var(char *variable);
 /// Utils
 void		move_forward_single_quotes(size_t *len, char *str);
-void		move_forward_double_quotes(size_t *len, char *str, char **env);
+void		move_forward_double_quotes(size_t *len, char *str, t_env *env);
 void		copy_single_quote(char *result, char *str, size_t *index);
 void		copy_double_quote_expand(char *result, char *str,
-				size_t *index, char **env);
+				size_t *index, t_env *env);
 void		single_var_expansion(size_t *index, char *str,
-				char *result, char **env);
+				char *result, t_env *env);
 /// Expand variables
-size_t		*variable_len(char *variable, char **env,
+void		variable_len(char *variable, t_env *env,
 				size_t *len_a, size_t *len_b);
-char		*variable_value(char *variable, char **env);
-size_t		var_expanded_len(char *str, char **env);
-char		*str_expand_var(char *str, char **env);
+char		*variable_value(char *variable, t_env *env);
+size_t		var_expanded_len(char *str, t_env *env);
+char		*str_expand_var(char *str, t_env *env);
 
 /// REDIRECTIONS AND ARGS EXTRACTION
 /// Utils
