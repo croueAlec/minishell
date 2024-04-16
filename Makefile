@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+         #
+#    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
 #    Updated: 2024/04/15 12:16:51 by jblaye           ###   ########.fr        #
@@ -41,6 +41,7 @@ EXEC_DIR = alexec
 PARSING_DIR = jularsing
 HEREDOC_DIR = here_docs
 BUILTIN_DIR = built_ins
+SIGNAL_DIR = signals
 INCS_DIR = includes
 OBJS_DIR = objs
 LIBFT_DIR = $(LIBS_DIR)/libft
@@ -76,6 +77,7 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	built_ins_handling.c \
 	display_tree.c \
 	error_handling.c \
+	execution_utils_utils.c \
 	execution_utils.c \
 	execution.c \
 	fork_builtins.c \
@@ -98,7 +100,10 @@ SRC :=	$(addprefix $(PARSING_DIR)/, \
 	pwd.c \
 	sort_tab.c \
 	unset.c ) \
-	main.c
+	$(addprefix $(SIGNAL_DIR)/, \
+	signals.c ) \
+	main.c \
+	readline.c
 
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
 DEPS := $(patsubst %.c,$(OBJS_DIR)/%.d,$(SRC))
@@ -118,6 +123,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)/$(EXEC_DIR)
 	@mkdir -p $(OBJS_DIR)/$(HEREDOC_DIR)
 	@mkdir -p $(OBJS_DIR)/$(BUILTIN_DIR)
+	@mkdir -p $(OBJS_DIR)/$(SIGNAL_DIR)
 	@$(CC) $(DEP_FLAGS) $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
 
 clean:

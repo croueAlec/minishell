@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:14:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/04 14:28:28 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/15 18:32:25 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@
 # include "parsing_struct.h"
 # include "builtins.h"
 # include "here_doc.h"
+# include "minishell_signals.h"
+
+extern int	g_global;
 
 void	print_parsing(void);
 void	print_exec(void);
+int		is_line_empty(char	*str);
 
 #endif
