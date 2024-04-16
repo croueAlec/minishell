@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:18:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/03/15 11:15:33 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/16 17:06:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,18 @@ void	redirection_error(t_branch *branch, size_t tree_index)
 {
 	t_cmd	*cmd;
 
-	ft_dprintf(2, "%s", ERR_REDIR);
 	cmd = branch->elmnt;
-	free_tab((void **)&cmd->tree[tree_index]);
-	free(cmd->tree);
-	free_cmd(cmd);
-	free(branch);
+	while (cmd->tree && cmd->tree[tree_index] != NULL)
+	{
+		if (cmd->tree[tree_index]->type == T_INFILE)
+			free_infile_branch(cmd->tree[tree_index]);
+		else if (cmd->tree[tree_index]->type == T_OUTFILE)
+			free_outfile_branch(cmd->tree[tree_index]);
+		tree_index++;
+	}
+	// free(cmd->tree);
+	// free_cmd(cmd);
+	// free(branch);
 }
 
 /**
