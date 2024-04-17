@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jblaye <jblaye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/15 12:09:54 by jblaye           ###   ########.fr       */
+/*   Updated: 2024/04/17 07:19:15 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,19 @@ char	*variable_value(char *variable, t_env *env)
 	return (NULL);
 }
 
+static void	set_values_zero(size_t *val_one, size_t *val_two)
+{
+	*val_one = 0;
+	*val_two = 0;
+}
+
 size_t	var_expanded_len(char *str, t_env *env)
 {
 	size_t	len[2];
 	size_t	var_len[2];
 
-	len[0] = 0;
-	len[1] = 0;
-	var_len[0] = 0;
-	var_len[1] = 0;
+	set_values_zero(&len[0], &len[1]);
+	set_values_zero(&var_len[0], &var_len[1]);
 	while (str[len[LEN]] != 0)
 	{
 		len[LEN] += 1;
@@ -86,11 +90,13 @@ size_t	var_expanded_len(char *str, t_env *env)
 		else if (str[len[LEN] - 1] == 36)
 		{
 			variable_len(&(str)[len[LEN]], env, &var_len[0], &var_len[1]);
-			len[LEN] += var_len[LEN];
+			len[LEN] += var_len[LEN] - 1;
 			len[EXP_LEN] += var_len[EXP_LEN];
 		}
 		else
 			len[EXP_LEN] += 1;
+		if (len[LEN] > 1 && !str[len[LEN] - 2])
+			break ;
 	}
 	return (len[EXP_LEN]);
 }
@@ -111,7 +117,7 @@ char	*str_expand_var(char *str, t_env *env)
 			copy_single_quote(result, str, index);
 		else if (str[index[0]] == '\"')
 			copy_double_quote_expand(result, str, index, env);
-		else if (str[index[0]] == 36)
+		else if (str[index[0]] == 36 && ft_isalpha(str[index[0] + 1]))
 			single_var_expansion(index, str, result, env);
 		else
 		{
