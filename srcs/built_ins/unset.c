@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:59:57 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/10 15:48:52 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/17 05:19:31 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ char	**remove_from_env(char **env, char *var)
 	return (free(env), sort_char_tab(new_env));
 }
 
-static int	is_valid_unset(const char *str)
+static int	is_valid_unset(const char *str, t_env *env)
 {
 	size_t	i;
 
 	i = 0;
+	if (!variable_value((char *)str, env))
+		return (0);
 	while (str && str[i])
 	{
 		if (str[i] == '=')
@@ -84,7 +86,7 @@ int	unset_built_in(t_branch *branch)
 	i = 1;
 	while (cmd && cmd->args && cmd->args[i])
 	{
-		if (is_valid_unset(cmd->args[i]))
+		if (is_valid_unset(cmd->args[i], env))
 			env->env_tab = remove_from_env(env->env_tab, cmd->args[i]);
 		i++;
 	}
