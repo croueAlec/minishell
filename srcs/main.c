@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 23:02:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/17 00:30:55 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	main(int ac, char **av, char **default_env)
 	{
 		g_global = 0;
 		tree = parsing(env_struct);
+		if (!tree)
+			continue ;
 		if (g_global == SIGINT_HD && skip_cmd_hd_sigint(tree, env_struct))
 			continue ;
 		last_pid = execute_tree(tree, env_struct, 0);
