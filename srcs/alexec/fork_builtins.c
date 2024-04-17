@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:48:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 19:29:14 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/17 03:34:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ pid_t	fork_built_ins(int fd_out[2], t_branch *branch, size_t *cmd_number)
 	{
 		cmd->env->err_no = handle_builtins(branch, cmd_number, fd_out[1]);
 	}
+	close(fd_out[0]);
 	free_curr_branch(branch);
 	(*cmd_number)++;
 	return (pid);
