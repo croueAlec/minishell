@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/17 00:30:55 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/17 04:23:30 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 int	g_global = 0;
 
-int	wait_children(int pid)
+static void	sig_handle_c(int signum)
+{
+	g_global = signum;
+	ft_putchar_fd('\n', 1);
+}
+
+static int	wait_children(int pid, t_env *env)
 {
 	int	wait_status;
 	int	error_status;
 
+	define_sig(SIGINT, &sig_handle_c, env);
 	while (errno != ECHILD)
 		if (wait(&wait_status) == pid && WIFEXITED(wait_status))
 			error_status = WEXITSTATUS(wait_status);
@@ -45,10 +52,9 @@ int	main(int ac, char **av, char **default_env)
 	if (!isatty(0))
 		return ((void)ft_dprintf(2, YOU_CANT_DO_THAT), 1);
 	env_struct = make_env(default_env);
-	set_signals_default(env_struct);
 	while (1)
 	{
-		g_global = 0;
+		set_signals_default(env_struct);
 		tree = parsing(env_struct);
 		if (!tree)
 			continue ;
@@ -56,7 +62,7 @@ int	main(int ac, char **av, char **default_env)
 			continue ;
 		last_pid = execute_tree(tree, env_struct, 0);
 		if (last_pid != UNDEFINED_FD)
-			env_struct->err_no = wait_children(last_pid);
+			env_struct->err_no = wait_children(last_pid, env_struct);
 	}
 	rl_clear_history();
 	return (0);
