@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:56:32 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/15 17:35:27 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/17 03:39:15 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ void	free_and_exit(int code, t_branch *branch, t_env *env)
 	exit(code);
 }
 
-int	exit_built_in(t_branch *branch)
+int	exit_built_in(t_branch *branch, size_t *cmd_number)
 {
 	t_cmd	*cmd;
 	int		code;
 
 	cmd = branch->elmnt;
-	ft_dprintf(2, "exit\n");
+	if (!cmd->next_cmd && *cmd_number == 0)
+		ft_dprintf(2, "exit\n");
 	if (!cmd->args[1])
 		free_and_exit(cmd->env->err_no, branch, cmd->env);
 	if (!check_exit_first_arg(cmd->args[1]))

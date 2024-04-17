@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/17 03:16:22 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/17 03:38:49 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ not changed\n"
 # define CD_NO_FILE "tacOS: cd: %s: No such file or directory\n"
 
 /* 			EXIT			 */
-int		exit_built_in(t_branch *branch);
+int		exit_built_in(t_branch *branch, size_t *cmd_number);
 void	free_and_exit(int code, t_branch *branch, t_env *env);
 /* 			ECHO			 */
 int		echo_built_in(t_branch *branch, int fd_out);
