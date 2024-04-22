@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:15:55 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 12:52:26 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 14:17:25 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	set_err_sig_int_in_prompt(t_env *env)
 {
 	if (g_global == SIGINT)
 		env->err_no = 130;
+	g_global = 0;
 }
 
 t_branch	*parsing(t_env *env)

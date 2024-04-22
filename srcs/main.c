@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 13:28:11 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 14:12:14 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	wait_children(int pid, t_env *env)
 
 static int	skip_cmd_hd_sigint(t_branch *tree, t_env *env)
 {
+	printf("should not happen\n");
 	env->err_no = 130;
 	free_tree(tree);
 	g_global = 0;
