@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:18:00 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 19:10:04 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 19:14:25 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	find_shlvl(t_env *env)
 
 int	set_shlvl(t_env *env)
 {
-	int	shlvl;
+	int		shlvl;
 	char	*level;
 	char	*new_level;
 
