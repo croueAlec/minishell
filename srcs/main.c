@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:47 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 12:56:16 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 13:28:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int ac, char **av, char **default_env)
 	if (!isatty(0))
 		return ((void)ft_dprintf(2, YOU_CANT_DO_THAT), 1);
 	env_struct = make_env(default_env);
-	set_signals_default(env_struct);
 	while (1)
 	{
 		set_signals_default(env_struct);

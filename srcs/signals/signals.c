@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:51:34 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 23:36:28 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 13:30:00 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	define_sig(int signum, void (*fun_ptr)(int), t_env *env)
 		perror("sigaction");
 		return (-1);
 	}
-	env->err_no = 0;
 	return (0);
 }
 
