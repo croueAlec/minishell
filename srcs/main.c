@@ -57,6 +57,8 @@ int	main(int ac, char **av, char **default_env)
 	{
 		set_signals_default(env_struct);
 		tree = parsing(env_struct);
+		if (!tree)
+			continue ;
 		if (g_global == SIGINT_HD && skip_cmd_hd_sigint(tree, env_struct))
 			continue ;
 		last_pid = execute_tree(tree, env_struct, 0);
