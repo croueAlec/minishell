@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:17:11 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 20:02:59 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 12:27:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_cmd	*basic_check(t_branch *branch, int *tmp_outfile)
 			old_curr_branch = cmd->next_cmd;
 		if (!cmd->cmd_path && !cmd->args[0])
 		{
-			(close(*tmp_outfile), *tmp_outfile = UNDEFINED_FD);
+			if (*tmp_outfile >= 0 && !isatty(*tmp_outfile))
+				(close(*tmp_outfile), *tmp_outfile = UNDEFINED_FD);
 			cmd = open_close_redir(branch, old_curr_branch);
 		}
 		else if (!cmd->cmd_path && is_built_in(branch))
