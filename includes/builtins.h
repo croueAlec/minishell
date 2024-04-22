@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 12:42:32 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 18:47:35 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ not changed\n"
 # define EXIT_TOO_MANY_ARG "tacOS: exit: too many arguments\n"
 # define CD_MALLOC_FAIL "tacOS: Malloc failed, could not change directory\n"
 # define CD_NO_FILE "tacOS: cd: %s: No such file or directory\n"
+# define ERRENV "tacOS: malloc error when building environnment\n"
 
 /* 			EXIT			 */
 int		exit_built_in(t_branch *branch, size_t *cmd_number);
@@ -72,6 +73,7 @@ size_t	tab_len(char **tab);
 char	**sort_char_tab(char **tab);
 size_t	length_until_char(const char *str, char ch);
 void	free_env(t_env *env);
+int		set_shlvl(t_env *env);
 /* 			BUILTINS UTILS	 */
 pid_t	fork_built_ins(int fd_out[2], t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);
