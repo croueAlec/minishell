@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 14:25:42 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/17 05:20:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 12:38:48 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	cd_built_in(t_cmd *cd_cmd)
 		return (free(tmp_pwd), ft_dprintf(2, CD_NO_FILE, cd_cmd->args[1]), 1);
 	new_pwd = getcwd(0, 0);
 	if (!new_pwd)
-		return (free(tmp_pwd), errno);
+		return (free(tmp_pwd), 1);
 	tmp_pwd = full_env_parameter("OLDPWD=", tmp_pwd);
 	if (!tmp_pwd)
 		return (free(new_pwd), ft_dprintf(2, EXPORT_MALLOC_FAIL), ENOMEM);
