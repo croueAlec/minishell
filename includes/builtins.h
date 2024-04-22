@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:57:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 18:47:35 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 19:07:59 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**sort_char_tab(char **tab);
 size_t	length_until_char(const char *str, char ch);
 void	free_env(t_env *env);
 int		set_shlvl(t_env *env);
+void	set_pwd_env(t_env *env);
 /* 			BUILTINS UTILS	 */
 pid_t	fork_built_ins(int fd_out[2], t_branch *branch, size_t *cmd_number);
 int		is_built_in(t_branch *branch);

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:19:58 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/22 18:46:48 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/22 19:08:38 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_env	*make_env(char **env_tab)
 		return (free(env), NULL);
 	if (!set_shlvl(env))
 		return ((void)ft_dprintf(2, ERRENV), free_and_exit(1, NULL, env), NULL);
+	set_pwd_env(env);
 	return (env);
 }
 
