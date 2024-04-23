@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:36:59 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 16:48:24 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:59:29 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,15 @@ void	open_redirections(int *infile, int *outfile, t_branch *branch)
 	while (cmd->tree && cmd->tree[i] != NULL && cmd->tree[i]->elmnt)
 	{
 		if (cmd->tree[i]->type == T_INFILE)
+		{
 			*infile = open_infile(cmd->tree[i], *infile);
+			cmd->tree[i] = NULL;
+		}
 		else if (cmd->tree[i]->type == T_OUTFILE)
+		{
 			*outfile = open_outfile(cmd->tree[i], *outfile);
+			cmd->tree[i] = NULL;
+		}
 		else
 			printf("hmm what kind of branch is %d ?\n", cmd->tree[i]->type);
 		if (*outfile == E_FD || *infile == E_FD)
