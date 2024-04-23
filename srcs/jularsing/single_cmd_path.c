@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:48:46 by jblaye            #+#    #+#             */
-/*   Updated: 2024/04/11 17:42:33 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/23 13:26:38 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@ char	**pathstab(char **ev)
 	return (paths);
 }
 
+/**
+ * @brief Checks if the command is longer than 0 and has characters apart from 
+ * spaces.
+ */
+static int	is_valid_cmd(char *cmd)
+{
+	size_t	i;
+
+	i = 0;
+	if (!ft_safe_strlen(cmd))
+		return (0);
+	while (cmd && cmd[i])
+	{
+		if (cmd[i] < 9 || cmd[i] > 13 || cmd[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 /// @brief finds the path of the cmd, returns null otherwise
 /// @param cmd name of the cmd
 /// @param ev array with mallocked env variables
@@ -45,6 +65,8 @@ char	*cmdpath(char *cmd, char **ev)
 	char	*cmd_path;
 
 	i = 0;
+	if (!is_valid_cmd(cmd))
+		return (NULL);
 	paths = pathstab(ev);
 	if (!paths)
 		return (NULL);
