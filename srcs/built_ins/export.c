@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:39:01 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/11 21:00:52 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/23 11:15:00 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	**replace_in_env(char **env, char *arg, int *err_no)
 {
 	size_t	i;
 	size_t	key_length;
+	char	*tmp;
 
 	key_length = length_until_char(arg, '=');
 	if (!arg[key_length])
@@ -42,10 +43,15 @@ char	**replace_in_env(char **env, char *arg, int *err_no)
 	i = 0;
 	while (env && env[i] && ft_strncmp(env[i], arg, key_length) != 0)
 		i++;
-	free(env[i]);
+	tmp = env[i];
 	env[i] = ft_strdup(arg);
 	if (!env[i])
+	{
 		*err_no = (ft_dprintf(2, EXPORT_MALLOC_FAIL, arg) > 0);
+		env[i] = tmp;
+		return (env);
+	}
+	free(tmp);
 	return (env);
 }
 
@@ -60,7 +66,10 @@ char	**add_to_env(char **env, char *arg, int *err_no)
 		return (replace_in_env(env, arg, err_no));
 	new_env = ft_calloc(i + 1, sizeof(char *));
 	if (!new_env)
-		return (NULL);
+	{
+		*err_no = 1;
+		return ((void)ft_dprintf(2, EXPORT_MALLOC_FAIL, arg), env);
+	}
 	new_env[i] = NULL;
 	i = 0;
 	while (env && env[i])
