@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/17 07:19:15 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/23 13:59:06 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ char	*str_expand_var(char *str, t_env *env)
 			copy_single_quote(result, str, index);
 		else if (str[index[0]] == '\"')
 			copy_double_quote_expand(result, str, index, env);
-		else if (str[index[0]] == 36 && ft_isalpha(str[index[0] + 1]))
+		else if (str[index[0]] == 36 && (ft_isalpha(str[index[0] + 1]) \
+		|| str[index[0] + 1] == '?'))
 			single_var_expansion(index, str, result, env);
 		else
 		{
