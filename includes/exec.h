@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 10:12:39 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/16 20:52:48 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/23 13:30:30 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-# define CMD_NOT_FOUND "%s: command not found\n"
+# define CMD_NOT_FOUND "tacOS: %s: command not found\n"
 # define NO_SUCH_FILE_OR_DIR "tacOS: %s: No such file or directory\n"
 # define YOU_CANT_DO_THAT "42 doesn't allow you to do that\n"
 

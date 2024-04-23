@@ -60,7 +60,7 @@ char	*variable_value(char *variable, t_env *env)
 	while (env->env_tab[i] != 0)
 	{
 		if (ft_strncmp(env->env_tab[i], variable, len_var) == 0
-			&& env->env_tab[i][len_var] == '=')
+			&& (env->env_tab[i][len_var] == '=' || !env->env_tab[i][len_var]))
 			return (&(env->env_tab)[i][len_var + 1]);
 		i++;
 	}
