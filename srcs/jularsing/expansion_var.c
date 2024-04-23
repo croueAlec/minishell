@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/17 07:19:15 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/23 11:26:29 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*variable_value(char *variable, t_env *env)
 	while (env->env_tab[i] != 0)
 	{
 		if (ft_strncmp(env->env_tab[i], variable, len_var) == 0
-			&& env->env_tab[i][len_var] == '=')
+			&& (env->env_tab[i][len_var] == '=' || !env->env_tab[i][len_var]))
 			return (&(env->env_tab)[i][len_var + 1]);
 		i++;
 	}
