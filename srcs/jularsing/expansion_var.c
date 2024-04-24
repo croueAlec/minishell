@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/23 13:59:06 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 13:00:51 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	variable_len(char *variable, t_env *env, size_t *len_a, size_t *len_b)
 	char	*content;
 
 	i = 0;
-	if (ft_strncmp(variable, "?", 2) == 0)
+	if (ft_strncmp(variable, "?", 1) == 0)
 	{
 		*len_b = 1;
 		if (env->err_no >= 10)
