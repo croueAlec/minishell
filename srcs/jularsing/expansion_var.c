@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:05 by julieblaye        #+#    #+#             */
-/*   Updated: 2024/04/24 13:00:51 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 13:38:29 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ size_t	var_expanded_len(char *str, t_env *env)
 			move_forward_single_quotes(len, str);
 		else if (str[len[LEN] - 1] == '\"')
 			move_forward_double_quotes(len, str, env);
-		else if (str[len[LEN] - 1] == 36)
+		else if (str[len[LEN] - 1] == 36 && str[len[LEN]] \
+		&& str[len[LEN]] != 32)
 		{
 			variable_len(&(str)[len[LEN]], env, &var_len[0], &var_len[1]);
 			len[LEN] += var_len[LEN] - 1;
